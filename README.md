@@ -15,13 +15,13 @@ At time `t`, a detector may use its fitted reference and observations through `x
 
 ```mermaid
 flowchart LR
-    H[Historical reference] --> M[Fit Gaussian AR(1)]
-    M --> C[Conditional mean and scale]
-    X[Arriving observation x_t] --> Z[Standardized innovation]
+    H["Historical reference"] --> M["Fit Gaussian AR(1)"]
+    M --> C["Conditional mean and scale"]
+    X["Arriving observation x_t"] --> Z["Standardized innovation"]
     C --> Z
-    Z --> P[Optional Gaussian PIT]
-    Z --> S[Signed and magnitude CUSUMs]
-    S --> E[Uncalibrated break evidence]
+    Z --> P["Optional Gaussian PIT"]
+    Z --> S["Signed and magnitude CUSUMs"]
+    S --> E["Uncalibrated break evidence"]
 ```
 
 The public score is evidence, not a calibrated probability or alarm guarantee. The PIT is available separately; its interpretation depends on the conditional model being adequate.
