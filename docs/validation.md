@@ -75,7 +75,7 @@ The historical project had a one-time grouped-ID CV-B score audit. The access lo
 
 ## Historical validity labels
 
-These labels describe evidence status, not method quality:
+These labels describe evidence status, not method quality. `SYNTHETIC_ONLY` and `CLOUD_PRIVATE` describe data provenance; they do not establish validity on their own. Result ledgers may also carry scope, reproducibility, or run-outcome tags. Those tags are defined below and should not be read as extra evidence of model quality.
 
 | Label | Meaning | Public interpretation |
 |---|---|---|
@@ -86,6 +86,38 @@ These labels describe evidence status, not method quality:
 | `VALID_EXACT_STREAM` | The recorded inference path used only the reference and exact observed prefix. | Describes inference causality only; says nothing by itself about fold independence or generalization. |
 | `REDUCED_ONLY` | Evaluation used a reduced diagnostic sample rather than the intended full evaluation set. | A limited diagnostic; do not substitute for a full benchmark. |
 | `UNKNOWN_PROVENANCE` | Available records do not establish the data, split, code, or evaluation path. | Withhold from benchmark comparisons or label the uncertainty explicitly. |
+| `SYNTHETIC_ONLY` | The result comes from generated data included in the public reproduction path. | Reproducible for the stated generator and configuration; it does not establish competition transfer. |
+| `CLOUD_PRIVATE` | The aggregate comes from private competition or provider-evaluation data. | The underlying data are not redistributed and the result cannot be replayed from this repository. |
+| `VERIFIED_OFFICIAL_RUN` | A provider record supports the reported run outcome and score. | Does not independently verify final rank or exact serialized-package identity. |
+| `ONE_TIME_EXPOSED_DIAGNOSTIC` | A grouped diagnostic was viewed once, but later metadata exposure prevents treating it as a sealed holdout. | Do not tune on it or describe it as a clean final test. |
+| `FEATURE_COMPONENT_PARITY_ONLY` | Individual feature builders passed prefix-level parity checks. | Does not establish parity of the integrated detector or submission package. |
+| `PACKAGE_PARITY_UNKNOWN` | The integrated inference package lacks a complete parity receipt. | Do not treat feature-level checks or OOF scores as deployable-package evidence. |
+| `SYNTHETIC_STAGE0_HELD_SEED` | A fixed exploratory method screen held out generated seeds. | Keep outside the public benchmark unless its code, protocol, and result are independently reproducible. |
+| `UNKNOWN_FROM_PUBLIC_INDEX` | Public source records do not establish the method detail, data, split, or inference path. | Keep the uncertainty explicit; do not infer that unrecorded checks passed. |
+| `UNKNOWN_PROTOCOL` | An archived result lacks enough protocol detail for the exact-stream standard. | Do not compare it with verified exact-stream evidence. |
+| `CAUSALITY_AUDIT_UNKNOWN` | Available evidence does not resolve whether the inference path was prefix-causal. | Do not call it a validated streaming result. |
+| `PACKAGE_PARITY_UNVERIFIED` | The integrated package lacks a complete parity record. | Treat package-level deployment behavior as unverified. |
+| `PACKAGE_REPLAY_PENDING` | The integrated package replay has not been completed. | Do not claim deployment-level reproduction. |
+| `PRIVATE_DATA_NOT_REPRODUCIBLE_HERE` | The result depends on private inputs absent from this repository. | The code and data needed for an independent replay are not available here. |
+| `PRIVATE_DATA_UNAVAILABLE` | The required private data cannot be accessed from this repository. | The result cannot be replayed here. |
+| `RETROSPECTIVE_NOT_ONLINE` | A diagnostic was calculated after the stream rather than emitted online at each prefix. | It cannot demonstrate online inference behavior. |
+| `PARTIAL_FOLD_WHERE_APPLICABLE` | Some entries in a grouped catalog record used an incomplete fold screen. | Check the record-level scope before making a full-fold comparison. |
+
+### Provenance, scope, and run-outcome tags
+
+These tags can appear alongside validity labels in the catalog and result CSVs:
+
+| Tag | Meaning |
+|---|---|
+| `GROUPED_CV_A` | The result used grouped CV-A folds; this does not establish nesting or selection validity. |
+| `FULL_GROUPED_CV_A` | The result covered the complete grouped CV-A fold set; this does not establish nesting or selection validity. |
+| `FULL_FOLD_CONFIRMATION_AFTER_F0_F4_SEARCH` | A fixed candidate was evaluated on all folds after folds F0/F4 had already informed the search. |
+| `SYNTHETIC_OR_STAGE0_ONLY` | Exploratory or synthetic screening evidence, separate from the checked-in reproducible benchmark. |
+| `SYNTHETIC_STAGE0` | An exploratory synthetic screen, separate from the checked-in reproducible benchmark. |
+| `PRIVATE_BREAK_MAGNITUDE_DIAGNOSTIC` | A private-data diagnostic about break magnitude; the tag does not imply public reproducibility. |
+| `OFFICIAL_RUN` | A provider-linked submission or run record; it can describe a failed attempt with no score. |
+| `NO_SCORE` | No metric was returned for that run. |
+| `PACKAGE_ASSEMBLY_FAILURE` | The submission failed during package import or assembly before inference. |
 
 Historical stacked CV work was found to include `NON_NESTED_META_CV` and `POST_SELECTION_CV` cases; earlier length-dependent work was `INVALID_FUTURE_LENGTH`. Some later paths satisfied exact-prefix checks, but incomplete manifests prevent a complete nested replay. These results are therefore not combined into a clean benchmark table. No substitute score is inferred. Selected aggregates and their individual labels are in [results.md](results.md); the official private score is kept separate from local CV estimates.
 

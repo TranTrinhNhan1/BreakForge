@@ -141,8 +141,8 @@ The late matched-capacity ablation found that the fixed P2+Aux head scored above
 
 | Candidate | CV-A mean TS-AUC | Matched-control CV-A mean | One-time reduced diagnostic | Validity label |
 |---|---:|---:|---:|---|
-| P2+Aux Arm C (47 inputs; no age) | 0.610056 | 0.5992524 | 0.5135546 | `CLOUD_PRIVATE; POST_SELECTION_CV; COMPONENT_PARITY_ONLY; PACKAGE_PARITY_UNKNOWN; REDUCED_ONLY` |
-| P2+Aux Arm D (48 inputs; with age) | 0.6104292 | 0.5992524 | — | `CLOUD_PRIVATE; POST_SELECTION_CV; COMPONENT_PARITY_ONLY; PACKAGE_PARITY_UNKNOWN` |
+| P2+Aux Arm C (47 inputs; no age) | 0.610056 | 0.5992524 | 0.5135546 | `CLOUD_PRIVATE; POST_SELECTION_CV; FEATURE_COMPONENT_PARITY_ONLY; PACKAGE_PARITY_UNKNOWN; REDUCED_ONLY` |
+| P2+Aux Arm D (48 inputs; with age) | 0.6104292 | 0.5992524 | — | `CLOUD_PRIVATE; POST_SELECTION_CV; FEATURE_COMPONENT_PARITY_ONLY; PACKAGE_PARITY_UNKNOWN` |
 
 For Arm D, the paired-ID bootstrap mean delta was +0.0113107 (descriptive 95% interval +0.0073494 to +0.0155046 over 512 resamples; `CLOUD_PRIVATE; POST_SELECTION_CV`). This resampling is conditional on the saved OOF predictions and does not quantify model-selection or training uncertainty. The reduced Arm C value is `REDUCED_ONLY`, not a sealed holdout.
 
