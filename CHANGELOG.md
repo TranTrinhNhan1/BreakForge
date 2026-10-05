@@ -7,5 +7,6 @@
 - Add exact-stream and fold-isolation helpers with causality regression tests.
 - Document conditional PIT assumptions, research evolution, matched controls, failed configurations, nested-OOF contamination, and future-length leakage.
 - Separate synthetic results, official private-run history, and labeled historical research aggregates.
-- Add a 131-record source-digest inventory and curated research archive index.
+- Preserve all 131 indexed research reports in the source-digest inventory and add a 134-record method/evidence catalog with five supplemental records.
+- Document late matched-control audits, corrected diagnostic interpretations, and the first submission's package-import failure without promoting unvalidated candidates.
 - Add verified primary references, packaging, and GitHub Actions CI.
