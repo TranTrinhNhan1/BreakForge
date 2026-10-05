@@ -26,6 +26,7 @@
 /predictions/
 /models/
 /cache/
+/reports/figures/generated/
 **/data/
 **/prediction/
 **/predictions/
@@ -42,6 +43,11 @@
 *.sqlite3
 *.db
 *.tfevents
+*.zip
+*.tar
+*.tar.gz
+*.tgz
+*.7z
 
 # Python build and test artifacts
 __pycache__/

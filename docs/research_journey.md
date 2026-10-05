@@ -52,6 +52,6 @@ The challenge used heterogeneous, private competition data. That is not a substi
 
 ## 13. Post-competition cleanup
 
-The public release extracts a small, deterministic, CPU-only reference implementation and its regression tests. Raw research remains local and ignored; selected lessons are summarized without publishing restricted data, internal messages, secrets, or unverifiable scores. The resulting repository is intended to be a starting point for reproducible work, not a claim that the competition produced a universally superior detector.
+The public release extracts a small, deterministic, CPU-only reference implementation and its regression tests. Raw research remains local and ignored; selected lessons are summarized without publishing restricted data, internal messages, secrets, or scores presented without their validity limits. The resulting repository is intended to be a starting point for reproducible work, not a claim that the competition produced a universally superior detector.
 
 For method-by-method scope and controls, see [failed experiments](failed_experiments.md). For validation labels and protocols, see [validation](validation.md).
