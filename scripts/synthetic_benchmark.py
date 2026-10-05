@@ -13,7 +13,7 @@ def _write_csv(results: list[BenchmarkResult], destination: Path) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
     rows = [result.to_dict() for result in results]
     with destination.open("w", newline="", encoding="utf-8") as file:
-        writer = csv.DictWriter(file, fieldnames=list(rows[0]))
+        writer = csv.DictWriter(file, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 

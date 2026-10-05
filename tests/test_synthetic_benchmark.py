@@ -79,6 +79,9 @@ def test_benchmark_command_writes_a_reproducible_csv(tmp_path):
 
     with output.open(newline="", encoding="utf-8") as file:
         rows = list(csv.DictReader(file))
+    contents = output.read_bytes()
+    assert contents.endswith(b"\n")
+    assert b"\r\n" not in contents
     assert len(rows) == len(MECHANISMS) * len(DETECTOR_NAMES)
     assert {row["seed"] for row in rows} == {"2"}
     assert all(row["mechanism"] in MECHANISMS for row in rows)
