@@ -63,7 +63,20 @@ The synthetic benchmark is reproducible with `python scripts/synthetic_benchmark
 
 ## Methods investigated
 
-The research covered rolling statistics, conditional PIT/Rosenblatt transforms, sequential tests, kernels, density ratios, spectral and wavelet features, Koopman/DMD, path signatures, Bayesian methods, conformal inference, and learned representations. Selected configurations did not establish that any broad family is ineffective. See the [method catalog](docs/method_catalog.md), [failed experiments](docs/failed_experiments.md), and the [131-report index](reports/experiment_index.csv).
+| Family | Examples investigated | What the available evidence says |
+|---|---|---|
+| Statistical and sequential baselines | Rolling moments, CUSUM, multiscale evidence | Simple controls remain useful; the public reference combines conditional innovations with CUSUM evidence. |
+| Conditional normalization and score transforms | AR residuals, empirical PIT, Gaussian scores, GARCH-style transforms | Useful for comparing a stream with its own history; misspecification can leave dependence or non-uniform scores. |
+| Conformal and sequential inference | Betting processes, restart mixtures, predictive ranks, conformal martingales | No complex variant earned a calibrated public default; dependence assumptions and false-alarm control remain open. |
+| Kernel, discrepancy, and density comparison | RFF/MMD, two-sample statistics, density ratios, Wasserstein comparisons | Some selected CV gains were small or failed matched/reduced checks; they are not clean performance estimates. |
+| Dynamical and Bayesian models | AR coefficient drift, context trees, DMD/Koopman, run-length models | Tested configurations were not promoted; selected CV results often weakened on reduced diagnostics. |
+| Spectral and multiscale evidence | Frequency, bispectral, wavelet, and block summaries | Responses depended on the change mechanism; the tested configurations did not establish robust transfer. |
+| Path, geometry, and ordinal structure | Signatures, recurrence and visibility graphs, ordinal patterns | Feasibility or partial-fold signals did not justify promotion; matched low-order controls remain important. |
+| Learned representations and neural methods | TNC, contrastive encoders, score models, CNN and GRU pilots | Results were limited by transfer, exact-stream parity, or fold nesting; no learned representation is in the public core. |
+| Supervised heads, ensembles, and selection | Tree and ranking heads, stacked blends, automated search | Repeated CV selection and upstream OOF contamination can inflate apparent gains; see the validation audit. |
+| Other causal evidence methods | Tail, dependence, and event-timing features | Mixed feasibility results; individual configurations remain exploratory rather than family-wide conclusions. |
+
+These are summaries of tested configurations, not verdicts on whole research families. The catalog distinguishes detector ideas from representations, scoring heads, and selection procedures. See the [method catalog](docs/method_catalog.md), [failed and inconclusive experiments](docs/failed_experiments.md), and the [131-report index](reports/experiment_index.csv).
 
 ## What did not work
 
