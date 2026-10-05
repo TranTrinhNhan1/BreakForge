@@ -19,10 +19,10 @@ This release makes no leaderboard-rank, state-of-the-art, or generalized perform
 
 ## Release limitations
 
-- Competition data and private results are not redistributed.
+- Competition data, labels, and per-series predictions are not redistributed; only aggregate findings are reported.
 - A clean competition benchmark replay is not available from the public files.
-- Source ownership, third-party provenance, repository authors, and final license still require resolution.
 - The current score is uncalibrated evidence; no false-alarm guarantee is claimed.
+- The official final competition rank was not independently verified.
 
 ## GitHub metadata proposal
 

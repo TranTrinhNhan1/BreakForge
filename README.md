@@ -109,4 +109,4 @@ The core runtime uses only the Python standard library. Plotting is optional. Co
 
 ## References, citation, and license
 
-See [results](docs/results.md), [references](docs/references.md), [CITATION.cff](CITATION.cff), and [LICENSE](LICENSE).
+See [results](docs/results.md), [references](docs/references.md), [CITATION.cff](CITATION.cff), and [LICENSE](LICENSE). Contribution guidelines are in [CONTRIBUTING.md](CONTRIBUTING.md); security reports should follow [SECURITY.md](SECURITY.md).
