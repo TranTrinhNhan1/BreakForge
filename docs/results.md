@@ -42,7 +42,7 @@ The score is linked to a completed provider run and a submission record. The his
 
 ### Recorded official run outcomes
 
-The following provider-linked outcomes are retained so that unsuccessful and lower-scoring attempts are visible alongside the reported score. Submission/run IDs are included as result provenance; they do not identify a team or expose data. The full machine-readable table and source labels are in [`official_runs.csv`](../reports/curated_results/official_runs.csv).
+The following provider-linked outcomes are retained so that unsuccessful and lower-scoring attempts are visible alongside the reported score. Submission/run IDs are included as result provenance; they do not identify a team or expose data. The machine-readable index and source labels are in [`official_runs.csv`](../reports/curated_results/official_runs.csv).
 
 | Submission | Run | Recorded outcome | TS-AUC | Note |
 |---|---:|---|---:|---|
