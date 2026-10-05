@@ -1,6 +1,6 @@
 # Curated research archive
 
-The release includes a [source-indexed inventory of 131 local research reports](../reports/experiment_index.csv). Its `MTH-*` catalog keys were assigned for this release and are not original experiment IDs. The list records report titles and SHA-256 digests only; it does not publish the private source notes, logs, prediction arrays, models, or competition data. A digest is provenance bookkeeping, not a reproduction package. Validity labels apply only where explicitly documented in [the result table](../docs/results.md); other inventory entries remain historical and unassessed.
+The release includes a [source-indexed inventory of 131 local research reports](../reports/experiment_index.csv) and a [curated method and variant catalog](../reports/method_catalog.csv). Its `MTH-*` and `CAT-*` keys were assigned for this release and are not original experiment IDs. The source index records report titles and SHA-256 digests; the method catalog groups staged reports and adds five supplemental experiment summaries whose reviewed evidence was outside the report index. Neither publishes private source notes, logs, prediction arrays, models, or competition data. A digest is provenance bookkeeping, not a reproduction package. Validity labels apply only where explicitly documented in [the result tables](../docs/results.md); other inventory entries remain historical and unassessed.
 
 This archive preserves the scientific conclusions of the broader project
 without including raw competition data, predictions, model binaries, logs, or
