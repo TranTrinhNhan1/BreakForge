@@ -16,6 +16,17 @@ There is a useful distinction between knowing a container's length for output al
 
 The historical audit found a more consequential case: a full online-segment length selected or parameterized null/calibration behavior in some experimental paths. Those scores are labeled `INVALID_FUTURE_LENGTH`. CrunchDAO staff later stated that pre-June 8 evaluations were invalidated and excluded after a data-access fix. The public detector does not inspect stream length and `update()` has no future-length argument.
 
+One recorded P2 path chose a pseudo-online null segment length from `len(online)`. In real-time use that is the final, not-yet-observed horizon `T`; it changes the null evidence used for earlier observations. A later P11 configuration inherited a null-profile segment built with the same future-length rule. The historical CV-A values `0.6505362` (P2) and `0.6504968` (P11) are retained only with the `INVALID_FUTURE_LENGTH` label in [results](results.md).
+
+```python
+# Invalid: T is not available while an unsized stream is still arriving.
+segment_length = min(max(final_online_length, 16), max_segment_length)
+
+# Causal alternative: predeclare the null window from configuration/reference,
+# or use a rule that depends only on the observed prefix through t.
+segment_length = configured_null_length
+```
+
 ## Grouped folds and out-of-fold predictions
 
 When several rows or windows come from one time series, folds must be assigned by series ID, not by row. All rows from a held-out series belong to the same fold. The public `split_ids_by_fold` helper makes the train/held-out partition explicit; it does not train a model or prove that every surrounding pipeline component respects the split.
@@ -77,6 +88,8 @@ These labels describe evidence status, not method quality:
 | `UNKNOWN_PROVENANCE` | Available records do not establish the data, split, code, or evaluation path. | Withhold from benchmark comparisons or label the uncertainty explicitly. |
 
 Historical stacked CV work was found to include `NON_NESTED_META_CV` and `POST_SELECTION_CV` cases; earlier length-dependent work was `INVALID_FUTURE_LENGTH`. Some later paths satisfied exact-prefix checks, but incomplete manifests prevent a complete nested replay. These results are therefore not combined into a clean benchmark table. No substitute score is inferred. Selected aggregates and their individual labels are in [results.md](results.md); the official private score is kept separate from local CV estimates.
+
+The local nested-OOF audit specifically qualified the Trial 11 CV-A mean `0.6344382`, Trial 52 `0.6340387`, the D3+D2 replay `0.6345702`, and the DMD/Koopman blend `0.6356422` as `NON_NESTED_META_CV`. Later post-hoc blends at `0.6361802` and `0.6363125` inherit the same contamination and also carry `POST_SELECTION_CV`. Their inference paths could be causal while their fold estimates were dependent on held-out labels through upstream fits. The separately reported private run is not invalidated by this local CV lineage finding.
 
 ## Tests in this repository
 

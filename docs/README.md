@@ -2,7 +2,7 @@
 
 - [Methodology](methodology.md): reference fitting, conditional PIT, and sequential evidence.
 - [Validation](validation.md): exact-stream causality, grouped folds, nested stacking, holdouts, and validity labels.
-- [Results](results.md): reproducible synthetic metrics, official aggregate result, and labeled historical comparisons.
+- [Results](results.md): reproducible synthetic metrics, official run history, and labeled historical comparisons.
 - [Method catalog](method_catalog.md): research families, matched controls, evidence state, and unresolved questions.
 - [Failed experiments](failed_experiments.md): negative and inconclusive findings without family-wide overclaims.
 - [Research journey](research_journey.md): how the research evolved and what its validation audits changed.

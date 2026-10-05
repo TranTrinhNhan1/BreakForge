@@ -1,0 +1,9 @@
+submission,run_id,outcome,ts_auc,recorded_date,source_evidence,notes
+#2,119859,COMPLETED,0.6213426076511025,UNKNOWN,SRC-003;SRC-007,Effectively tied with submission #21; difference is below a meaningful demonstrated improvement.
+#21,120227,COMPLETED,0.6213427008018434,2026-09-25,SRC-001;SRC-002,"Provider-linked official run. Individual source/resource file checks matched 40/40; no aggregate archive hash was returned, so serialized-package identity is not established."
+#3,120060,COMPLETED,0.6210239248938853,2026-09-24,SRC-009,Lower than the #2/#21 result; the added D3 blend is not a demonstrated private-evaluation improvement.
+#28,120828,COMPLETED,0.6210238431356813,2026-09-27,SRC-010,Close to submission #3 and below #2/#21.
+#29,121939,STOPPED_BEFORE_SCORE,NOT_REPORTED,2026-09-28,SRC-011,No private score was returned.
+#18,119641,TIMED_OUT_NO_SCORE,NOT_REPORTED,UNKNOWN,SRC-006;SRC-007,"Timed out after 3,020 seconds; no private score."
+#22,117904,NO_PREDICTION_RECORD,NOT_REPORTED,UNKNOWN,SRC-012,No prediction record was available; no private score.
+UNKNOWN,119099,PROTOCOL_FAILURE,NOT_REPORTED,2026-09-21,SRC-013,Protocol failure; no private score.
