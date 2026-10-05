@@ -84,17 +84,18 @@ These labels describe evidence status, not method quality. `SYNTHETIC_ONLY` and 
 | `POST_SELECTION_CV` | The reported result was selected after repeated comparison on the same CV evidence. | Exploratory estimate, not an unbiased final benchmark. |
 | `PARTIAL_FOLD` | Evaluation covered only part of the intended IDs/folds. | Incomplete; do not compare as full-protocol evidence. |
 | `VALID_EXACT_STREAM` | The recorded inference path used only the reference and exact observed prefix. | Describes inference causality only; says nothing by itself about fold independence or generalization. |
+| `VALID_CLEAN_CV` | Groups were isolated through all fit and stacking stages, the protocol was nested, and the reported folds were not used for selection. | No competition-derived CV result in this release meets this standard. |
 | `REDUCED_ONLY` | Evaluation used a reduced diagnostic sample rather than the intended full evaluation set. | A limited diagnostic; do not substitute for a full benchmark. |
 | `UNKNOWN_PROVENANCE` | Available records do not establish the data, split, code, or evaluation path. | Withhold from benchmark comparisons or label the uncertainty explicitly. |
 | `SYNTHETIC_ONLY` | The result comes from generated data included in the public reproduction path. | Reproducible for the stated generator and configuration; it does not establish competition transfer. |
 | `CLOUD_PRIVATE` | The aggregate comes from private competition or provider-evaluation data. | The underlying data are not redistributed and the result cannot be replayed from this repository. |
-| `VERIFIED_OFFICIAL_RUN` | A provider record supports the reported run outcome and score. | Does not independently verify final rank or exact serialized-package identity. |
+| `VERIFIED_OFFICIAL` | A provider record supports the reported official run outcome and score. | Does not independently verify final rank or exact serialized-package identity. |
 | `ONE_TIME_EXPOSED_DIAGNOSTIC` | A grouped diagnostic was viewed once, but later metadata exposure prevents treating it as a sealed holdout. | Do not tune on it or describe it as a clean final test. |
 | `FEATURE_COMPONENT_PARITY_ONLY` | Individual feature builders passed prefix-level parity checks. | Does not establish parity of the integrated detector or submission package. |
 | `PACKAGE_PARITY_UNKNOWN` | The integrated inference package lacks a complete parity receipt. | Do not treat feature-level checks or OOF scores as deployable-package evidence. |
 | `SYNTHETIC_STAGE0_HELD_SEED` | A fixed exploratory method screen held out generated seeds. | Keep outside the public benchmark unless its code, protocol, and result are independently reproducible. |
 | `UNKNOWN_FROM_PUBLIC_INDEX` | Public source records do not establish the method detail, data, split, or inference path. | Keep the uncertainty explicit; do not infer that unrecorded checks passed. |
-| `UNKNOWN_PROTOCOL` | An archived result lacks enough protocol detail for the exact-stream standard. | Do not compare it with verified exact-stream evidence. |
+| `UNKNOWN_PROVENANCE` | An archived result lacks enough protocol detail for the exact-stream standard. | Do not compare it with verified exact-stream evidence. |
 | `CAUSALITY_AUDIT_UNKNOWN` | Available evidence does not resolve whether the inference path was prefix-causal. | Do not call it a validated streaming result. |
 | `PACKAGE_PARITY_UNVERIFIED` | The integrated package lacks a complete parity record. | Treat package-level deployment behavior as unverified. |
 | `PACKAGE_REPLAY_PENDING` | The integrated package replay has not been completed. | Do not claim deployment-level reproduction. |

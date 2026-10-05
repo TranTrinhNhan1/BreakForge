@@ -1,6 +1,32 @@
 # Results and evidence status
 
-This page separates public synthetic evidence, official private-evaluation outcomes, historical competition-derived research, and a one-time holdout audit. Only the synthetic benchmark is reproducible from this repository. Private competition inputs, fold assignments, predictions, and model artifacts are not included.
+## Official competition result
+
+| Competition | Submission / run | Metric | Verified private-evaluation score | Validity label | Final rank |
+|---|---|---|---:|---|---|
+| ADIA Lab / CrunchDAO Structural Break: Real-Time (2026) | #21 / 120227 | Time-stratified AUC (TS-AUC) | **0.6213427008** | `CLOUD_PRIVATE; VERIFIED_OFFICIAL` | Not independently verified |
+
+The score is linked to a completed provider run and submission record, but the provider did not return an aggregate package digest, so exact serialized-package identity is not established. This submitted system was different from the compact Gaussian AR(1) detector currently exposed as BreakForge's public reference API. The score does not measure that public detector and does not establish performance beyond the competition distribution. No team alias, dataset, labels, series IDs, predictions, or submission bundle is published. Competition data remain subject to the platform's no-redistribution rule; see [competition background and data policy](competition.md).
+
+### Recorded official run outcomes
+
+The following nine provider-linked outcomes retain an unsuccessful package attempt and lower-scoring runs alongside the reported score. The machine-readable index and evidence labels are in [`official_runs.csv`](../reports/curated_results/official_runs.csv).
+
+| Submission | Run | Recorded outcome | TS-AUC | Validity label | Note |
+|---|---:|---|---:|---|---|
+| #1 | 119852 | Package assembly failure | — | `CLOUD_PRIVATE; OFFICIAL_RUN; PACKAGE_ASSEMBLY_FAILURE; NO_SCORE` | Import failed before inference; repaired submission #2 is listed separately. |
+| #2 | 119859 | Completed | 0.6213426077 | `CLOUD_PRIVATE; VERIFIED_OFFICIAL` | Effectively tied with #21; the tiny difference does not establish an improvement. |
+| #21 | 120227 | Completed | 0.6213427008 | `CLOUD_PRIVATE; VERIFIED_OFFICIAL` | Highest verified private score among the records summarized here. |
+| #3 | 120060 | Completed | 0.6210239249 | `CLOUD_PRIVATE; VERIFIED_OFFICIAL` | Below #2/#21. |
+| #28 | 120828 | Completed | 0.6210238431 | `CLOUD_PRIVATE; VERIFIED_OFFICIAL` | Close to #3. |
+| #29 | 121939 | Stopped before score | — | `CLOUD_PRIVATE; OFFICIAL_RUN; NO_SCORE` | No private score was returned. |
+| #18 | 119641 | Timed out after 3,020 seconds | — | `CLOUD_PRIVATE; OFFICIAL_RUN; NO_SCORE` | No private score was returned. |
+| #22 | 117904 | No prediction record | — | `CLOUD_PRIVATE; OFFICIAL_RUN; NO_SCORE` | No private score was available. |
+| Unknown | 119099 | Protocol failure | — | `CLOUD_PRIVATE; OFFICIAL_RUN; NO_SCORE` | No private score was returned. |
+
+These results describe one private competition distribution and a small number of submissions. The final rank and team attribution were not independently verified. Per-series predictions and private data remain unavailable and are not redistributed.
+
+This page separates official private-evaluation outcomes, public synthetic evidence, historical competition-derived research, and a one-time holdout audit. Only the synthetic benchmark is reproducible from this repository. Private competition inputs, fold assignments, predictions, and model artifacts are not included.
 
 ## Clean, reproducible synthetic benchmark
 
@@ -32,32 +58,6 @@ python scripts/synthetic_benchmark.py \
 
 The checked-in table was regenerated from code revision `326c000` with the public reference configuration (`allowance: 0.25`); all data are synthetic. The CSV records `SYNTHETIC_ONLY` and the Git revision used by the benchmark script. The sample is intentionally small: false-positive rates move in increments of 0.025, uncertainty intervals are not estimated, and each row represents one chosen data-generating process. These results describe implementation behavior, not broad performance or transfer. Other historical synthetic feasibility screens are described in the method catalog; they are not merged into this reproducible benchmark because their code and protocols are not part of the public reproduction path.
 
-## Official competition result
-
-| Competition | Submission / run | Metric | Verified private-evaluation score | Validity label | Final rank |
-|---|---|---|---:|---|---|
-| ADIA Lab / CrunchDAO Structural Break: Real-Time (2026) | #21 / 120227 | Time-stratified AUC (TS-AUC) | **0.6213427008** | `CLOUD_PRIVATE; VERIFIED_OFFICIAL_RUN` | Not independently verified |
-
-The score is linked to a completed provider run and submission record, but the provider did not return an aggregate package digest, so exact serialized-package identity is not established. This submitted system was different from the compact Gaussian AR(1) detector currently exposed as BreakForge's public reference API. The score does not measure that public detector and does not establish performance beyond the competition distribution. No team alias, dataset, labels, series IDs, predictions, or submission bundle is published. Competition data remain subject to the platform's no-redistribution rule; see [competition background and data policy](competition.md).
-
-### Recorded official run outcomes
-
-The following nine provider-linked outcomes retain an unsuccessful package attempt and lower-scoring runs alongside the reported score. The machine-readable index and evidence labels are in [`official_runs.csv`](../reports/curated_results/official_runs.csv).
-
-| Submission | Run | Recorded outcome | TS-AUC | Validity label | Note |
-|---|---:|---|---:|---|---|
-| #1 | 119852 | Package assembly failure | — | `CLOUD_PRIVATE; OFFICIAL_RUN; PACKAGE_ASSEMBLY_FAILURE; NO_SCORE` | Import failed before inference; repaired submission #2 is listed separately. |
-| #2 | 119859 | Completed | 0.6213426077 | `CLOUD_PRIVATE; VERIFIED_OFFICIAL_RUN` | Effectively tied with #21; the tiny difference does not establish an improvement. |
-| #21 | 120227 | Completed | 0.6213427008 | `CLOUD_PRIVATE; VERIFIED_OFFICIAL_RUN` | Highest verified private score among the records summarized here. |
-| #3 | 120060 | Completed | 0.6210239249 | `CLOUD_PRIVATE; VERIFIED_OFFICIAL_RUN` | Below #2/#21. |
-| #28 | 120828 | Completed | 0.6210238431 | `CLOUD_PRIVATE; VERIFIED_OFFICIAL_RUN` | Close to #3. |
-| #29 | 121939 | Stopped before score | — | `CLOUD_PRIVATE; OFFICIAL_RUN; NO_SCORE` | No private score was returned. |
-| #18 | 119641 | Timed out after 3,020 seconds | — | `CLOUD_PRIVATE; OFFICIAL_RUN; NO_SCORE` | No private score was returned. |
-| #22 | 117904 | No prediction record | — | `CLOUD_PRIVATE; OFFICIAL_RUN; NO_SCORE` | No private score was available. |
-| Unknown | 119099 | Protocol failure | — | `CLOUD_PRIVATE; OFFICIAL_RUN; NO_SCORE` | No private score was returned. |
-
-These results describe one private competition distribution and a small number of submissions. The final rank and team attribution were not independently verified. Per-series predictions and private data remain unavailable and are not redistributed.
-
 ## Historical competition-derived research
 
 The complete curated ledger is [`historical_research.csv`](../reports/curated_results/historical_research.csv). It records 54 selected, high, invalid, partial-fold, code-only, and archived protocol-mixed comparisons from the source records summarized for release. It includes fold set and scores when available, reported mean, sample standard deviation computed from the displayed fold values, worst fold, secondary diagnostic, matched control where known, selection status, inference status, private-run outcome, and source evidence label. Missing settings, seeds, or code revisions are explicitly marked unknown instead of being reconstructed.
@@ -79,14 +79,23 @@ The `result_group` field keeps the historical records in their original evidence
 
 The synthetic benchmark is published as a separate clean group above. Official provider runs are a separate private-evaluation group in `official_runs.csv`. Neither is pooled with these 54 competition-derived research records.
 
-These are not clean public benchmarks: their source data are private competition data, the raw data and predictions are omitted, and selected research comparisons share folds. The catalog intentionally keeps distinct validation dimensions separate:
+These are not clean public benchmarks: their source data are private competition data, the raw data and predictions are omitted, and selected research comparisons share folds. The canonical labels used in the result ledgers are:
 
-- `VALID_EXACT_STREAM` describes inference that used only the reference and observed prefix. It does not establish independent model selection or fold isolation.
-- `NON_NESTED_META_CV` means outer-fold information could influence a stacked feature or upstream model.
-- `POST_SELECTION_CV` means the reported folds informed repeated model or configuration choices.
-- `PARTIAL_FOLD` means the evaluation did not cover the planned fold set.
-- `INVALID_FUTURE_LENGTH` marks a score path that used the final, not-yet-observed stream length.
-- `UNKNOWN_PROTOCOL` means the archived record was not audited to the release's exact-stream standard.
+| Label | Meaning |
+|---|---|
+| `VERIFIED_OFFICIAL` | A completed official provider run and its reported score were verified. This does not verify the serialized package digest or final rank. |
+| `VALID_EXACT_STREAM` | Inference used only the reference and the observed prefix. This does not establish independent fold isolation or model selection. |
+| `VALID_CLEAN_CV` | A clean, nested evaluation with isolated groups and no selection on the reported folds. No competition-derived CV score in this release meets this standard. |
+| `NON_NESTED_META_CV` | Outer-fold information could flow through a stacked feature or upstream model. |
+| `POST_SELECTION_CV` | Reported folds informed repeated model or configuration choices. |
+| `INVALID_FUTURE_LENGTH` | A score path used the final, not-yet-observed stream length. |
+| `PARTIAL_FOLD` | The evaluation did not cover the planned fold set. |
+| `REDUCED_ONLY` | A reduced diagnostic was run; it is not a full evaluation or sealed holdout. |
+| `SYNTHETIC_ONLY` | The result uses generated data and supports only the stated synthetic setup. |
+| `CLOUD_PRIVATE` | The result depends on private competition data or provider evaluation and cannot be reproduced from this repository. |
+| `UNKNOWN_PROVENANCE` | The available record does not establish the evaluation protocol or provenance needed for a stronger label. |
+
+The labels describe different evidence dimensions and can appear together. A causal inference label does not imply an independent CV estimate, and a private official score is not directly comparable to a synthetic benchmark. The CSV ledgers also retain outcome and scope tags such as `OFFICIAL_RUN`, `NO_SCORE`, `FULL_GROUPED_CV_A`, `PACKAGE_PARITY_UNKNOWN`, and `FEATURE_COMPONENT_PARITY_ONLY`; those tags add detail and do not replace the canonical validity labels above.
 
 ### Selected causal and post-selection CV-A rows
 
@@ -109,7 +118,7 @@ These are not clean public benchmarks: their source data are private competition
 | D3 + CPIT Trial 19 exact OOF blend | 0.634526 | Not measured | `POST_SELECTION_CV`; `NON_NESTED_META_CV` | OOF blend, not a package replay; F0/F4 informed screening. |
 | D3 direct blend with Trial 52 | 0.634292 | Not measured | `POST_SELECTION_CV`; package parity unverified | The selected difference does not establish an independent gain. |
 
-The CSV also retains the complete archived protocol-mixed scoreboard slice rather than only its highest rows. Such rows are marked `UNKNOWN_PROTOCOL; POST_SELECTION_CV` unless a source audit justifies a stronger label. Two known future-length examples are shown separately below. Do not compare protocol-mixed values with the exact-stream rows above.
+The CSV also retains the complete archived protocol-mixed scoreboard slice rather than only its highest rows. Such rows are marked `UNKNOWN_PROVENANCE; POST_SELECTION_CV` unless a source audit justifies a stronger label. Two known future-length examples are shown separately below. Do not compare protocol-mixed values with the exact-stream rows above.
 
 ### Future-length-invalid historical values
 

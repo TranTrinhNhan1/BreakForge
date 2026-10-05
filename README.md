@@ -55,13 +55,17 @@ Inputs must be finite real values; `fit` requires at least three reference obser
 
 | Evidence | Result | Validity label | Interpretation |
 |---|---:|---|---|
-| Public synthetic benchmark | AUC 0.8288–1.0000 on six tested break mechanisms | `SYNTHETIC_ONLY` | Fixed-seed, 40 streams per mechanism |
+| Official private run #21 / 120227 | TS-AUC 0.6213427008 | `CLOUD_PRIVATE; VERIFIED_OFFICIAL` | Different system from the public API; final rank unverified |
+| Public synthetic benchmark | AUC 0.4781–1.0000 on six tested break mechanisms | `SYNTHETIC_ONLY` | Fixed-seed, 40 streams per mechanism |
 | Heavy-tail synthetic shift | AUC 0.4781; detection rate 0.075 | `SYNTHETIC_ONLY` | A tested failure case for this reference detector |
-| Official private run #21 / 120227 | TS-AUC 0.6213427008 | `CLOUD_PRIVATE; VERIFIED_OFFICIAL_RUN` | Different system from the public API; final rank unverified |
 
 The synthetic benchmark is reproducible with `python scripts/synthetic_benchmark.py`; configuration, code revision, metric definition, and limits are in [results](docs/results.md). Historical competition CV values are not clean benchmarks: some used final-length information, some had nested-OOF contamination, and many were selected on the same folds. The high historical values remain visible with labels in [results](docs/results.md) and [validation](docs/validation.md).
 
 ## Methods investigated
+
+The curated register maps 131 source reports to 134 evidence records: 129 detector, representation, scoring, and baseline records, four training or selection procedures, and one validation audit. Staged repeats are grouped; these counts describe records, not unique algorithms. The detailed [method and variant catalog](docs/method_catalog.md) preserves implementation, controls, validation scope, and open questions where source evidence supports them.
+
+Investigated variants include conditional AR/GARCH and empirical-PIT transforms, copula and expectile scores, CUSUM and restart/betting evidence, conformal martingales, RFF/MMD and density-ratio comparisons, Wasserstein distances, DMD/Koopman and switching-AR models, SINDy/ODE features, spectral and bispectral tests, wavelets, signatures and rough paths, recurrence graphs and persistent Laplacians, matrix profiles, TNC/TF-C and predictive-coding encoders, neural score models, CNN/GRU heads, and tree, ranking, stacking, and search procedures. These are experiments in the archive, not all parts of the public reference detector.
 
 | Family | Examples investigated | What the available evidence says |
 |---|---|---|
