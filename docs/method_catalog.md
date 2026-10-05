@@ -1179,25 +1179,25 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Question or hypothesis:** After historical AR/Rosenblatt normal-score whitening, the online sequence may change its conditional transition law. This experiment compared a compact historical delay operator with a prequential online operator, targeting dynamics that short-window marginal discrepancies may miss.
 
-**Implementation:** O-MAGIC (Sun et al., arXiv:2411.12277) uses a Gaussian-process prior with an ODE derivative-manifold constraint, a two-sample GLR, and parameter-change uncertainty. It assumes a specified dynamical vector field and focuses on noisy/sparse ODE observations. Since this competition provides no known governing ODE, directly porting O-MAGIC would add unsupported modeling assumptions and heavy inference; it motivates only the simpler system- identification residual here.
+**Implementation:** On the history-fitted AR/scale/Rosenblatt stream, form causal delay states and fit a fixed linear delay operator from reference history. Compare prequential operator and residual summaries with that frozen reference to produce drift evidence. O-MAGIC was reviewed but not ported because no governing ODE is provided.
 
-**Reference / online information:** Reference and information-set details are not preserved in the public summary.
+**Reference / online information:** Reference: historical AR, scale, and empirical normal-score transform plus a delay operator fit on history. Online: update causal delay-state and residual/operator summaries through the current timestep; no centered window or final horizon is used.
 
-**Tested settings or stage:** Delay-DMD / Koopman Dynamics Evidence — Search Report
+**Tested settings or stage:** Stages included F4/F0 feasibility screening, F1–F3 follow-up, five-fold grouped CV-A cross-fitting, and a frozen one-shot reduced diagnostic. The candidate used delay order 2 and windows 32/64; the feature-only head was also assessed separately.
 
-**Matched control:** No report-specific control detail is preserved in the public summary. This does not imply that no control was run; see docs/failed_experiments.md for family-level examples.
+**Matched control:** The same grouped folds used the Trial-11 kernel-CUSUM reference; a feature-only head isolated the DMD contribution from the blend. The blended head consumed Trial-11 OOF scores, which were not nested against the outer folds.
 
-**Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
+**Causal evidence:** Independent value-by-value whitening and per-step RLS replay matched on audited samples. Prefix invariance was checked across the development panel for the frozen feature path, with a separate smaller sampled parity audit. These checks do not remove fold-selection or meta-OOF contamination.
 
-**Evaluation scope:** grouped_cv_a_full_or_replay
+**Evaluation scope:** Multi-stage grouped CV-A: two-fold F4/F0 screening, F1–F3 follow-up, then five-fold cross-fitting. A selected candidate was checked once on a reduced diagnostic after freezing; no CV-B labels were used.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** VALID_EXACT_STREAM; NON_NESTED_META_CV; POST_SELECTION_CV; REDUCED_ONLY; CLOUD_PRIVATE
 
-**Result and disposition:** The selected DMD/Koopman blend had mean 0.635642 on CV-A but 0.591874 on the reduced diagnostic; it was not promoted. Both comparisons are selection-exposed.
+**Result and disposition:** The selected delay-order-2 blend improved the development folds but fell below its Trial-11 comparator on the one-shot reduced diagnostic. The feature-only grouped-CV head was much weaker than the blend. The configuration was not promoted.
 
-**Limit / reason deprioritized:** No additional limitation is preserved in the public summary; see the result and validation fields.
+**Limit / reason deprioritized:** The CV-A record was selection-exposed and its blend reused non-nested Trial-11 OOF scores. The single reduced diagnostic showed a transfer gap and cannot be reused for tuning. These results concern the tested configuration, not all DMD or Koopman approaches.
 
-**Open question:** Not recorded in the public summary.
+**Open question:** Can causal DMD residual features retain value under nested outer-fold training and matched low-order controls, with package-level prefix parity?
 
 </details>
 
@@ -1272,25 +1272,25 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Question or hypothesis:** Hypothesis: after the production causal Rosenblatt transform, a break in dependence may appear as a change between latent conditional-AR modes.
 
-**Implementation:** Implementation details are not preserved in the public summary.
+**Implementation:** Fit a Gaussian mixture to standardized lag-1 pairs from training histories, then derive state-specific conditional-AR emissions, transitions, and empirical age hazards. A one-pass state-age filter emits transition surprisal and smoothed switching evidence; this observable approximation is not a reproduction of the cited latent-state model.
 
-**Reference / online information:** Reference and information-set details are not preserved in the public summary.
+**Reference / online information:** Input stream: history-fitted BIC-AR residuals, conditional EWMA scale, and historical empirical-CDF normal scores. Fit regime parameters on training histories only; online filtering uses observations through the current timestep.
 
-**Tested settings or stage:** Latent Switching AR on Rosenblatt Innovations — Search Report
+**Tested settings or stage:** Grouped CV-A Stage-1 screens on F4 and F1, with 2/3 mixture states and geometric or empirical-duration filters; standalone transition-surprise features and a non-deployable complementarity diagnostic were assessed.
 
-**Matched control:** No report-specific control detail is preserved in the public summary. This does not imply that no control was run; see docs/failed_experiments.md for family-level examples.
+**Matched control:** Trial-11 OOF evidence was used for a complementarity diagnostic; no report-specific matched low-order transition control was preserved. That diagnostic ranked validation rows jointly and is not a causal per-ID detector.
 
-**Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
+**Causal evidence:** The whitening adapter matched the stateful streaming implementation bitwise on the audited sample. The state-age filter is one-pass and uses no future online values. The parity sample does not establish full-panel package parity.
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Two-fold grouped CV-A feature screen (F4/F1); no full CV-A, CV-B, reduced evaluation, private run, or deployment package followed.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** VALID_EXACT_STREAM; PARTIAL_FOLD; POST_SELECTION_CV; NON_NESTED_META_CV; CLOUD_PRIVATE
 
-**Result and disposition:** The latent-switching AR screen was near chance on the challenge folds; the tested configuration was not promoted.
+**Result and disposition:** The selected state-transition features were near chance on the challenge folds; the synthetic pilot was circular because its generator matched the fitted switching-AR assumptions. The specific lag-1 Gaussian-mixture approximation was stopped before later stages.
 
-**Limit / reason deprioritized:** No further reason for deprioritization is preserved in the public summary.
+**Limit / reason deprioritized:** The targeted transition signal did not transfer to the screened challenge folds. This does not reject richer latent switching models or other transition representations.
 
-**Open question:** Not recorded in the public summary.
+**Open question:** Would a more expressive history-fitted regime representation yield useful dependence-change evidence under nested folds and an independent matched control?
 
 </details>
 
@@ -2080,25 +2080,25 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Question or hypothesis:** Kraevskiy & Prokhorov, “Change Detection in Probability Flow ODE: Online Testing in Diffusion Latent Spaces,” arXiv:2608.22807 (2026-08-24), map pre-change observations to a Gaussian latent reference, evaluate RBF MMD, then accumulate a likelihood-ratio mixture with a Shiryaev–Roberts recursion.
 
-**Implementation:** Implementation details are not preserved in the public summary.
+**Implementation:** On a history-fitted Rosenblatt/normal-score stream, compute one-sample RBF-MMD against a standard-normal reference on non-overlapping online blocks. Historical blocks calibrate score location/scale and exponential-tilt alternatives; a likelihood mixture updates a Shiryaev–Roberts statistic after each complete block. MMD-only and SR-only ablations were also tested.
 
-**Reference / online information:** Reference and information-set details are not preserved in the public summary.
+**Reference / online information:** The reference distribution and empirical calibration come from historical blocks only. Online evidence updates only when a block is complete; partial future blocks are not used. Fitted Rosenblatt scores are not proven IID.
 
-**Tested settings or stage:** History-Calibrated Gaussian MMD / Shiryaev–Roberts Screen
+**Tested settings or stage:** Stage 1 feature-head CV-A screen on F4/F1; targeted Stage 2 ablated MMD-only and SR-only components with the same evaluator. Fold choice was pre-specified; these were two-fold screens, not full-CV estimates.
 
-**Matched control:** No report-specific control detail is preserved in the public summary. This does not imply that no control was run; see docs/failed_experiments.md for family-level examples.
+**Matched control:** The same frozen 54-feature P2+auxiliary+CRM head was evaluated without the candidate block, then with MMD-only and SR-only ablations. These controls isolate components but do not provide a clean independent benchmark.
 
-**Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
+**Causal evidence:** Six unit tests covered finite-sample MMD behavior, calibration, prefix causality, whitening shape/finiteness, and insufficient history. The tests support implementation behavior but not a sequential-validity guarantee.
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Two-fold grouped CV-A feature-head diagnostics plus a targeted component ablation; no full CV-A, reduced evaluation, CV-B, private run, or deployment package.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** VALID_EXACT_STREAM; PARTIAL_FOLD; POST_SELECTION_CV; CLOUD_PRIVATE
 
-**Result and disposition:** Status: Stage-1 and targeted Stage-2 CV-A screens complete; not promoted.
+**Result and disposition:** The SR-only component retained most of one fold’s movement but lost signal on the other; the tested variants were not promoted. This is an empirical adaptation of the evidence accumulator, not the cited probability-flow ODE method.
 
-**Limit / reason deprioritized:** No further reason for deprioritization is preserved in the public summary.
+**Limit / reason deprioritized:** The two-fold results are selection-sensitive, empirical calibration may be noisy, and neither IID normal scores nor formal false-alarm or restart guarantees were established.
 
-**Open question:** Not recorded in the public summary.
+**Open question:** Would blockwise MMD/SR evidence add value under nested grouped evaluation with an independent calibration and false-alarm study?
 
 </details>
 
@@ -3046,25 +3046,25 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Question or hypothesis:** Can a geometric model of the historical delay-state attractor produce conditional-dynamics evidence that adds information beyond the current Rosenblatt innovation, DMD, ordinal-transition, and rolling-statistic families? The main comparison is the feature-only head on grouped CV-A F4/F0; a fixed 0.10 blend with exact D2+D3 package OOF predictions is descriptive only.
 
-**Implementation:** First transform each ID using the deployment Rosenblatt stream: fit the history-only BIC-AR reference, empirical normal scores, and causal conditional-scale update. No online future value enters the transform. - Embed each whitened stream causally into delay states of dimension 2 or 3. - Fit vector-quantized phase-state centers and transition counts only on the first 75% of historical delay states.
+**Implementation:** Apply the history-fitted BIC-AR/Rosenblatt transform, embed standardized scores in causal delay states (dimensions 2 or 3), and fit phase-state centers and transition counts from historical states only. Freeze those references online; emit nearest-center distance, smoothed transition surprisal, entropy-normalized surprisal, and a causal EWMA for each observed state.
 
-**Reference / online information:** Reference and information-set details are not preserved in the public summary.
+**Reference / online information:** Reference: history-fitted AR residuals, empirical normal scores, conditional-scale state, and phase-state geometry. Online: assign delay states through the current observation to frozen historical centers and transition probabilities; future samples are not used.
 
-**Tested settings or stage:** Whitened Delay-State Attractor Network — Search Report
+**Tested settings or stage:** Stage 1 grouped CV-A F4/F0 feature-head screen; delay dimensions 2/3 and 8/16 state centers, four features per setting. The method stopped before full CV-A or reduced evaluation.
 
-**Matched control:** No report-specific control detail is preserved in the public summary. This does not imply that no control was run; see docs/failed_experiments.md for family-level examples.
+**Matched control:** The feature-only head was compared with the D2+D3 exact-package OOF replay; a fixed 0.10 blend was descriptive. No same-window low-order-moment ablation was preserved. The blended comparison inherits its upstream OOF and selection caveat.
 
-**Causal evidence:** prefix_or_future_mutation_audit_reported
+**Causal evidence:** Three runtime tests passed, including exact-prefix equality after mutating an unseen suffix. A sampled value-by-value whitening replay matched the streaming reference. The evidence covers the feature path, not a promoted package.
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Partial grouped CV-A F4/F0 screen with fold-excluded heads and label-blind feature construction; stopped before full CV-A, reduced evaluation, CV-B, private run, or deployment integration.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** VALID_EXACT_STREAM; PARTIAL_FOLD; POST_SELECTION_CV; NON_NESTED_META_CV; CLOUD_PRIVATE
 
-**Result and disposition:** Status: Stage-1 F4/F0 screen complete; not promoted beyond Stage 1.
+**Result and disposition:** Frozen feature-only heads were near chance on both screened folds; no tested blend had a positive two-fold mean change. The specific history-frozen K-means/transition-surprise variant was stopped before further evaluation.
 
-**Limit / reason deprioritized:** No further reason for deprioritization is preserved in the public summary.
+**Limit / reason deprioritized:** Only two folds were inspected, and the blended comparator used OOF predictions with prior fold exposure. The result does not evaluate attractor networks or Markov methods as whole families.
 
-**Open question:** Not recorded in the public summary.
+**Open question:** Would a nested, predeclared evaluation against same-window moment and transition controls show incremental value from history-fitted state geometry?
 
 </details>
 
@@ -3108,25 +3108,25 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Question or hypothesis:** The earlier `(time, rw_z)` signature screens did not represent the Hoff lead–lag lift. In one dimension, the antisymmetric second-level signature of the lead–lag path recovers realized quadratic variation. A time-augmented lead–lag signature can additionally encode when variation accrued within a trailing window and how that variation interacts with the path.
 
-**Implementation:** Implementation details are not preserved in the public summary.
+**Implementation:** Compute time-augmented lead–lag signatures from the causal increment stream over 64- and 128-step windows. The frozen schema spans signature levels 1–3 (72 features); it measures how variation accrues within a window, beyond total variation alone.
 
-**Reference / online information:** Reference and information-set details are not preserved in the public summary.
+**Reference / online information:** Reference and current-window features use the same history-normalized Rosenblatt increment stream. Each online window ends at the current observation. Sampled suffix-mutation and prefix replay left earlier features unchanged; complete correction-head package parity was not established.
 
-**Tested settings or stage:** Time-Augmented Hoff Lead–Lag Signatures
+**Tested settings or stage:** Synthetic cross-seed feasibility screen; grouped CV-A F1/F4 feasibility screen; frozen F0/F2/F3 follow-up; one-shot reduced transfer diagnostic; sampled inference parity; alternate-seed and age-only controls.
 
-**Matched control:** Before scoring, the frozen protocol kept the W64/W128 72-column schema, 60-round LightGBM, all non-seed parameters, and 10% blend weight unchanged; only `seed`, `feature_fraction_seed`, and `bagging_seed` changed from 42 to 20260929. Each grouped CV-A fold was scored once, training on the other four. | Fold | Trial52 | Seed-42 head blend | Seed-20260929 head blend | Alternate-seed Δ vs Trial52 |
+**Matched control:** A frozen same-window control used log variance, skewness, excess kurtosis, and mean absolute increment on the same causal increment stream. An age-only control was also tested but cannot rank same-age IDs, so it is not a generic feature-head null.
 
-**Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
+**Causal evidence:** Exact-prefix replay and 384 direct signature/window checks passed for the feature builder. A separate sampled audit reproduced base outputs and found no change to prior candidate features after suffix mutation. This is feature-source parity, not full correction-head package parity.
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Two-fold F1/F4 grouped CV-A selection followed by a frozen F0/F2/F3 screen; one reduced diagnostic was read after freezing. The reduced result is not a sealed holdout and does not support further selection.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** VALID_EXACT_STREAM; PARTIAL_FOLD; POST_SELECTION_CV; REDUCED_ONLY; CLOUD_PRIVATE; FEATURE_COMPONENT_PARITY_ONLY; PACKAGE_PARITY_UNKNOWN
 
-**Result and disposition:** Status: Stages 0–2, one frozen test-reduced transfer diagnostic, sampled `main.infer()` parity, and one alternate-seed head control complete; no deployment.
+**Result and disposition:** Lead–lag features showed modest synthetic cross-seed signal but did not establish superiority to simple moments. The matched moment control was competitive and fold contrasts varied; the reduced result and seed check did not establish stable transfer. No deployment followed.
 
-**Limit / reason deprioritized:** No additional limitation is preserved in the public summary; see the result and validation fields.
+**Limit / reason deprioritized:** Selection used the same CV-A folds later summarized; the reduced set had prior exposure elsewhere in the project. Feature parity is sampled and does not establish correction-head package parity.
 
-**Open question:** Not recorded in the public summary.
+**Open question:** Would lead–lag features add value to a nested, predeclared detector when compared with same-window moment controls and an independently sealed evaluation?
 
 </details>
 
@@ -3294,25 +3294,25 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Question or hypothesis:** Nie and Yue, “Online Change-Point Detection with Persistent Laplacian Features,” arXiv:2607.08635v2, combine delay-embedded Vietoris–Rips filtrations, persistent Betti features and positive persistent-Laplacian spectra, then ridge-whiten labeled Phase-I features and apply Page CUSUM.
 
-**Implementation:** Both experiments use history-only Rosenblatt scores, historical distance quantiles, observed values, and causal delay windows. The full-spectrum version uses three-dimensional delay states, 24-point windows updated every 8 observations, four fixed scale pairs, four positive eigenvalues per pair, and 12 historical reference windows. Synthetic feasibility only; no competition CV was run.
+**Implementation:** Use history-only Rosenblatt scores and distance quantiles to scale causal delay windows. The Stage-0 screens included GF(2) persistent beta-1 counts and a q=1 persistent combinatorial-Laplacian spectrum with three-dimensional delay states, 24-point windows, fixed historical scale pairs, and positive eigenvalues.
 
-**Reference / online information:** Reference and information-set details are not preserved in the public summary.
+**Reference / online information:** Reference distance quantiles and whitening are fit from synthetic history only; each delay window uses observations available through its endpoint. The features are a representation screen, not the cited paper’s full Phase-I/Page-CUSUM procedure.
 
-**Tested settings or stage:** Persistent q=1 Laplacian Features — Stage 0 Report
+**Tested settings or stage:** Two synthetic Stage-0 screens: an earlier persistent-Betti feature screen and a fixed q=1 spectrum/scale/head screen. No competition CV, reduced evaluation, private run, or package integration.
 
-**Matched control:** No report-specific control detail is preserved in the public summary. This does not imply that no control was run; see docs/failed_experiments.md for family-level examples.
+**Matched control:** A synthetic feasibility comparison was run, but no report-specific, same-window low-order-moment matched-control result is preserved.
 
-**Causal evidence:** causal_design_or_exact_stream_reported; audit_scope_varies
+**Causal evidence:** History-only reference scales and causal delay windows were used; whitening matched the streaming transform on synthetic checks. Unit checks covered finite, deterministic output and prefix causality.
 
-**Evaluation scope:** synthetic_screen
+**Evaluation scope:** Synthetic Stage-0 feasibility only; no competition-derived labels or folds were accessed.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** SYNTHETIC_ONLY; VALID_EXACT_STREAM.
 
-**Result and disposition:** Two exact-Rosenblatt synthetic Stage-0 screens were completed; no competition validation or promotion followed.
+**Result and disposition:** Both synthetic screens were completed and the tested q=1 recipes were stopped before competition evaluation. They do not establish structural-break performance on real or competition data.
 
-**Limit / reason deprioritized:** No additional limitation is preserved in the public summary; see the result and validation fields.
+**Limit / reason deprioritized:** The tested fixed q=1 spectrum/scale/head recipes were not advanced to supervised or competition evaluation; the paper’s assumptions and guarantees do not transfer to estimated Rosenblatt scores.
 
-**Open question:** Not recorded in the public summary.
+**Open question:** Could a simpler matched geometry summary justify a supervised test, and would its assumptions remain credible for dependent estimated innovations?
 
 </details>
 
@@ -3668,25 +3668,25 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Question or hypothesis:** Persistent structural changes can alter periodicity, roughness, or spectral concentration even when low-order moments are similar. A causal FFT summary of the normalized innovation prefix was compared with a historical spectral reference at windows 16, 32, and 64.
 
-**Implementation:** Implementation details are not preserved in the public summary.
+**Implementation:** For the spectral branch, compare history-only Rosenblatt FFT references with current-prefix windows (16/32/64) using delta and robust-z discrepancies in total power, low/mid/high frequency fractions, spectral entropy, and peak frequency. A separate TF-C pilot used causal time-frequency embeddings and a fold-excluded head.
 
-**Reference / online information:** Reference and information-set details are not preserved in the public summary.
+**Reference / online information:** Spectral references use historical normalized innovations only; each current window ends at the current timestep. The TF-C pilot pretrained on historical data with target-fold IDs excluded and formed online embeddings from prefixes.
 
-**Tested settings or stage:** Search Report: Causal Time-Frequency Discrepancy
+**Tested settings or stage:** FFT feature and Trial-13 head screens on CV-A folds F4/F0; no full-CV or exact-stream replay followed. The TF-C pilot used two causal-window unit tests and screened fold-excluded heads on F1/F3; no reduced evaluation or deployment package was run.
 
-**Matched control:** No report-specific control detail is preserved in the public summary. This does not imply that no control was run; see docs/failed_experiments.md for family-level examples.
+**Matched control:** The Trial-13 head was the frozen baseline for the FFT add-on. TF-C used Trial-11 OOF features as a reference; no same-window low-order spectral/moment control was preserved.
 
-**Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
+**Causal evidence:** The FFT features are built from history and observed prefixes. The TF-C pilot passed two causal-window unit tests, but the report explicitly does not establish full-package parity or a five-fold evaluation.
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Partial grouped CV-A screens: FFT feature/head on F4/F0 and a separate TF-C pilot on F1/F3; no full CV-A, reduced labels, CV-B, private run, or package integration.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** PARTIAL_FOLD; POST_SELECTION_CV; CLOUD_PRIVATE; FEATURE_COMPONENT_PARITY_ONLY
 
-**Result and disposition:** The exact 64-step, 100k-window, six-epoch TF-C head was stopped without promotion.
+**Result and disposition:** The FFT head did not show stable complementarity across its two folds. The tested 64-step TF-C configuration was stopped after its limited fold screen; this does not reject other time-frequency encoders or objectives.
 
-**Limit / reason deprioritized:** No additional limitation is preserved in the public summary; see the result and validation fields.
+**Limit / reason deprioritized:** Both branches were screened on few folds and selected through development CV-A; the TF-C causal-window tests do not prove full detector parity or transfer.
 
-**Open question:** Not recorded in the public summary.
+**Open question:** Would a predeclared time-frequency representation outperform matched moment and spectral controls under nested folds and exact package replay?
 
 </details>
 
@@ -4106,25 +4106,25 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Question or hypothesis:** Fold 4 may represent a difficult historical DGP group. History-only descriptors and group-balanced loss may reduce worst-group failure without hard-routing IDs or relying on online labels.
 
-**Implementation:** Implementation details are not preserved in the public summary.
+**Implementation:** Build history-only descriptors (log length and scale, lag-1 autocorrelation, sign-change rate, log difference scale, standardized tail rate, excess kurtosis, log MAD, and spectral entropy); fit K-means groups on each training fold only. Apply group-frequency powers to the supervised loss, with variants that also expose descriptors as model inputs; no hard routing occurs online.
 
-**Reference / online information:** Reference and information-set details are not preserved in the public summary.
+**Reference / online information:** Clustering descriptors and group frequencies are estimated from training histories within each fold. They influence training weights or optional model inputs; no online labels or inference-time group routing are used.
 
-**Tested settings or stage:** Search Report: Robust DGP-Group Training
+**Tested settings or stage:** Successive grouped CV-A screens on F4/F0 used group counts and weighting exponents, then a five-fold confirmation and later cross-fitted retests on the CPIT/Trial-52 head. No CV-B or reduced labels were used to choose the final retests.
 
-**Matched control:** No report-specific control detail is preserved in the public summary. This does not imply that no control was run; see docs/failed_experiments.md for family-level examples.
+**Matched control:** The V19, P2, and later Trial-19/Trial-52 heads served as architecture-matched references. Variants compared descriptor-as-input against weighting-only, with the baseline training objective otherwise held fixed.
 
-**Causal evidence:** causal_design_or_exact_stream_reported; audit_scope_varies
+**Causal evidence:** All descriptors are computed from history and the group assignments are training-time metadata; no online routing or labels are used. The public report does not establish an end-to-end streaming detector parity audit for the later heads.
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Repeated grouped CV-A: initial F4/F0 screen and TPE search, five-fold confirmation, and later all-fold cross-fitted retests. These followed earlier CV-A screening; no CV-B or reduced evaluation selected the final setting.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** POST_SELECTION_CV; CLOUD_PRIVATE
 
-**Result and disposition:** Retained as a weak local research branch, not a promotion candidate; the observed subgroup lift was not global.
+**Result and disposition:** Some settings improved a difficult fold slightly, but the gain was not global and errors remained highly correlated with the baseline. The K-means group-weighting branch was deprioritized and not deployed.
 
-**Limit / reason deprioritized:** No additional limitation is preserved in the public summary; see the result and validation fields.
+**Limit / reason deprioritized:** The multi-stage search reused CV-A for screening and confirmation, and subgroup gains did not translate into a robust overall improvement. The result does not disprove domain-robust training generally.
 
-**Open question:** Not recorded in the public summary.
+**Open question:** Would a more complementary history-only representation or a preregistered worst-group objective improve transfer under independent grouped evaluation?
 
 </details>
 
