@@ -1,0 +1,4 @@
+# Core runtime uses only the Python standard library.
+# Install the package with: pip install -e .
+# Tests: pip install -e ".[dev]"
+# Optional plot support: pip install -e ".[plot]"

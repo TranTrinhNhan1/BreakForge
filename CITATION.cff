@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use this software, cite it using this metadata after the placeholder author information is replaced and the release is finalized."
+# Placeholder only: replace with verified authors before any public release.
+authors:
+  - name: "TODO: confirm repository author(s) before release"
+title: "Structural Break Detection in Time Series"
+version: 1.0.0
+abstract: >-
+  A research framework for causal, real-time structural-break detection in
+  heterogeneous univariate time series, developed through the ADIA Lab /
+  CrunchDAO Structural Break Challenge.
+keywords:
+  - time series
+  - change-point detection
+  - structural break
+  - sequential analysis
+  - streaming
+repository-code: "https://github.com/TranTrinhNhan1/BreakForge-A-Research-Framework-for-Causal-Structural-Break-Detection"
