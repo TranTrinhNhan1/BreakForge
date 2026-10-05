@@ -1,6 +1,6 @@
 # Method catalog
 
-This is a curated map of research families explored during the project. Related variants are grouped together; a row is not a count of independent trials or a claim that every configuration completed the same evaluation. Detailed aggregate comparisons that can be reported are in [results.md](results.md). Raw datasets, predictions, model binaries, and experiment workspaces are not part of this repository.
+This is a curated map of research families explored during the project. Related variants are grouped together; a row is not a count of independent trials or a claim that every configuration completed the same evaluation. The [experiment report index](../reports/experiment_index.csv) lists 131 report-backed records by title and source digest. Those records include variants, feasibility work, audits, and repeated research branches; they are not 131 distinct methods. Detailed aggregate comparisons that can be reported are in [results.md](results.md). Raw datasets, predictions, model binaries, and experiment workspaces are not part of this repository.
 
 ## Catalog
 
