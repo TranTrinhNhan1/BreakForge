@@ -62,15 +62,15 @@ See [methodology](docs/methodology.md) for model assumptions and [validation](do
 
 ## Methods investigated
 
-The research explored rolling statistics, spectral and dynamical-system features (including Koopman/DMD), conditional PIT/Rosenblatt normalization, sequential tests, signatures, conformal methods, density ratios, Bayesian models, and representation learning. The public reference API contains only the small causal Gaussian AR(1) plus CUSUM baseline. [Failed experiments](docs/failed_experiments.md) separates tested configurations from broader claims about method families.
+The research explored rolling statistics, spectral and dynamical-system features (including Koopman/DMD), conditional PIT/Rosenblatt normalization, sequential tests, signatures, conformal methods, density ratios, Bayesian models, and representation learning. The public reference API contains only the small causal Gaussian AR(1) plus CUSUM baseline. See the [method catalog](docs/method_catalog.md) and [failed experiments](docs/failed_experiments.md) for tested configurations, controls, and open questions.
 
 ## Validation and results
 
-The public tests cover future-suffix invariance, state reset, determinism, streaming replay parity, and ID-level fold isolation. The verified private competition score was **0.6213427008 TS-AUC**; the final rank was not independently verified. This single result is not a reproducible benchmark. The small synthetic benchmark is reproducible and deliberately shows where the reference detector struggles, especially under heavy-tailed changes.
+The public tests cover future-suffix invariance, state reset, determinism, streaming replay parity, and ID-level fold isolation. A historical competition submission received a verified private score of **0.6213427008 TS-AUC**; the final rank was not independently verified. That submission was a different system from the compact public reference API, so this score is not a result for the current detector. The small synthetic benchmark is reproducible and deliberately shows where the reference detector struggles, especially under heavy-tailed changes.
 
 | Evidence | Result | Interpretation |
 |---|---:|---|
-| Official private Real-Time evaluation | 0.6213427008 TS-AUC | Verified aggregate; no rank or generalization claim |
+| Historical official private Real-Time evaluation | 0.6213427008 TS-AUC | Different system from the current public API; no rank or generalization claim |
 | Synthetic mean, variance, AR, persistence, and frequency shifts | AUC 0.8288–1.0000 for BreakForge | Fixed-seed, small generated benchmark; see full per-mechanism table |
 | Synthetic heavy-tail shift | AUC 0.4781; detection rate 0.075 | Weak under this tested data-generating process |
 

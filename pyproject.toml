@@ -13,8 +13,8 @@ license-files = ["LICENSE"]
 dependencies = []
 
 [project.urls]
-Homepage = "https://github.com/TranTrinhNhan1/BreakForge-A-Research-Framework-for-Causal-Structural-Break-Detection"
-Repository = "https://github.com/TranTrinhNhan1/BreakForge-A-Research-Framework-for-Causal-Structural-Break-Detection"
+Homepage = "https://github.com/TranTrinhNhan1/BreakForge"
+Repository = "https://github.com/TranTrinhNhan1/BreakForge"
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]
