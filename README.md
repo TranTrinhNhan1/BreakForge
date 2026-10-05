@@ -65,6 +65,10 @@ The synthetic benchmark is reproducible with `python scripts/synthetic_benchmark
 
 The research covered rolling statistics, conditional PIT/Rosenblatt transforms, sequential tests, kernels, density ratios, spectral and wavelet features, Koopman/DMD, path signatures, Bayesian methods, conformal inference, and learned representations. Selected configurations did not establish that any broad family is ineffective. See the [method catalog](docs/method_catalog.md), [failed experiments](docs/failed_experiments.md), and the [131-report index](reports/experiment_index.csv).
 
+## What did not work
+
+Some high historical CV scores depended on the final stream length or on upstream OOF predictions that had seen nominally held-out folds. A selected DMD/Koopman blend scored higher on those CV folds than the Trial 11 reference but lower on its reduced diagnostic. These are configuration-level observations, not clean benchmarks or family-wide conclusions; see the [labeled results](docs/results.md) and [validation postmortem](docs/validation.md).
+
 ## Competition context and data
 
 The challenge supplied the research problem and real-time constraints. CrunchDAO announced the Real-Time edition closed on 2026-10-02; see its [closure notice](https://forum.crunchdao.com/t/2026-w40-closing-of-structural-break-real-time/1222) and [streaming leakage clarification](https://forum.crunchdao.com/t/leaderboard-comparability-after-the-june-8-real-time-data-access-fix-were-pre-fix-scores-rescored/1188). Competition data, labels, per-series predictions, and submission bundles are not included. Users must supply data they are authorized to use. The public examples and tests work without them.
