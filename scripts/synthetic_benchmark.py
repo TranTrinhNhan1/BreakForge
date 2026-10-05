@@ -5,13 +5,36 @@ from __future__ import annotations
 import argparse
 import csv
 from pathlib import Path
+import subprocess
 
 from breakforge.validation.synthetic import BenchmarkResult, run_synthetic_benchmark
 
 
-def _write_csv(results: list[BenchmarkResult], destination: Path) -> None:
+def _git_revision() -> str:
+    repo_root = Path(__file__).resolve().parents[1]
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "--short=7", "HEAD"],
+            cwd=repo_root,
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+    except (OSError, subprocess.CalledProcessError):
+        return "NOT_RECORDED"
+    return result.stdout.strip() or "NOT_RECORDED"
+
+
+def _write_csv(
+    results: list[BenchmarkResult], destination: Path, code_revision: str
+) -> None:
     destination.parent.mkdir(parents=True, exist_ok=True)
-    rows = [result.to_dict() for result in results]
+    rows = []
+    for result in results:
+        row = result.to_dict()
+        row["validity_labels"] = "SYNTHETIC_ONLY"
+        row["code_revision"] = code_revision
+        rows.append(row)
     with destination.open("w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=list(rows[0]), lineterminator="\n")
         writer.writeheader()
@@ -40,7 +63,7 @@ def main() -> None:
         stream_length=args.stream_length,
     )
     if args.output is not None:
-        _write_csv(results, args.output)
+        _write_csv(results, args.output, code_revision=_git_revision())
         print(f"wrote {len(results)} synthetic benchmark rows to {args.output}")
         return
 

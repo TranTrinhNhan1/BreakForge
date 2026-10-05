@@ -54,7 +54,7 @@ def test_small_benchmark_is_deterministic_and_reports_each_detector():
             assert 0.0 <= row.auc_vs_no_change <= 1.0
 
 
-def test_benchmark_command_writes_a_reproducible_csv(tmp_path):
+def test_benchmark_command_records_validity_and_code_revision(tmp_path):
     repo_root = Path(__file__).parents[1]
     output = tmp_path / "benchmark.csv"
 
@@ -85,6 +85,16 @@ def test_benchmark_command_writes_a_reproducible_csv(tmp_path):
     assert len(rows) == len(MECHANISMS) * len(DETECTOR_NAMES)
     assert {row["seed"] for row in rows} == {"2"}
     assert all(row["mechanism"] in MECHANISMS for row in rows)
+    assert {"validity_labels", "code_revision"} <= set(rows[0])
+    assert {row["validity_labels"] for row in rows} == {"SYNTHETIC_ONLY"}
+    expected_revision = subprocess.run(
+        ["git", "rev-parse", "--short=7", "HEAD"],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
+    assert {row["code_revision"] for row in rows} == {expected_revision}
     null_rows = [row for row in rows if row["mechanism"] == "no_change"]
     assert len(null_rows) == len(DETECTOR_NAMES)
     assert all(row["auc_vs_no_change"] == "" for row in null_rows)
