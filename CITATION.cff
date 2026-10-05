@@ -4,7 +4,6 @@ authors:
   - name: "TranTrinhNhan1"
 title: "BreakForge: A Research Framework for Causal Structural Break Detection"
 version: 1.0.0
-date-released: 2026-10-06
 abstract: >-
   A research framework for causal, real-time structural-break detection in
   heterogeneous univariate time series, developed through the ADIA Lab /
