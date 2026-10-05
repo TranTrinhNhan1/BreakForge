@@ -6,7 +6,7 @@ import argparse
 from pathlib import Path
 import random
 
-from structural_break import StructuralBreakDetector
+from breakforge import StructuralBreakDetector
 
 
 def generate_ar_break(

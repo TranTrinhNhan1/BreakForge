@@ -5,7 +5,7 @@ from __future__ import annotations
 import math
 from typing import Iterable
 
-from structural_break.preprocessing.rosenblatt import CausalGaussianAR1PIT
+from breakforge.preprocessing.rosenblatt import CausalGaussianAR1PIT
 
 
 _MEAN_ABSOLUTE_STANDARD_NORMAL = math.sqrt(2.0 / math.pi)

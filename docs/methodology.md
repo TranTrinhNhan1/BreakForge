@@ -43,7 +43,7 @@ s_t = max(s_(t-1), C+_t, C-_t, Cabs_t)
 ## Public API and state
 
 ```python
-from structural_break import StructuralBreakDetector
+from breakforge import StructuralBreakDetector
 
 detector = StructuralBreakDetector(allowance=0.25).fit(history)
 for value in stream:

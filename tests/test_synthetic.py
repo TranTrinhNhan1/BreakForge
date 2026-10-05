@@ -3,7 +3,7 @@ from importlib import import_module, util
 from io import StringIO
 import sys
 
-import structural_break as sb
+import breakforge as sb
 
 
 def _estimate_ar1(values: list[float]) -> float:

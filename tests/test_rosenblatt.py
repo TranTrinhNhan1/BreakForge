@@ -1,6 +1,6 @@
 from statistics import NormalDist
 
-import structural_break as sb
+import breakforge as sb
 
 
 def test_conditional_gaussian_pit_maps_back_to_its_gaussian_score() -> None:

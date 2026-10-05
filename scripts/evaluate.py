@@ -7,7 +7,7 @@ import csv
 import json
 from pathlib import Path
 
-from structural_break import StructuralBreakDetector
+from breakforge import StructuralBreakDetector
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]

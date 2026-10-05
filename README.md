@@ -44,7 +44,7 @@ python examples/synthetic_break_demo.py --plot
 ## Streaming API
 
 ```python
-from structural_break import StructuralBreakDetector
+from breakforge import StructuralBreakDetector
 
 detector = StructuralBreakDetector(allowance=0.25)
 detector.fit(history)                 # fixed reference fit
@@ -79,7 +79,7 @@ Competition datasets cannot be redistributed. This repository does not require o
 ## Repository map
 
 ```text
-src/structural_break/   Public detector, conditional PIT, and validation helpers
+src/breakforge/   Public detector, conditional PIT, and validation helpers
 examples/               Synthetic, data-independent demonstrations
 tests/                  Fast causality and fold-isolation tests
 configs/                Small reference configuration

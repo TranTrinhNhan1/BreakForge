@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from collections.abc import Iterable, Iterator
 
-from structural_break.detectors.baseline import StructuralBreakDetector
+from breakforge.detectors.baseline import StructuralBreakDetector
 
 
 def score_stream(

@@ -1,6 +1,6 @@
 import math
 
-import structural_break as sb
+import breakforge as sb
 
 
 def test_fit_and_update_return_current_streaming_evidence() -> None:

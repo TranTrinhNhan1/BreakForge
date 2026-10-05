@@ -1,12 +1,12 @@
 from importlib import import_module, util
 
-import structural_break as sb
+import breakforge as sb
 
 
 def test_stream_helper_matches_explicit_one_value_updates() -> None:
-    module_spec = util.find_spec("structural_break.validation.streaming")
+    module_spec = util.find_spec("breakforge.validation.streaming")
     assert module_spec is not None
-    score_stream = import_module("structural_break.validation.streaming").score_stream
+    score_stream = import_module("breakforge.validation.streaming").score_stream
     detector_type = getattr(sb, "StructuralBreakDetector", None)
     assert detector_type is not None
     history = [-1.2, -0.7, -0.1, 0.5, 0.8, 0.2, -0.4, -0.9]
