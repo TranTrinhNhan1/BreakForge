@@ -1,4 +1,4 @@
-# Structural Break Detection in Time Series
+# BreakForge: Structural Break Detection in Time Series
 
 A research framework for causal, real-time structural-break detection in heterogeneous univariate time series. The online work grew out of ADIA Lab and CrunchDAO's **Structural Break: Real-Time** edition; the methods and synthetic examples are intended to be useful beyond that competition.
 
@@ -66,9 +66,15 @@ The research explored rolling statistics, spectral and dynamical-system features
 
 ## Validation and results
 
-The public tests cover future-suffix invariance, state reset, determinism, streaming replay parity, and ID-level fold isolation. Historical stacked CV and model-selection results have different validity levels; they are not presented as clean benchmarks. No competition score is included here until provenance, evaluation status, and publication rights for that result are verified.
+The public tests cover future-suffix invariance, state reset, determinism, streaming replay parity, and ID-level fold isolation. The verified private competition score was **0.6213427008 TS-AUC**; the final rank was not independently verified. This single result is not a reproducible benchmark. The small synthetic benchmark is reproducible and deliberately shows where the reference detector struggles, especially under heavy-tailed changes.
 
-The most important historical lesson is that an exact-stream runtime check does not repair contaminated cross-validation: all upstream fitted models in a stack must also exclude the outer validation fold. Details and validity labels are in [validation.md](docs/validation.md).
+| Evidence | Result | Interpretation |
+|---|---:|---|
+| Official private Real-Time evaluation | 0.6213427008 TS-AUC | Verified aggregate; no rank or generalization claim |
+| Synthetic mean, variance, AR, persistence, and frequency shifts | AUC 0.8288–1.0000 for BreakForge | Fixed-seed, small generated benchmark; see full per-mechanism table |
+| Synthetic heavy-tail shift | AUC 0.4781; detection rate 0.075 | Weak under this tested data-generating process |
+
+Historical CV values are selection-exposed or otherwise limited and are labeled separately in [results.md](docs/results.md); they are not clean benchmark estimates. See [validation.md](docs/validation.md) for the evaluation dependency diagram and holdout history.
 
 ## Competition background
 
@@ -89,7 +95,7 @@ reports/                Curated results only, with validity labels
 research_archive/       Indexed summaries of selected historical evidence
 ```
 
-The original experiment tree is retained locally and excluded from the public Git interface. See [research_archive/README.md](research_archive/README.md) for the curated index.
+The raw experiment tree, data, and private runtime artifacts are excluded from the public Git interface. Selected research history and its status are indexed in [research_archive/README.md](research_archive/README.md).
 
 ## Reproducibility
 
@@ -103,4 +109,4 @@ The core runtime uses only the Python standard library. Plotting is optional. Co
 
 ## References, citation, and license
 
-See [references](docs/references.md) and [CITATION.cff](CITATION.cff). Repository authorship and third-party provenance are still being checked; a repository license will be added only after that review is resolved.
+See [results](docs/results.md), [references](docs/references.md), [CITATION.cff](CITATION.cff), and [LICENSE](LICENSE).

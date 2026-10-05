@@ -1,9 +1,9 @@
-# Curated results policy
+# Curated results
 
-Public result categories must stay separate:
+Public result categories stay separate:
 
-1. **Clean / reproducible results:** exact config, seed, code revision, data provenance, fold protocol, and metric definition are available; validation is nested or otherwise appropriate for the claim; data and derived-result publication rights are resolved.
-2. **Official competition result:** event, official score/rank, run or submission identifier, and publication permission are verified against an authoritative record. It is not a substitute for a reproducible research benchmark.
-3. **Historical research results:** retain an explicit validity label such as `INVALID_FUTURE_LENGTH`, `NON_NESTED_META_CV`, `POST_SELECTION_CV`, `PARTIAL_FOLD`, or `VALID_EXACT_STREAM`.
+1. **Clean / reproducible results:** the synthetic benchmark is generated from public code and a fixed seed. Its configuration, code revision, metrics, and limitations are documented in [results.md](../../docs/results.md); the complete output is [`synthetic_benchmark.csv`](../synthetic_benchmark.csv).
+2. **Official competition result:** one aggregate private-evaluation score is reported in [results.md](../../docs/results.md). It is an official run metric, not a reproducible benchmark or rank claim.
+3. **Historical research results:** selected aggregate CV results are recorded in [`historical_research.csv`](historical_research.csv), with explicit labels including `VALID_EXACT_STREAM`, `POST_SELECTION_CV`, and `NON_NESTED_META_CV`.
 
-No score is currently published in these categories. Historical numeric values and private identifiers are withheld until evaluation provenance and publication rights are resolved. The absence of a table is preferable to reusing a contaminated or unverifiable number.
+Competition-derived results are aggregates only. The repository excludes source data, labels, series IDs, predictions, and artifacts that would reproduce or expose the competition dataset. See the [competition data policy](../../docs/competition.md).

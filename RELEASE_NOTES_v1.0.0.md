@@ -9,11 +9,13 @@ This draft describes the intended contents of the public release. It is not an a
 - Exact-stream and fold-isolation validation helpers, with regression tests for causality, reset behavior, determinism, and replay parity.
 - A synthetic AR structural-break demonstration that requires no competition data or CrunchDAO runtime.
 - A research retrospective covering validation leakage, nested OOF contamination, matched controls, and experiments that were deprioritized.
+- A reproducible synthetic benchmark and an explicitly separated, verified aggregate official competition score.
+- Curated historical research comparisons with validity labels and selection caveats.
 - A curated reference list, research archive index, reference configuration, and user-data CSV evaluation script.
 
 ## Validation and performance
 
-This release makes no leaderboard, state-of-the-art, or generalized performance claim. It contains no competition score table. Historical evaluation results have differing validity and provenance; the documentation labels known issues and does not treat them as clean benchmarks.
+This release makes no leaderboard-rank, state-of-the-art, or generalized performance claim. The one private official score is a verified aggregate, not a public reproducible benchmark. Historical evaluation results have differing validity and provenance; the documentation labels known issues and does not treat them as clean benchmarks.
 
 ## Release limitations
 

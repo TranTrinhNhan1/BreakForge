@@ -15,7 +15,7 @@ In its [June 2026 leaderboard clarification](https://forum.crunchdao.com/t/leade
 
 CrunchDAO's [data-sharing clarification](https://forum.crunchdao.com/t/sharing-finding/1095) says competition data must not be shared outside the platform. This repository therefore contains no train/test data, labels, fold maps, cached copies, raw OOF predictions, or competition-derived model artifacts. Any future competition-specific adapter must operate on data supplied by a user who is authorized to use it.
 
-No private score, rank, run ID, or submission artifact is included in this release draft. They will be added only after official verification, publication-rights review, and a clear validity classification. Local competition data and result files are intentionally excluded from Git.
+One aggregate official private-evaluation score is reported in [results.md](results.md), based on a preserved provider receipt and run readback. It contains no per-series values, labels, predictions, or identifiers. The final competition rank was not independently verified and is not reported. Historical cross-validation values are separated from that official result and carry explicit validity labels. Local competition data, result files, and submission artifacts remain excluded from Git.
 
 ## Reproducing research without platform data
 

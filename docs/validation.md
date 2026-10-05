@@ -60,6 +60,8 @@ Repeatedly comparing features, model families, hyperparameters, thresholds, or s
 
 Use development folds to form hypotheses, nested folds for model selection when feasible, and a sealed holdout once for a final estimate. A sealed holdout must remain inaccessible to feature design and threshold tuning. Record every reported result with its dataset provenance, IDs/folds, metric definition, seed, configuration, code revision, and selection history.
 
+The historical project had a one-time grouped-ID CV-B score audit. The access log says candidate selection did not continue after that score read, but later metadata-only access exposed holdout manifest information and artifact paths. The split therefore cannot be described as an untouched, sealed final holdout in this release. Do not reuse it for tuning or report its diagnostic values as a clean sealed-holdout estimate. This is distinct from exposing labels or prediction contents, which the access log does not record.
+
 ## Historical validity labels
 
 These labels describe evidence status, not method quality:
@@ -70,9 +72,11 @@ These labels describe evidence status, not method quality:
 | `NON_NESTED_META_CV` | Outer-fold information could reach a meta-training representation through an upstream fitted stage. | Not an independent outer-fold estimate. |
 | `POST_SELECTION_CV` | The reported result was selected after repeated comparison on the same CV evidence. | Exploratory estimate, not an unbiased final benchmark. |
 | `PARTIAL_FOLD` | Evaluation covered only part of the intended IDs/folds. | Incomplete; do not compare as full-protocol evidence. |
-| `VALID_EXACT_STREAM` | The recorded inference path used the exact observed prefix and passed the documented fold/provenance checks. | Valid for that recorded protocol; not automatically a generalization claim. |
+| `VALID_EXACT_STREAM` | The recorded inference path used only the reference and exact observed prefix. | Describes inference causality only; says nothing by itself about fold independence or generalization. |
+| `REDUCED_ONLY` | Evaluation used a reduced diagnostic sample rather than the intended full evaluation set. | A limited diagnostic; do not substitute for a full benchmark. |
+| `UNKNOWN_PROVENANCE` | Available records do not establish the data, split, code, or evaluation path. | Withhold from benchmark comparisons or label the uncertainty explicitly. |
 
-Historical stacked CV work was found to include `NON_NESTED_META_CV` and `POST_SELECTION_CV_A` cases; earlier length-dependent work was `INVALID_FUTURE_LENGTH`. Some later paths satisfied exact-prefix checks, but incomplete manifests prevent a complete nested replay. These results are therefore not combined into a clean benchmark table. No substitute score is inferred.
+Historical stacked CV work was found to include `NON_NESTED_META_CV` and `POST_SELECTION_CV` cases; earlier length-dependent work was `INVALID_FUTURE_LENGTH`. Some later paths satisfied exact-prefix checks, but incomplete manifests prevent a complete nested replay. These results are therefore not combined into a clean benchmark table. No substitute score is inferred. Selected aggregates and their individual labels are in [results.md](results.md); the official private score is kept separate from local CV estimates.
 
 ## Tests in this repository
 
