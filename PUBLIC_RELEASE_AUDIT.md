@@ -9,6 +9,8 @@
 
 The public source tree installs and its local smoke checks pass. This audit does **not** certify a final `v1.0.0` release yet: the GitHub Actions run for the audited commit was queued when checked, and the existing `v1.0.0` tag points to an earlier commit (`ff0625f`). No GitHub Release object exists for that tag. The tag has not been moved.
 
+GitHub's [active Actions incident](https://www.githubstatus.com/incidents/3q1yb5m7ltvb) reports delays assigning GitHub-hosted runners, matching the queued runs observed here. The incident update at 2026-10-05 19:50 UTC said GitHub was still investigating. This explains the current CI delay; it is not evidence of a project test failure.
+
 ## Security and data
 
 - Scanned 127 Git blobs reachable from the public clone's fetched branches and tags. The scan found no credential-pattern matches, sensitive-name candidates, restricted-data/model/archive file extensions, or blobs larger than 5 MB. The largest blob was the curated method catalog (201,213 bytes).
@@ -33,7 +35,7 @@ From a new HTTPS clone at `30a1763`:
 | Internal Markdown links | 98 targets passed before this audit file was added |
 | README Mermaid architecture diagram | Parsed successfully with Mermaid 12.1.0 |
 
-The current GitHub Actions run is [queued](https://github.com/TranTrinhNhan1/BreakForge/actions). A complete Python 3.10, 3.11, and 3.12 matrix passed on `ff0625f`, before the latest documentation-only commits. Two subsequent runs ended with queued matrix jobs cancelled; the jobs that ran completed successfully. No test-step failure was reported in those runs. The latest commit's workflow result must be checked before tagging a release.
+The current GitHub Actions run is [queued](https://github.com/TranTrinhNhan1/BreakForge/actions). A complete Python 3.10, 3.11, and 3.12 matrix passed on `ff0625f`, before the latest documentation-only commits. Three subsequent runs ended with queued matrix jobs cancelled; the jobs that ran completed successfully. No test-step failure was reported in those runs. The latest commit's workflow result must be checked before tagging a release.
 
 The README and reference-list external links were checked separately. Publisher and DOI hosts may return HTTP 403 to automated requests; this is not treated as a broken citation when an authoritative page resolves. The older Statistica Sinica page had a TLS validation failure in this environment and was replaced by a Lund University publication record, which returned HTTP 200.
 
