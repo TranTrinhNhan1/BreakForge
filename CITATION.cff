@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it using these metadata."
 authors:
-  - name: "TranTrinhNhan1 (GitHub account)"
+  - name: "TranTrinhNhan1"
 title: "BreakForge: A Research Framework for Causal Structural Break Detection"
 version: 1.0.0
 abstract: >-

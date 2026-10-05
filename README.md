@@ -1,29 +1,30 @@
-# BreakForge: Structural Break Detection in Time Series
+# BreakForge
 
-A research framework for causal, real-time structural-break detection in heterogeneous univariate time series. The online work grew out of ADIA Lab and CrunchDAO's **Structural Break: Real-Time** edition; the methods and synthetic examples are intended to be useful beyond that competition.
+**A Research Framework for Causal Structural Break Detection**
 
-The reference implementation is deliberately compact: it fits a Gaussian AR(1) model on historical data, converts each arriving observation to a conditional innovation/PIT, and accumulates sequential evidence. It is a transparent baseline for research, not a leaderboard claim.
+[![CI](https://github.com/TranTrinhNhan1/BreakForge/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/TranTrinhNhan1/BreakForge/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/github/license/TranTrinhNhan1/BreakForge)](LICENSE)
 
-## Overview
+BreakForge studies causal, real-time break detection in heterogeneous univariate time series. The research grew out of the ADIA Lab / CrunchDAO Structural Break: Real-Time challenge and is presented here as a reusable research framework, with a small public reference detector and an honest record of methods, controls, and validation failures.
 
-At time `t`, an online score may depend on the reference history and observations through `x_t`. It must not depend on later observations, the final stream length, or the end of a sequence. The package exposes a resettable detector, a conditional PIT transform, fold-isolation helpers, and tests for these guarantees.
+## Problem and approach
+
+At time `t`, a detector may use its fitted reference and observations through `x_t`. It must not depend on future observations or the final stream length. BreakForge illustrates conditional normalization with a fixed Gaussian AR(1), then accumulates sequential evidence from each standardized innovation.
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-    H[Historical reference] --> M[Fit fixed Gaussian AR(1)]
-    M --> P[Conditional mean and scale]
-    X[One arriving value x_t] --> E[Innovation e_t]
-    P --> E
-    E --> Z[Standardized innovation z_t]
-    Z --> U[Gaussian PIT u_t = Phi(z_t)]
-    Z --> C[Signed mean and absolute-value CUSUMs]
-    C --> S[Running maximum evidence score]
-    S --> NEXT[Emit score before consuming x_(t+1)]
+    H[Historical reference] --> M[Fit Gaussian AR(1)]
+    M --> C[Conditional mean and scale]
+    X[Arriving observation x_t] --> Z[Standardized innovation]
+    C --> Z
+    Z --> P[Optional Gaussian PIT]
+    Z --> S[Signed and magnitude CUSUMs]
+    S --> E[Uncalibrated break evidence]
 ```
 
-The public detector uses the standardized innovation for its sequential evidence. The PIT is also available directly for analyses and alternative detectors. Neither the score nor the PIT is a calibrated probability unless a separate calibration procedure is justified and validated.
+The public score is evidence, not a calibrated probability or alarm guarantee. The PIT is available separately; its interpretation depends on the conditional model being adequate.
 
 ## Quick start
 
@@ -32,14 +33,7 @@ pip install -e .
 python examples/synthetic_break_demo.py
 ```
 
-The demo generates its own AR process. Before the break it uses `x_t = 0.7 x_(t-1) + ε_t`; after the break it uses `x_t = -0.2 x_(t-1) + 2 ε_t`. It prints the true change index and sequential evidence without loading competition data.
-
-To write a plot, install the optional plotting extra and pass `--plot`:
-
-```bash
-pip install -e '.[plot]'
-python examples/synthetic_break_demo.py --plot
-```
+The demo generates its own AR process with a change in coefficient and noise scale. It needs no Crunch runtime or competition data. Add `--plot` after installing `pip install -e '.[plot]'` to save a figure.
 
 ## Streaming API
 
@@ -47,55 +41,46 @@ python examples/synthetic_break_demo.py --plot
 from breakforge import StructuralBreakDetector
 
 detector = StructuralBreakDetector(allowance=0.25)
-detector.fit(history)                 # fixed reference fit
+detector.fit(history)  # estimate and freeze the reference
 
-for value in stream:                   # one observation at a time
-    score = detector.update(value)     # consumes only this value and prior state
-    print(score)
+for x_t in stream:
+    score = detector.update(x_t)  # consume one observation
 
-detector.reset()                       # retain the fit; clear online state
+detector.reset()  # clear online state while keeping the fitted reference
 ```
 
-`history` and each stream item must be finite real numbers. `fit` requires at least three history observations. `update` returns a non-decreasing, uncalibrated CUSUM evidence score; `detector.score` exposes the current value. `reset()` restarts from the fitted history endpoint so one series cannot contaminate the next.
-
-See [methodology](docs/methodology.md) for model assumptions and [validation](docs/validation.md) for the causal contract, fold isolation, and historical leakage findings.
-
-## Methods investigated
-
-The research explored rolling statistics, spectral and dynamical-system features (including Koopman/DMD), conditional PIT/Rosenblatt normalization, sequential tests, signatures, conformal methods, density ratios, Bayesian models, and representation learning. The public reference API contains only the small causal Gaussian AR(1) plus CUSUM baseline. See the [method catalog](docs/method_catalog.md) and [failed experiments](docs/failed_experiments.md) for tested configurations, controls, and open questions.
+Inputs must be finite real values; `fit` requires at least three reference observations. `update` returns a non-decreasing, uncalibrated score. Resetting between series prevents state from leaking across IDs. See [methodology](docs/methodology.md) for assumptions and [validation](docs/validation.md) for the causal contract.
 
 ## Validation and results
 
-The public tests cover future-suffix invariance, state reset, determinism, streaming replay parity, and ID-level fold isolation. A historical competition submission received a verified private score of **0.6213427008 TS-AUC**; the final rank was not independently verified. That submission was a different system from the compact public reference API, so this score is not a result for the current detector. The small synthetic benchmark is reproducible and deliberately shows where the reference detector struggles, especially under heavy-tailed changes.
-
 | Evidence | Result | Interpretation |
 |---|---:|---|
-| Historical official private Real-Time evaluation | 0.6213427008 TS-AUC | Different system from the current public API; no rank or generalization claim |
-| Synthetic mean, variance, AR, persistence, and frequency shifts | AUC 0.8288–1.0000 for BreakForge | Fixed-seed, small generated benchmark; see full per-mechanism table |
-| Synthetic heavy-tail shift | AUC 0.4781; detection rate 0.075 | Weak under this tested data-generating process |
+| Public synthetic benchmark | AUC 0.8288–1.0000 on five tested break mechanisms | Fixed-seed, 40 streams per mechanism; synthetic only |
+| Heavy-tail synthetic shift | AUC 0.4781; detection rate 0.075 | A tested failure case for this reference detector |
+| Official private run #21 / 120227 | TS-AUC 0.6213427008 | Different system from the public API; final rank unverified |
 
-Historical CV values are selection-exposed or otherwise limited and are labeled separately in [results.md](docs/results.md); they are not clean benchmark estimates. See [validation.md](docs/validation.md) for the evaluation dependency diagram and holdout history.
+The synthetic benchmark is reproducible with `python scripts/synthetic_benchmark.py`; configuration, code revision, metric definition, and limits are in [results](docs/results.md). Historical competition CV values are not clean benchmarks: some used final-length information, some had nested-OOF contamination, and many were selected on the same folds. The high historical values remain visible with labels in [results](docs/results.md) and [validation](docs/validation.md).
 
-## Competition background
+## Methods investigated
 
-This project’s online research came from the **Structural Break: Real-Time** edition, which CrunchDAO reported closed on 2026-10-02. It is distinct from the earlier 2025 ADIA Lab Structural Break Challenge documentation, which describes both segments supplied together for a batch decision. The Real-Time edition used streaming inference and required each score to use only history and the online prefix. [CrunchDAO's closure notice](https://forum.crunchdao.com/t/2026-w40-closing-of-structural-break-real-time/1222), [Real-Time leakage clarification](https://forum.crunchdao.com/t/leaderboard-comparability-after-the-june-8-real-time-data-access-fix-were-pre-fix-scores-rescored/1188), and [original batch challenge documentation](https://docs.crunchdao.com/competitions/competitions/adia-lab-structural-break-challenge) are linked for context.
+The research covered rolling statistics, conditional PIT/Rosenblatt transforms, sequential tests, kernels, density ratios, spectral and wavelet features, Koopman/DMD, path signatures, Bayesian methods, conformal inference, and learned representations. Selected configurations did not establish that any broad family is ineffective. See the [method catalog](docs/method_catalog.md), [failed experiments](docs/failed_experiments.md), and the [131-report index](reports/experiment_index.csv).
 
-Competition datasets cannot be redistributed. This repository does not require or include them; users must supply data they are authorized to use. See [competition notes](docs/competition.md).
+## Competition context and data
+
+The challenge supplied the research problem and real-time constraints. CrunchDAO announced the Real-Time edition closed on 2026-10-02; see its [closure notice](https://forum.crunchdao.com/t/2026-w40-closing-of-structural-break-real-time/1222) and [streaming leakage clarification](https://forum.crunchdao.com/t/leaderboard-comparability-after-the-june-8-real-time-data-access-fix-were-pre-fix-scores-rescored/1188). Competition data, labels, per-series predictions, and submission bundles are not included. Users must supply data they are authorized to use. The public examples and tests work without them.
 
 ## Repository map
 
 ```text
-src/breakforge/   Public detector, conditional PIT, and validation helpers
-examples/               Synthetic, data-independent demonstrations
-tests/                  Fast causality and fold-isolation tests
-configs/                Small reference configuration
-scripts/                Reproduction and user-data evaluation commands
-docs/                   Methodology, validation, history, and citations
-reports/                Curated results only, with validity labels
-research_archive/       Indexed summaries of selected historical evidence
+src/breakforge/       Causal detector, conditional PIT, validation utilities
+examples/             Synthetic streaming demonstrations
+tests/                Causality, reset, parity, determinism, fold isolation
+configs/              Small reference configuration
+scripts/              Reproduction and user-data evaluation
+reports/              Synthetic results and curated historical aggregates
+docs/                 Methods, validation, results, research history, references
+research_archive/     Indexed conclusions from selected research
 ```
-
-The raw experiment tree, data, and private runtime artifacts are excluded from the public Git interface. Selected research history and its status are indexed in [research_archive/README.md](research_archive/README.md).
 
 ## Reproducibility
 
@@ -105,8 +90,8 @@ pytest -q
 python examples/synthetic_break_demo.py
 ```
 
-The core runtime uses only the Python standard library. Plotting is optional. Competition-specific evaluation is not part of the public quick start.
+The core has no runtime dependencies beyond Python's standard library. Plotting is optional; no Crunch credentials, cloud services, or private data are needed for the quick start.
 
-## References, citation, and license
+## Citation and license
 
-See [results](docs/results.md), [references](docs/references.md), [CITATION.cff](CITATION.cff), and [LICENSE](LICENSE). Contribution guidelines are in [CONTRIBUTING.md](CONTRIBUTING.md); security reports should follow [SECURITY.md](SECURITY.md).
+Use the metadata in [CITATION.cff](CITATION.cff). BreakForge is distributed under the [MIT License](LICENSE). See [references](docs/references.md) and [contribution guidance](CONTRIBUTING.md).

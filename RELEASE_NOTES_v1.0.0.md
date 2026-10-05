@@ -1,31 +1,37 @@
-# v1.0.0 — Post-Competition Research Release (draft)
+# BreakForge v1.0.0 — Post-Competition Research Release
 
-This draft describes the intended contents of the public release. It is not an announcement that the release gates have passed.
+BreakForge presents a compact, causal streaming reference implementation and a curated account of research into structural-break detection in heterogeneous univariate time series.
 
-## Included
+## Highlights
 
-- A compact, deterministic, CPU-only causal streaming API for a fixed Gaussian AR(1) reference and sequential CUSUM evidence.
-- Conditional Gaussian PIT / standardized innovation normalization with explicit assumptions and failure cases.
-- Exact-stream and fold-isolation validation helpers, with regression tests for causality, reset behavior, determinism, and replay parity.
-- A synthetic AR structural-break demonstration that requires no competition data or CrunchDAO runtime.
-- A research retrospective covering validation leakage, nested OOF contamination, matched controls, and experiments that were deprioritized.
-- A reproducible synthetic benchmark and an explicitly separated, verified aggregate official competition score.
-- Curated historical research comparisons with validity labels and selection caveats.
-- A curated reference list, research archive index, reference configuration, and user-data CSV evaluation script.
+- A resettable, deterministic CPU detector with a fitted Gaussian AR(1) reference, conditional standardized innovations, optional Gaussian PIT values, and sequential CUSUM evidence.
+- A synthetic AR-break demonstration and seeded benchmark that require no competition data or Crunch runtime.
+- Exact-stream, suffix-invariance, reset, replay-parity, determinism, and fold-isolation validation utilities and tests.
+- A method catalog, 131-record report-title and digest index, research journey, matched-control discussion, and curated failed/inconclusive experiments.
+- Separate reporting for synthetic reproducible results, official private-run outcomes, and historical CV results with `INVALID_FUTURE_LENGTH`, `NON_NESTED_META_CV`, `POST_SELECTION_CV`, and `PARTIAL_FOLD` labels.
+- Primary-source references and an MIT-licensed, installable Python package.
 
-## Validation and performance
+## Results and limitations
 
-This release makes no leaderboard-rank, state-of-the-art, or generalized performance claim. The one private official score is a verified aggregate, not a public reproducible benchmark. Historical evaluation results have differing validity and provenance; the documentation labels known issues and does not treat them as clean benchmarks.
+The official score reported in this repository is a private competition metric from a system distinct from the public reference API. The final rank is not independently verified. It is not a public benchmark and does not establish generalization. No competition data, labels, per-series outputs, or submission bundle are included.
 
-## Release limitations
+No competition-derived CV result in this release qualifies as a clean independent benchmark. Historical scores remain available with their validation limitations, including future-length leakage and nested-OOF contamination. The synthetic benchmark is small and covers selected data-generating processes; the public CUSUM score is uncalibrated and does not provide a false-alarm guarantee.
 
-- Competition data, labels, and per-series predictions are not redistributed; only aggregate findings are reported.
-- A clean competition benchmark replay is not available from the public files.
-- The current score is uncalibrated evidence; no false-alarm guarantee is claimed.
-- The official final competition rank was not independently verified.
+## Install and reproduce
 
-## GitHub metadata proposal
+```bash
+pip install -e .
+python examples/synthetic_break_demo.py
 
-- **Description:** Research framework for causal, real-time structural-break detection in heterogeneous univariate time series.
-- **Topics:** `time-series`, `change-point-detection`, `structural-break`, `sequential-analysis`, `streaming`, `statistical-learning`.
-- **Homepage:** leave unset unless a project page or canonical paper is established.
+pip install -e '.[dev]'
+pytest -q
+python scripts/synthetic_benchmark.py \
+  --seed 20261005 \
+  --repetitions 40 \
+  --calibration-repetitions 80 \
+  --history-length 256 \
+  --stream-length 512 \
+  --output reports/synthetic_benchmark.csv
+```
+
+Competition evaluation requires user-supplied data and authorization. The public synthetic workflow does not require competition access.
