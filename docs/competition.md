@@ -17,7 +17,7 @@ CrunchDAO's [data-sharing clarification](https://forum.crunchdao.com/t/sharing-f
 
 The repository's MIT license applies to project-authored code and documentation. It does not grant rights to CrunchDAO or ADIA Lab data, labels, or platform materials.
 
-The primary official private-evaluation score and other verified run outcomes are reported as aggregates in [results.md](results.md), based on preserved provider records. The release includes submission/run IDs as provenance, but no per-series values, labels, predictions, series IDs, team aliases, or submission artifacts. The final competition rank was not independently verified and is not reported. Historical cross-validation values are separated from official run outcomes and carry explicit validity labels. Local competition data, result files, and submission artifacts remain excluded from Git.
+The primary official private-evaluation score and other verified run outcomes are reported as aggregates in [results.md](results.md), based on preserved provider records. The release includes submission/run IDs as provenance, but no per-series values, labels, predictions, series IDs, team aliases, or submission artifacts. The final competition rank was not independently verified and is not reported. Historical cross-validation values are separated from official run outcomes and carry explicit validity labels. Competition data, result files, and submission artifacts remain excluded from Git.
 
 ## Reproducing research without platform data
 

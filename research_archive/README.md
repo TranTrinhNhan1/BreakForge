@@ -1,11 +1,10 @@
 # Curated research archive
 
-The release includes a [source-indexed inventory of 131 local research reports](../reports/experiment_index.csv) and a [curated method and variant catalog](../reports/method_catalog.csv). Its `MTH-*` and `CAT-*` keys were assigned for this release and are not original experiment IDs. The source index records report titles and SHA-256 digests; the method catalog groups staged reports and adds five supplemental experiment summaries whose reviewed evidence was outside the report index. Neither publishes private source notes, logs, prediction arrays, models, or competition data. A digest is provenance bookkeeping, not a reproduction package. Validity labels apply only where explicitly documented in [the result tables](../docs/results.md); other inventory entries remain historical and unassessed.
+The release includes a [source-indexed inventory of 131 research reports](../reports/experiment_index.csv) and a [curated method and variant catalog](../reports/method_catalog.csv). Its `MTH-*` and `CAT-*` keys were assigned for this release and are not original experiment IDs. The source index records report titles and SHA-256 digests; the method catalog groups staged reports and adds five supplemental experiment summaries whose reviewed evidence was outside the report index. The source report text, runtime logs, prediction arrays, model artifacts, and competition data are not distributed. A digest supports source mapping but is not a reproduction package. Validity labels apply only where explicitly documented in [the result tables](../docs/results.md); other inventory entries remain historical and unassessed.
 
 This archive preserves the scientific conclusions of the broader project
 without including raw competition data, predictions, model binaries, logs, or
-private working files. The summaries below use stable public evidence labels;
-they do not rely on machine-specific paths.
+private working files. The summaries below use stable public evidence labels rather than filesystem locations.
 
 | Evidence label | Research question | Status / validity | Public account | Key lesson |
 |---|---|---|---|---|
@@ -33,5 +32,5 @@ they do not rely on machine-specific paths.
   claim.
 
 The curated public account is in [the research journey](../docs/research_journey.md)
-and [failed experiments](../docs/failed_experiments.md). The original local
-experiment artifacts remain outside this public archive.
+and [failed experiments](../docs/failed_experiments.md). Raw research artifacts
+remain outside this public archive.
