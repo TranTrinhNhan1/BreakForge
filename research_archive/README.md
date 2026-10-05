@@ -1,6 +1,6 @@
 # Curated research archive
 
-The release includes a [source-indexed inventory of 131 research reports](../reports/experiment_index.csv) and a [curated method and variant catalog](../reports/method_catalog.csv). Its `MTH-*` and `CAT-*` keys were assigned for this release and are not original experiment IDs. The source index records report titles and SHA-256 digests; the method catalog groups staged reports and adds five supplemental experiment summaries whose reviewed evidence was outside the report index. The source report text, runtime logs, prediction arrays, model artifacts, and competition data are not distributed. A digest supports source mapping but is not a reproduction package. Validity labels apply only where explicitly documented in [the result tables](../docs/results.md); other inventory entries remain historical and unassessed.
+The release includes a [source-indexed inventory of 131 research reports](../reports/experiment_index.csv) and a [curated method and variant catalog](../reports/method_catalog.csv). Its `MTH-*` and `CAT-*` keys were assigned for this release and are not original experiment IDs. The source index records report titles and SHA-256 digests; the method catalog groups staged reports and adds five supplemental evidence summaries whose reviewed records were outside the report index. The source report text, runtime logs, prediction arrays, model artifacts, and competition data are not distributed. A digest supports source mapping but is not a reproduction package. Method-level and result-level validation labels appear where evidence supports them; other inventory entries remain historical or explicitly unknown.
 
 This archive preserves the scientific conclusions of the broader project
 without including raw competition data, predictions, model binaries, logs, or
@@ -17,6 +17,11 @@ private working files. The summaries below use stable public evidence labels rat
 | `MTH-04` | Do dynamics, frequency, and path representations transfer? | Tested configurations only; no family-wide rejection. | [Method catalog](../docs/method_catalog.md), [failed experiments](../docs/failed_experiments.md), [references](../docs/references.md) | Embedding, rank, window, scaling, and noise choices can dominate apparent effects. |
 | `MTH-05` | Do learned or pretrained representations transfer to break detection? | Incompletely reproduced; not part of the public reference implementation. | [Research journey](../docs/research_journey.md), [method catalog](../docs/method_catalog.md), [failed experiments](../docs/failed_experiments.md) | Forecasting or pretraining performance alone does not establish detection transfer. |
 | `DATA-01` | Can the historical challenge data be redistributed? | Excluded; platform guidance prohibits sharing the competition dataset. | [Competition notes](../docs/competition.md) | The synthetic examples keep the package usable without restricted data. |
+| `RUN-01` (`SRC-021`) | Why did the first recorded cloud attempt fail? | `CLOUD_PRIVATE; OFFICIAL_RUN; PACKAGE_ASSEMBLY_FAILURE; NO_SCORE`. | [Results](../docs/results.md) | The attempt failed before inference because of package assembly; the repaired run is a separate record. |
+| `AUX-01` (`SRC-022`–`SRC-025`) | Do matched P2+Aux features add to the Clean Baseline V2 head? | `CLOUD_PRIVATE; POST_SELECTION_CV; FEATURE_COMPONENT_PARITY_ONLY; PACKAGE_PARITY_UNKNOWN; REDUCED_ONLY` where applicable. | [Results](../docs/results.md), [failed experiments](../docs/failed_experiments.md) | A CV-A lift and a weaker reduced diagnostic do not justify promotion without integrated inference parity. |
+| `ACF-01` (`SRC-026`–`SRC-029`) | Do online-age or historical-ACF partitions support a new detector feature? | `CLOUD_PRIVATE; DESCRIPTIVE_OOF_DIAGNOSTIC` for subgroup audits; `SYNTHETIC_STAGE0_HELD_SEED` for the fixed ACF recipe. | [Failed experiments](../docs/failed_experiments.md), [research journey](../docs/research_journey.md) | Subgroup gaps did not explain a mechanism; the static ACF recipe failed a preregistered group condition. |
+| `NULL-01` (`SRC-030`–`SRC-031`) | Does robust history-null calibration fix under-detection? | `SYNTHETIC_STAGE0; MATCHED_CONTROL` and `CLOUD_PRIVATE; OOF_DIAGNOSTIC`. | [Failed experiments](../docs/failed_experiments.md) | The tested robust correction failed its matched-control gate, and the under-detection claim was not supported. |
+| `SNR-01` (`SRC-032`–`SRC-034`) | Does weak break-age ranking establish a hard signal ceiling? | `CLOUD_PRIVATE; EXPLORATORY_METRIC_AUDIT` and `SYNTHETIC_STAGE0; PRIVATE_BREAK_MAGNITUDE_DIAGNOSTIC; INTERPRETATION_CORRECTED`. | [Failed experiments](../docs/failed_experiments.md), [research journey](../docs/research_journey.md) | The threshold-based ceiling reading was downgraded after raw null scores rose with stream age. |
 
 ## Validity labels
 
@@ -28,8 +33,8 @@ private working files. The summaries below use stable public evidence labels rat
   upstream representation or stacked feature.
 - `POST_SELECTION_CV` marks results used during repeated candidate selection.
 - `PARTIAL_FOLD` marks incomplete planned evaluation coverage.
-- `UNKNOWN` means the available provenance or rights do not support a stronger
-  claim.
+- `UNKNOWN` or `UNKNOWN_FROM_PUBLIC_INDEX` means the available provenance or
+  rights do not support a stronger claim.
 
 The curated public account is in [the research journey](../docs/research_journey.md)
 and [failed experiments](../docs/failed_experiments.md). Raw research artifacts

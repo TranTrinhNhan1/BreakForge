@@ -50,7 +50,13 @@ An evaluation-DAG review found that outer validation information could flow into
 
 The challenge used heterogeneous, private competition data. That is not a substitute for broad evidence on public deployment distributions. The dataset cannot be included in this repository, and a faithful clean benchmark replay is unavailable from the checked-in public artifacts. Transfer claims are therefore limited; synthetic examples demonstrate mechanics, not external validity.
 
-## 13. Post-competition cleanup
+## 13. Late-cycle matched controls and corrections
+
+The final matched-capacity P2+Aux ablation showed a selected CV-A lift over the Clean Baseline V2 head. A paired-ID bootstrap described uncertainty conditional on saved OOF predictions, but did not remove prior fold exposure. The no-age version fell below its control on one reduced-only diagnostic, and full integrated inference parity remained open. Those results stay `CLOUD_PRIVATE; POST_SELECTION_CV` and were not promoted.
+
+Separate audits clarified several misleading patterns. A static history-ACF feature failed one preregistered synthetic group condition and was closed as a fixed recipe (`SYNTHETIC_STAGE0_HELD_SEED`). A robust-history-null correction failed its matched-control gate, and the associated under-detection claim was not supported. Metric-weight analysis showed why online-age subgroup AUC should not be treated as a direct measure of score contribution. A synthetic break-magnitude screen also needed correction: a raw maximum score rose with stream age under null, so its threshold-based “ceiling” interpretation was downgraded. These are specific diagnostics, not universal conclusions about their method families.
+
+## 14. Post-competition cleanup
 
 The public release extracts a small, deterministic, CPU-only reference implementation and its regression tests. Detailed source reports and raw artifacts are not included; selected lessons are summarized without publishing restricted data or scores presented without their validity limits. The resulting repository is intended to be a starting point for reproducible work, not a claim that the competition produced a universally superior detector.
 

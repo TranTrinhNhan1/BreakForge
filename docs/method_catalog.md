@@ -1,8 +1,8 @@
 # Research method catalog
 
-The project explored a broad set of evidence channels for heterogeneous univariate streams. The [machine-readable catalog](../reports/method_catalog.csv) covers all 131 report-index IDs, grouped into report-level records, plus five supplemental records. It records a hypothesis, implementation, control, validation scope, or disposition when a release-safe summary supports it; missing fields are marked explicitly.
+The project explored a broad set of evidence channels for heterogeneous univariate streams. The [machine-readable catalog](../reports/method_catalog.csv) has 134 records: 129 report-level `CAT-*` records cover all 131 indexed `MTH-*` reports (two catalog records combine pairs of staged reports), plus five supplemental `SUP-*` evidence records. It records a hypothesis, implementation, control, validation scope, or disposition when a release-safe summary supports it; missing fields are marked explicitly.
 
-The catalog covers all 131 report-index identifiers (`MTH-*`) after grouping staged reports that describe the same underlying recipe. It also records five code-only experiment branches whose useful aggregate outcomes were found outside those reports. These are catalog records, not a count of distinct algorithms: entries include detectors, feature representations, scoring heads, training or selection procedures, and one validation audit. Seeds, folds, and repeat runs are not counted as separate methods. The audit entry is explicitly typed as such, and stage records with the same method are grouped under one catalog ID.
+The catalog covers all 131 report-index identifiers (`MTH-*`) after grouping staged reports that describe the same underlying recipe. Five supplemental records summarize evidence found outside those reports. These are catalog records, not a count of distinct algorithms: entries include detectors, feature representations, scoring heads, training or selection procedures, and one validation audit. Seeds, folds, and repeat runs are not counted as separate methods. The audit entry is explicitly typed as such, and stage records with the same method are grouped under one catalog ID.
 
 The identifiers `MTH-*` and `CAT-*` were assigned for this release. The report index keeps the source titles and SHA-256 digests; the original report text, raw predictions, model artifacts, and competition data are not included. The 131 report digests were checked against the source records used for this curation. A matching digest verifies the source mapping, but it does not make an experiment independently reproducible. Selected aggregate outcomes and their caveats are published separately in [results](results.md) and [`historical_research.csv`](../reports/curated_results/historical_research.csv).
 
@@ -46,7 +46,7 @@ The catalog is a curated map, not a downloadable implementation of every experim
 
 ## Complete method and variant register
 
-This release contains **134 curated records**, covering **131 indexed research reports** and five supplemental evidence records. A record can describe a detector, feature representation, training or selection procedure, or a validation audit; these are not counts of independent algorithms. Report IDs and source evidence IDs preserve provenance. The original reports and private inputs are not distributed. Matching a source digest verifies which record informed the summary; it does not make the experiment independently reproducible.
+This release contains **134 curated records**: **129 `CAT-*` records** cover **131 indexed `MTH-*` research reports**, and five `SUP-*` records summarize additional evidence. Two catalog entries each combine two staged reports. A record can describe a detector, feature representation, training or selection procedure, or a validation audit; these are not counts of independent algorithms. Report IDs and source evidence IDs preserve provenance. The original reports and private inputs are not distributed. Matching a source digest verifies which record informed the summary; it does not make the experiment independently reproducible.
 
 Each entry retains the experiment question, implementation or explicit unknown, matched control, evaluation scope, validation labels, outcome, limits, and open question where the reviewed source supports them. `UNKNOWN_FROM_PUBLIC_INDEX` and similar labels are retained when the source record does not justify a stronger statement.
 
@@ -588,28 +588,27 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Reported family label:** Conformal Restart Max.
 
-**Question or hypothesis:** Not preserved in the public summary; see the report title and source digest.
+**Question or hypothesis:** A maximum over candidate restart times after a finite betting-power mixture may preserve a local alternative diluted by a restart sum. A normalized prior-weighted mixture over restart times may handle an unknown change location better than a maximum or an unweighted restart recurrence.
 
-**Implementation:** Implementation details are not preserved in the public summary.
+**Implementation:** Apply a restart maximum and normalized candidate-time prior mixtures, including harmonic and near-harmonic priors, to the existing causal Rosenblatt/P2 evidence streams.
 
-**Reference / online information:** Reference and information-set details are not preserved in the public summary.
+**Reference / online information:** The restart evidence updates on the fixed history-normalized score stream using only the observed prefix; no final online length is used.
 
 **Tested settings or stage:** Conformal Restart Maximum and tau Mixture
 
-**Matched control:** No report-specific control detail is preserved in the public summary. This does not imply that no control was run; see docs/failed_experiments.md for family-level examples.
+**Matched control:** The fixed P2+Aux+CRM baseline on the same grouped CV-A F4/F1 screen.
 
-**Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
+**Causal evidence:** The six existing CRM outputs were preserved bitwise. Twenty-seven future-suffix prefix checks passed; normalized prior mass and the restart-mixture calculation were also checked.
 
-**Evaluation scope:** grouped_cv_a_partial
+**Evaluation scope:** Two-fold grouped CV-A F4/F1 Stage-1 screen; no full-fold or package evaluation.
 
-**Validation labels:** POST_SELECTION_CV;PARTIAL_FOLD_WHERE_APPLICABLE
+**Validation labels:** VALID_EXACT_STREAM; PARTIAL_FOLD; POST_SELECTION_CV
 
-**Result and disposition:** The causal restart features and staged CV-A screens were completed; the harmonic candidate-time mixture was not promoted.
+**Result and disposition:** No candidate was promoted. The restart maximum was slightly negative on both screened means, and the normalized-prior variants lost on F1.
 
-**Limit / reason deprioritized:** No additional limitation is preserved in the public summary; see the result and validation fields.
+**Limit / reason deprioritized:** Only two folds were screened after prior model development; results are post-selection and do not settle other restart constructions.
 
-**Open question:** Not recorded in the public summary.
-
+**Open question:** Would a restart maximum or normalized candidate-time mixture help under a nested full-fold evaluation?
 </details>
 
 <details>
@@ -962,17 +961,17 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Reported family label:** Ar Focus.
 
-**Question or hypothesis:** Not preserved in the public summary; see the report title and source digest.
+**Question or hypothesis:** Given a history-fitted AR(p) process, a permanent location shift produces a transient response in the first p prewhitened innovations and a constant response afterward. Weighting those innovations by the AR response may detect autocorrelated location changes that a rolling mean of AR residuals misses.
 
-**Implementation:** Implementation details are not preserved in the public summary.
+**Implementation:** Fit historical mean, AR order 0–12, and innovation scale using the reference history. Compute generalized-likelihood evidence over a fixed geometric grid of candidate durations 1–4096. This is a Stage-1 fixed-grid approximation, not the paper’s exact pruned AR(p)-FOCuS algorithm.
 
-**Reference / online information:** Not preserved in the public summary.
+**Reference / online information:** AR parameters and scale use history only. At online time t, the score uses observations through t and a predeclared duration grid; the final online length is not used.
 
 **Tested settings or stage:** AR(p)-Aware FOCuS Evidence — Search Report
 
-**Matched control:** No report-specific control detail is preserved in the public summary. This does not imply that no control was run; see docs/failed_experiments.md for family-level examples.
+**Matched control:** Plain rolling-mean / generalized-likelihood evidence on AR residuals and an IID-based scan. The comparison remained a two-fold feasibility screen.
 
-**Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
+**Causal evidence:** The vectorized scan matched an independent scalar prefix replay, and future-suffix mutation preserved all earlier features for the tested fixed-grid implementation.
 
 **Evaluation scope:** Grouped CV-A F4/F2 feasibility screen; AR-order and scan variants were compared on the same two folds.
 
@@ -980,10 +979,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Result and disposition:** The F4/F2 screen showed no stable across-fold gain; raw AR-adjusted scans were marginally higher than the IID scan on each screened fold, but the feature-only heads remained near chance. Not promoted.
 
-**Limit / reason deprioritized:** No additional limitation is preserved in the public summary; see the result and validation fields.
+**Limit / reason deprioritized:** The screen showed no stable across-fold gain, and the feature-only heads remained near chance. The experiment did not implement exact pruned AR(p)-FOCuS.
 
-**Open question:** Not recorded in the public summary.
-
+**Open question:** Would an exact AR(p)-FOCuS implementation or the fixed-grid approximation add value for non-location breaks under a full-fold, nested evaluation?
 </details>
 
 <details>
@@ -2551,26 +2549,25 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Question or hypothesis:** P2's AR-whitened, tau-integrated Rosenblatt evidence may become more useful when its historical null calibration adapts causally to observed stream age and is combined with orthogonal dynamics, martingale, and spectral evidence. This is a synthesis experiment using already-reviewed method families, not a claim of new theoretical guarantees.
 
-**Implementation:** P2 contributes standardized innovations and mean, scale, and dependence evidence, including log-mixture and maximum evidence over available candidate change times, conditional-scale ratio, and historical AR order. Ten robust-z features calibrate this evidence against a history-only null; auxiliary features summarize dynamics, martingale, spectral, and stream-age evidence.
+**Implementation:** The 48-input head combines 15 raw P2/Rosenblatt features, 10 history-null robust-z features, 22 dynamics features, and stream age. A matched ablation also evaluated the 47-input version without age.
 
-**Reference / online information:** Reference and information-set details are not preserved in the public summary.
+**Reference / online information:** Features use a history-initialized conditional-normalization stream and online values through the current prefix. All 48 components passed a component-level prefix audit; integrated candidate inference parity remains unverified.
 
 **Tested settings or stage:** Causal P2 Multiscale Evidence Fusion — Search Report
 
-**Matched control:** No report-specific control detail is preserved in the public summary. This does not imply that no control was run; see docs/failed_experiments.md for family-level examples.
+**Matched control:** Clean Baseline V2 direct head on the same grouped CV-A folds; its reduced-only score is retained as a separate one-time control.
 
-**Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
+**Causal evidence:** All feature components passed a full component-level prefix-parity audit. This does not establish parity of the integrated 47/48-input inference package.
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Five-fold grouped CV-A matched-capacity ablation; Arm C had one reduced-only diagnostic, and Arm D had retrospective paired-ID resampling. No package or official private evaluation.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** CLOUD_PRIVATE; POST_SELECTION_CV; FEATURE_COMPONENT_PARITY_ONLY; PACKAGE_PARITY_UNKNOWN; REDUCED_ONLY (Arm C only)
 
-**Result and disposition:** Decision: Do not promote. The feature-only head is weak; its fixed blend with Trial 11 is promising but inherits Trial 11's nested-OOF CV caveat.
+**Result and disposition:** Arm C (47 inputs) averaged 0.610056 CV-A versus 0.5992524 for the matched control, but scored 0.5135546 on the one reduced-only diagnostic versus 0.520526 for the control. Arm D (48 inputs) averaged 0.6104292; its paired-ID bootstrap mean delta was +0.0113107 with descriptive interval +0.0073494 to +0.0155046. Neither head was promoted.
 
-**Limit / reason deprioritized:** No further reason for deprioritization is preserved in the public summary.
+**Limit / reason deprioritized:** CV-A and feature development were repeatedly exposed. Bootstrap uncertainty is conditional on saved predictions. Integrated inference/package parity is open, and the no-age Arm C fell below its control on the reduced diagnostic.
 
-**Open question:** Not recorded in the public summary.
-
+**Open question:** Would the CV-A lift persist with complete integrated-prefix parity and an independent nested or sealed evaluation?
 </details>
 
 <details>

@@ -53,11 +53,11 @@ Inputs must be finite real values; `fit` requires at least three reference obser
 
 ## Validation and results
 
-| Evidence | Result | Interpretation |
-|---|---:|---|
-| Public synthetic benchmark | AUC 0.8288–1.0000 on five tested break mechanisms | Fixed-seed, 40 streams per mechanism; synthetic only |
-| Heavy-tail synthetic shift | AUC 0.4781; detection rate 0.075 | A tested failure case for this reference detector |
-| Official private run #21 / 120227 | TS-AUC 0.6213427008 | Different system from the public API; final rank unverified |
+| Evidence | Result | Validity label | Interpretation |
+|---|---:|---|---|
+| Public synthetic benchmark | AUC 0.8288–1.0000 on six tested break mechanisms | `SYNTHETIC_ONLY` | Fixed-seed, 40 streams per mechanism |
+| Heavy-tail synthetic shift | AUC 0.4781; detection rate 0.075 | `SYNTHETIC_ONLY` | A tested failure case for this reference detector |
+| Official private run #21 / 120227 | TS-AUC 0.6213427008 | `CLOUD_PRIVATE; VERIFIED_OFFICIAL_RUN` | Different system from the public API; final rank unverified |
 
 The synthetic benchmark is reproducible with `python scripts/synthetic_benchmark.py`; configuration, code revision, metric definition, and limits are in [results](docs/results.md). Historical competition CV values are not clean benchmarks: some used final-length information, some had nested-OOF contamination, and many were selected on the same folds. The high historical values remain visible with labels in [results](docs/results.md) and [validation](docs/validation.md).
 
