@@ -1,6 +1,6 @@
 # Research method catalog
 
-The project explored a broad set of causal evidence channels for heterogeneous univariate streams. The [machine-readable catalog](../reports/method_catalog.csv) records the tested hypothesis, implementation summary, information-set notes, matched control when available, validation scope, disposition, and source-report identifiers for each catalog entry.
+The project explored a broad set of evidence channels for heterogeneous univariate streams. The [machine-readable catalog](../reports/method_catalog.csv) covers all 131 report-index IDs, grouped into report-level records, plus five supplemental records. It records a hypothesis, implementation, control, validation scope, or disposition when a release-safe summary supports it; missing fields are marked explicitly.
 
 The catalog covers all 131 report-index identifiers (`MTH-*`) after grouping staged reports that describe the same underlying recipe. It also records five code-only experiment branches whose useful aggregate outcomes were found outside those reports. These are catalog records, not a count of distinct algorithms: entries include detectors, feature representations, scoring heads, training or selection procedures, and one validation audit. Seeds, folds, and repeat runs are not counted as separate methods. The audit entry is explicitly typed as such, and stage records with the same method are grouped under one catalog ID.
 
@@ -12,8 +12,9 @@ The identifiers `MTH-*` and `CAT-*` were assigned for this release. The original
 - **Method or variant** preserves the report title. A changed statistic, representation, calibration rule, or model objective remains visible as its own entry; staged evaluations of the same recipe share a catalog ID.
 - **Causal evidence** distinguishes a stated causal design from a reported prefix or future-mutation check. Neither label substitutes for inspecting the implementation and audit scope.
 - **Evaluation scope** separates synthetic feasibility, full grouped-fold records, partial-fold screens, and package replays. A package replay does not certify model selection or fold independence.
-- **Validation labels** preserve known caveats such as `POST_SELECTION_CV`, `NON_NESTED_META_CV`, `PARTIAL_FOLD`, and `INVALID_FUTURE_LENGTH`. `UNKNOWN_FROM_PUBLIC_INDEX` means the available release summary does not justify a stronger claim.
-- **Matched control** is `not captured` when the source summary did not preserve enough detail. Family-level examples and the reason matched controls matter are in [failed and inconclusive experiments](failed_experiments.md); a reader should not infer a matched comparison where none is documented.
+- **Validation labels** preserve known caveats such as `POST_SELECTION_CV`, `NON_NESTED_META_CV`, `PARTIAL_FOLD`, and `INVALID_FUTURE_LENGTH`. `UNKNOWN_FROM_PUBLIC_INDEX` means the reviewed public summary does not justify a stronger claim.
+- **Missing detail** is labeled `Not preserved in the public summary` or `UNKNOWN_FROM_PUBLIC_INDEX`. This is not evidence that a method, control, or audit was absent; it means the release does not publish a verified detail for that field.
+- **Matched control** is report-specific only when the catalog names one. Otherwise the row says that a control was not preserved in its public summary; family-level examples and comparison principles are in [failed and inconclusive experiments](failed_experiments.md).
 
 ## Main research threads
 
@@ -35,7 +36,7 @@ Temporal-neighborhood encoders, reference/current embeddings, contrastive and pr
 
 ## Matched controls
 
-The catalog marks a report-specific control as unknown if the public index did not retain it. The general comparison rule used in this retrospective is to match the information set, stream, window, normalization, compute budget, and threshold calibration, then reduce the proposed method to a simple control such as low-order moments, autocorrelation, the same conditional innovations with a CUSUM, or the frozen reference head. This guards against crediting an elaborate representation for extra context, tuning, or a stronger downstream model.
+The catalog marks a report-specific control as unknown when no release-safe control summary was retained. The general comparison rule used in this retrospective is to match the information set, stream, window, normalization, compute budget, and threshold calibration, then reduce the proposed method to a simple control such as low-order moments, autocorrelation, the same conditional innovations with a CUSUM, or the frozen reference head. This guards against crediting an elaborate representation for extra context, tuning, or a stronger downstream model.
 
 The clean, public comparison is the [reproducible synthetic benchmark](results.md#clean-reproducible-synthetic-benchmark). Competition-derived comparisons remain separate because private inputs and artifacts are unavailable for independent replay.
 
