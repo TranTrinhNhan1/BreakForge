@@ -5,13 +5,17 @@
 [![CI](https://github.com/TranTrinhNhan1/BreakForge/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/TranTrinhNhan1/BreakForge/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/github/license/TranTrinhNhan1/BreakForge)](LICENSE)
 
-BreakForge studies causal, real-time break detection in heterogeneous univariate time series. The research grew out of the ADIA Lab / CrunchDAO Structural Break: Real-Time challenge and is presented here as a reusable research framework, with a small public reference detector and an honest record of methods, controls, and validation failures.
+BreakForge is a research framework for causal, real-time break detection in heterogeneous univariate time series. The ADIA Lab / CrunchDAO Structural Break: Real-Time challenge motivated the work; the repository now presents the reusable methods, validation lessons, and research history independently of the competition.
 
-## Problem and approach
+## Why BreakForge?
 
-At time `t`, a detector may use its fitted reference and observations through `x_t`. It must not depend on future observations or the final stream length. BreakForge illustrates conditional normalization with a fixed Gaussian AR(1), then accumulates sequential evidence from each standardized innovation.
+Many break detectors are evaluated on complete sequences even when they are intended for online use. BreakForge makes the time-of-prediction constraint explicit and provides a compact, inspectable reference implementation alongside a curated account of methods that worked, failed, or remain uncertain.
 
-## Architecture
+## Problem definition
+
+Given a reference history and a stream `x_0, x_1, ...`, produce a break-evidence score at each time `t`. A score may depend on the fitted reference and observations through `x_t`; it cannot use later observations or the eventual stream length.
+
+## Causal contract and architecture
 
 ```mermaid
 flowchart LR
@@ -24,16 +28,16 @@ flowchart LR
     S --> E["Uncalibrated break evidence"]
 ```
 
-The public score is evidence, not a calibrated probability or alarm guarantee. The PIT is available separately; its interpretation depends on the conditional model being adequate.
+The public reference freezes its conditional model after `fit`. `update` consumes exactly one new value and advances sequential evidence. Its score is not a calibrated probability or an alarm guarantee. The PIT is available separately, and its interpretation depends on the conditional model being adequate.
 
 ## Quick start
 
 ```bash
-pip install -e .
+python -m pip install -e .
 python examples/synthetic_break_demo.py
 ```
 
-The demo generates its own AR process with a change in coefficient and noise scale. It needs no Crunch runtime or competition data. Add `--plot` after installing `pip install -e '.[plot]'` to save a figure.
+The demo creates an AR process with a coefficient and noise-scale break; it needs no Crunch runtime or competition data. To save a figure, install `python -m pip install -e '.[plot]'` and run the demo with `--plot`.
 
 ## Streaming API
 
@@ -46,73 +50,49 @@ detector.fit(history)  # estimate and freeze the reference
 for x_t in stream:
     score = detector.update(x_t)  # consume one observation
 
-detector.reset()  # clear online state while keeping the fitted reference
+detector.reset()  # clear online state; retain the fitted reference
 ```
 
-Inputs must be finite real values; `fit` requires at least three reference observations. `update` returns a non-decreasing, uncalibrated score. Resetting between series prevents state from leaking across IDs. See [methodology](docs/methodology.md) for assumptions and [validation](docs/validation.md) for the causal contract.
+Inputs are finite real values; `fit` requires at least three reference observations. `update` returns a non-decreasing, uncalibrated evidence score. Reset between series so state cannot carry across IDs. See [methodology](docs/methodology.md) for assumptions and [validation](docs/validation.md) for the streaming contract.
 
-## Validation and results
+## Public benchmark
 
-| Evidence | Result | Validity label | Interpretation |
-|---|---:|---|---|
-| Official private run #21 / 120227 | TS-AUC 0.6213427008 | `CLOUD_PRIVATE; VERIFIED_OFFICIAL` | Different system from the public API; final rank unverified |
-| Public synthetic benchmark | AUC 0.4781–1.0000 on six tested break mechanisms | `SYNTHETIC_ONLY` | Fixed-seed, 40 streams per mechanism |
-| Heavy-tail synthetic shift | AUC 0.4781; detection rate 0.075 | `SYNTHETIC_ONLY` | A tested failure case for this reference detector |
+The fixed-seed synthetic benchmark covers six break mechanisms and a no-change control. The reference detector's AUC ranges from 0.4781 to 1.0000 across the six generated mechanisms; the heavy-tail case is near chance (0.4781 AUC, 0.075 detection rate). These are results for the stated synthetic generators, not general performance claims. Full settings, metrics, and limitations are in [results](docs/results.md).
 
-The synthetic benchmark is reproducible with `python scripts/synthetic_benchmark.py`; configuration, code revision, metric definition, and limits are in [results](docs/results.md). Historical competition CV values are not clean benchmarks: some used final-length information, some had nested-OOF contamination, and many were selected on the same folds. The high historical values remain visible with labels in [results](docs/results.md) and [validation](docs/validation.md).
+## Official competition result
+
+The highest verified provider result recorded here is TS-AUC **0.6213427008** for submission #21 / run 120227. The provider did not return an aggregate package digest, the final rank is unverified, and this submitted system differs from the public reference detector. It is private competition evidence, not a benchmark for BreakForge. See the [official result record](docs/results.md#official-competition-result).
+
+## Validation lessons
+
+- A real-time score cannot use `final_online_length` or any other future-derived quantity.
+- Upstream stacked predictions can carry outer-fold information into nominal OOF features; nested evaluation must isolate every training stage.
+- Historical CV numbers include invalid, selected, partial-fold, and contaminated results. They remain labeled and separate from reproducible synthetic evidence.
+
+The [validation guide](docs/validation.md) explains the audits, controls, and causal tests.
 
 ## Methods investigated
 
-The curated register maps 131 indexed source reports to 137 evidence records: 129 report-level entries cover all 131 reports, and eight supplemental records summarize additional audits and synthetic screens. By the catalog type rule, 132 records describe methods or variants (detectors/evidence methods, representations/models, combinations/scoring heads, and a baseline); four records describe training/selection procedures and one is a validation audit. Staged reports are grouped, and these counts describe records, not unique algorithms. The detailed [method and variant catalog](docs/method_catalog.md) preserves implementation, controls, validation scope, and open questions where source evidence supports them.
+The research covers conditional normalization and PITs, sequential tests, rolling and spectral statistics, kernels and density ratios, optimal transport, DMD/Koopman and Bayesian dynamics, signatures, conformal methods, learned representations, foundation models, and ensembles. These are investigated research families; only a small reference detector is in the public core. Browse the [method and variant catalog](docs/method_catalog.md) and [failed experiments](docs/failed_experiments.md) for configuration-level evidence and matched controls.
 
-Investigated variants include conditional AR/GARCH and empirical-PIT transforms, copula and expectile scores, CUSUM and restart/betting evidence, conformal martingales, RFF/MMD and density-ratio comparisons, Wasserstein distances, DMD/Koopman and switching-AR models, SINDy/ODE features, spectral and bispectral tests, wavelets, signatures and rough paths, recurrence graphs and persistent Laplacians, matrix profiles, TNC/TF-C and predictive-coding encoders, neural score models, CNN/GRU heads, pretrained forecasting/foundation models, and tree, ranking, stacking, and automated-search procedures. These are experiments in the archive, not all parts of the public reference detector.
+## Documentation
 
-| Research family | Examples investigated | Role in the research | What the available evidence says |
-|---|---|---|
-| Statistical and sequential baselines | Rolling moments, CUSUM, multiscale evidence | Detection statistics and matched controls | Simple controls remain useful; the public reference combines conditional innovations with CUSUM evidence. |
-| Conditional normalization and score transforms | AR residuals, empirical PIT, Gaussian scores, GARCH-style transforms | Reference-fitted stream representations | Useful for comparing a stream with its own history; misspecification can leave dependence or non-uniform scores. |
-| Conformal and sequential inference | Betting processes, restart mixtures, predictive ranks, conformal martingales | Sequential evidence and calibration procedures | No complex variant earned a calibrated public default; dependence assumptions and false-alarm control remain open. |
-| Kernel, discrepancy, and density comparison | RFF/MMD, two-sample statistics, density ratios, Wasserstein comparisons | Distribution-comparison detectors and features | Some selected CV gains were small or failed matched/reduced checks; they are not clean performance estimates. |
-| Dynamical and Bayesian models | AR coefficient drift, context trees, DMD/Koopman, run-length models | Dynamics representations and change evidence | Tested configurations were not promoted; selected CV results often weakened on reduced diagnostics. |
-| Spectral and multiscale evidence | Frequency, bispectral, wavelet, and block summaries | Frequency-domain and scale-sensitive features | Responses depended on the change mechanism; the tested configurations did not establish robust transfer. |
-| Path, geometry, and ordinal structure | Signatures, recurrence and visibility graphs, ordinal patterns | Ordered-path and state-space representations | Feasibility or partial-fold signals did not justify promotion; matched low-order controls remain important. |
-| Learned representations and neural methods | TNC, contrastive encoders, score models, CNN and GRU pilots | Learned stream representations and scoring models | Results were limited by transfer, exact-stream parity, or fold nesting; no learned representation is in the public core. |
-| Supervised heads, ensembles, and selection | Tree and ranking heads, stacked blends, automated search | Combination heads and model-selection procedures | Repeated CV selection and upstream OOF contamination can inflate apparent gains; see the validation audit. |
-| Other causal evidence methods | Tail, dependence, and event-timing features | Compact hand-built detector features | Mixed feasibility results; individual configurations remain exploratory rather than family-wide conclusions. |
+- [Methodology](docs/methodology.md) — conditional normalization and online scoring
+- [Validation](docs/validation.md) — exact-stream evaluation, leakage, and fold isolation
+- [Research journey](docs/research_journey.md) — how the investigation changed
+- [Failed experiments](docs/failed_experiments.md) — negative and inconclusive results
+- [Results](docs/results.md) — synthetic, official, and historical evidence, kept separate
+- [References](docs/references.md) — papers and their role in the project
+- [Research workflow](docs/research_workflow.md) — experiment and review practices
 
-These are summaries of tested configurations, not verdicts on whole research families. The catalog distinguishes detector ideas from representations, scoring heads, and selection procedures. See the [method catalog](docs/method_catalog.md), [failed and inconclusive experiments](docs/failed_experiments.md), and the [131-report index](reports/experiment_index.csv).
+## Competition data and reproducibility
 
-## What did not work
-
-Some high historical CV scores depended on the final stream length or on upstream OOF predictions that had seen nominally held-out folds. A selected DMD/Koopman blend scored higher on those CV folds than the Trial 11 reference but lower on its reduced diagnostic. These are configuration-level observations, not clean benchmarks or family-wide conclusions; see the [labeled results](docs/results.md) and [validation postmortem](docs/validation.md).
-
-## Competition context and data
-
-The challenge supplied the research problem and real-time constraints. CrunchDAO announced the Real-Time edition closed on 2026-10-02; see its [closure notice](https://forum.crunchdao.com/t/2026-w40-closing-of-structural-break-real-time/1222) and [streaming leakage clarification](https://forum.crunchdao.com/t/leaderboard-comparability-after-the-june-8-real-time-data-access-fix-were-pre-fix-scores-rescored/1188). Competition data, labels, per-series predictions, and submission bundles are not included. Users must supply data they are authorized to use. The public examples and tests work without them.
-
-## Repository map
-
-```text
-src/breakforge/       Causal detector, conditional PIT, validation utilities
-examples/             Synthetic streaming demonstrations
-tests/                Causality, reset, parity, determinism, fold isolation
-configs/              Small reference configuration
-scripts/              Reproduction and user-data evaluation
-reports/              Synthetic results and curated historical aggregates
-docs/                 Methods, validation, results, research history, references
-research_archive/     Indexed conclusions from selected research
-```
-
-## Reproducibility
+Competition data, labels, per-series predictions, and submission bundles are not included. Supply only data you are authorized to use for any competition-specific adapter. The public demo and tests work without them.
 
 ```bash
-pip install -e '.[dev]'
+python -m pip install -e '.[dev]'
 pytest -q
 python examples/synthetic_break_demo.py
 ```
 
-The core has no runtime dependencies beyond Python's standard library. Plotting is optional; no Crunch credentials, cloud services, or private data are needed for the quick start.
-
-## Citation and license
-
-Use the metadata in [CITATION.cff](CITATION.cff). BreakForge is distributed under the [MIT License](LICENSE). See [references](docs/references.md) and [contribution guidance](CONTRIBUTING.md).
+The core requires only Python at runtime; plotting is optional. See [CITATION.cff](CITATION.cff) for citation metadata. BreakForge is distributed under the [MIT License](LICENSE).
