@@ -1,6 +1,4 @@
-# Results and evidence status
-
-## Official competition result
+# Official competition result
 
 | Competition | Submission / run | Metric | Verified private-evaluation score | Validity label | Final rank |
 |---|---|---|---:|---|---|
