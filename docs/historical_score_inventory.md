@@ -22,7 +22,7 @@ The consistency checks are simple arithmetic checks, not validation of the evalu
 
 For partial records, `partial_score_values_unassigned` contains distinct numeric values found in the score area. It intentionally carries no fold labels. Do not compare those values with five-fold means or use them to rank methods.
 
-The score table alone does not retain enough information to reconstruct configurations, seeds, code revisions, or validation protocols for every row. A separate [run-variant crosswalk](../reports/curated_results/run_variant_crosswalk.csv) joins all 111 experiment IDs to their recorded hypotheses, feature blocks, hyperparameters, postprocessing, and source run group. It provides six direct catalog links, four related-family links, and explicitly leaves 86 groups without a verified method-catalog mapping. This metadata crosswalk does not resolve the evaluation protocol or make any score benchmark-eligible.
+The score table alone does not retain enough information to reconstruct configurations, seeds, code revisions, or validation protocols for every row. A separate [run-variant crosswalk](../reports/curated_results/run_variant_crosswalk.csv) joins all 111 experiment IDs to their recorded hypotheses, feature blocks, hyperparameters, postprocessing, and source run group. It provides six direct catalog links, five related-family links, and explicitly leaves 85 groups without a verified method-catalog mapping. This metadata crosswalk does not resolve the evaluation protocol or make any score benchmark-eligible.
 
 `SRC-041` is the SHA-256 digest of the withheld structured source ledger. It supports source identification only; the raw file is not distributed because it contains machine-local artifact references and malformed rows.
 

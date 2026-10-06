@@ -103,22 +103,22 @@ The labels describe different evidence dimensions and can appear together. A cau
 
 | Candidate | Five-fold CV-A mean TS-AUC | Reduced diagnostic | Status | Interpretation |
 |---|---:|---:|---|---|
-| P2 locked causal multiscale reference | 0.630553 | 0.599657 | `VALID_EXACT_STREAM`; grouped CV-A; private data | Locked causal reference; not reproducible without the private inputs and artifacts. |
-| Trial 11, history-seeded online kernel CUSUM | 0.634438 | 0.599603 | `VALID_EXACT_STREAM`; `NON_NESTED_META_CV`; `POST_SELECTION_CV` | Exact-package replay; stacked CV artifacts are not an independent outer-fold estimate. Official run #21 is listed above. |
-| Trial 52, TNC residual plus temporal/sequential heads | 0.634039 | 0.599747 | `VALID_EXACT_STREAM`; `NON_NESTED_META_CV`; `POST_SELECTION_CV` | Exact-package replay; chained score heads consume fold-specific base predictions. Run #18 timed out without a score. |
-| Trial 11 + D3 sequential RFF exact-package replay | 0.634570 | 0.600201 | `VALID_EXACT_STREAM`; `NON_NESTED_META_CV`; `POST_SELECTION_CV` | Exact replay, but folds F0/F4 informed screening and the upstream meta-feature path was not nested. Run #3 completed at 0.6210239 privately. |
-| Delay-DMD / Koopman operator-drift blend | 0.635642 | 0.591874 | `VALID_EXACT_STREAM`; `NON_NESTED_META_CV`; `POST_SELECTION_CV` | The head included Trial 11's score; its selected CV mean did not carry to the reduced diagnostic. |
-| P3 causal historical-null head, fixed trial 13 | 0.631890 | Not measured | `POST_SELECTION_CV`; F0/F4 informed selection | Fixed trial was confirmed on five folds after the two-fold search; not an independent five-fold estimate. |
-| Score-driven AR(1)/GARCH evidence | 0.634768 | 0.598097 | `POST_SELECTION_CV` | Research head; small CV increase did not carry to the reduced diagnostic. |
-| Continuous Bayesian-AR context tree | 0.634711 | 0.598650 | `POST_SELECTION_CV` | Similar selected-CV/reduced pattern; not promoted. |
-| History-frozen Soft-BCT-inspired gate | 0.634578 | 0.598314 | `POST_SELECTION_CV` | This was not the paper's full variational Soft-BCT method. |
-| Monotone GRU, repeated-state BCE | 0.634716 | 0.597635 | `POST_SELECTION_CV` | Research cross-fit only; no full package/private confirmation. |
-| Monotone GRU, event/censoring likelihood | 0.634572 | 0.599227 | `POST_SELECTION_CV` | Research cross-fit only; no full package/private confirmation. |
-| CRM/RuLSIF blend | 0.636180 | Not measured | `NON_NESTED_META_CV`; `POST_SELECTION_CV` | Upstream meta-features were not independently nested; no reduced, package, or private confirmation. |
-| Post-hoc Trial 11 + Candidate 9 + VSBT blend | 0.636313 | Not measured | `NON_NESTED_META_CV`; `POST_SELECTION_CV` | Weights followed CV-A review; upstream stacked predictions were contaminated and no package/private evaluation was run. |
-| D3 + CPIT group-balance cross-fit head | 0.634566 | Not measured | `POST_SELECTION_CV`; `NON_NESTED_META_CV` | Cross-fit head only; no complete package replay or private result. |
-| D3 + CPIT Trial 19 exact OOF blend | 0.634526 | Not measured | `POST_SELECTION_CV`; `NON_NESTED_META_CV` | OOF blend, not a package replay; F0/F4 informed screening. |
-| D3 direct blend with Trial 52 | 0.634292 | Not measured | `POST_SELECTION_CV`; package parity unverified | The selected difference does not establish an independent gain. |
+| P2 locked causal multiscale reference | 0.630553 | 0.599657 | `CLOUD_PRIVATE`; `VALID_EXACT_STREAM`; grouped CV-A; private data | Locked causal reference; not reproducible without the private inputs and artifacts. |
+| Trial 11, history-seeded online kernel CUSUM | 0.634438 | 0.599603 | `CLOUD_PRIVATE`; `VALID_EXACT_STREAM`; `NON_NESTED_META_CV`; `POST_SELECTION_CV` | Exact-package replay; stacked CV artifacts are not an independent outer-fold estimate. Official run #21 is listed above. |
+| Trial 52, TNC residual plus temporal/sequential heads | 0.634039 | 0.599747 | `CLOUD_PRIVATE`; `VALID_EXACT_STREAM`; `NON_NESTED_META_CV`; `POST_SELECTION_CV` | Exact-package replay; chained score heads consume fold-specific base predictions. Run #18 timed out without a score. |
+| Trial 11 + D3 sequential RFF exact-package replay | 0.634570 | 0.600201 | `CLOUD_PRIVATE`; `VALID_EXACT_STREAM`; `NON_NESTED_META_CV`; `POST_SELECTION_CV` | Exact replay, but folds F0/F4 informed screening and the upstream meta-feature path was not nested. Run #3 completed at 0.6210239 privately. |
+| Delay-DMD / Koopman operator-drift blend | 0.635642 | 0.591874 | `CLOUD_PRIVATE`; `VALID_EXACT_STREAM`; `NON_NESTED_META_CV`; `POST_SELECTION_CV` | The head included Trial 11's score; its selected CV mean did not carry to the reduced diagnostic. |
+| P3 causal historical-null head, fixed trial 13 | 0.631890 | Not measured | `CLOUD_PRIVATE`; `POST_SELECTION_CV`; F0/F4 informed selection | Fixed trial was confirmed on five folds after the two-fold search; not an independent five-fold estimate. |
+| Score-driven AR(1)/GARCH evidence | 0.634768 | 0.598097 | `CLOUD_PRIVATE`; `POST_SELECTION_CV` | Research head; small CV increase did not carry to the reduced diagnostic. |
+| Continuous Bayesian-AR context tree | 0.634711 | 0.598650 | `CLOUD_PRIVATE`; `POST_SELECTION_CV` | Similar selected-CV/reduced pattern; not promoted. |
+| History-frozen Soft-BCT-inspired gate | 0.634578 | 0.598314 | `CLOUD_PRIVATE`; `POST_SELECTION_CV` | This was not the paper's full variational Soft-BCT method. |
+| Monotone GRU, repeated-state BCE | 0.634716 | 0.597635 | `CLOUD_PRIVATE`; `POST_SELECTION_CV` | Research cross-fit only; no full package/private confirmation. |
+| Monotone GRU, event/censoring likelihood | 0.634572 | 0.599227 | `CLOUD_PRIVATE`; `POST_SELECTION_CV` | Research cross-fit only; no full package/private confirmation. |
+| CRM/RuLSIF blend | 0.636180 | Not measured | `CLOUD_PRIVATE`; `NON_NESTED_META_CV`; `POST_SELECTION_CV` | Upstream meta-features were not independently nested; no reduced, package, or private confirmation. |
+| Post-hoc Trial 11 + Candidate 9 + VSBT blend | 0.636313 | Not measured | `CLOUD_PRIVATE`; `NON_NESTED_META_CV`; `POST_SELECTION_CV` | Weights followed CV-A review; upstream stacked predictions were contaminated and no package/private evaluation was run. |
+| D3 + CPIT group-balance cross-fit head | 0.634566 | Not measured | `CLOUD_PRIVATE`; `POST_SELECTION_CV`; `NON_NESTED_META_CV` | Cross-fit head only; no complete package replay or private result. |
+| D3 + CPIT Trial 19 exact OOF blend | 0.634526 | Not measured | `CLOUD_PRIVATE`; `POST_SELECTION_CV`; `NON_NESTED_META_CV` | OOF blend, not a package replay; F0/F4 informed screening. |
+| D3 direct blend with Trial 52 | 0.634292 | Not measured | `CLOUD_PRIVATE`; `POST_SELECTION_CV`; package parity unverified | The selected difference does not establish an independent gain. |
 
 ### Additional source-report outcomes
 
@@ -166,8 +166,8 @@ These values are preserved because they shaped the research record, but the audi
 
 | Historical configuration | CV-A mean TS-AUC | Reduced diagnostic | Status | Why invalid |
 |---|---:|---:|---|---|
-| P2 historical-null robust-z anchor | 0.6505362 | 0.6409083 | `INVALID_FUTURE_LENGTH` | The null segment length was selected using the complete online-sequence length. |
-| P11 nested-weight audit, gamma 5 / eta 0.015 | 0.6504968 | 0.6530942 | `INVALID_FUTURE_LENGTH`; `POST_SELECTION_CV` | An upstream null-profile segment used the final online length; this was one of several tuned settings. |
+| P2 historical-null robust-z anchor | 0.6505362 | 0.6409083 | `CLOUD_PRIVATE`; `INVALID_FUTURE_LENGTH` | The null segment length was selected using the complete online-sequence length. |
+| P11 nested-weight audit, gamma 5 / eta 0.015 | 0.6504968 | 0.6530942 | `CLOUD_PRIVATE`; `INVALID_FUTURE_LENGTH`; `POST_SELECTION_CV` | An upstream null-profile segment used the final online length; this was one of several tuned settings. |
 
 ### Trial 20 package-parity note
 
@@ -179,15 +179,15 @@ These private-data screens are preserved as historical evidence. The v19 LightGB
 
 | Candidate | Evaluation | TS-AUC | Transfer result | Status |
 |---|---|---:|---:|---|
-| Saved V5 LightGBM, 196 features | Five grouped-fold replay | 0.5810991 mean (0.5667206–0.6000968) | 0.5052849 on `test_reduced` | `UNKNOWN_PROVENANCE; POST_SELECTION_CV; REDUCED_ONLY; CAUSALITY_AUDIT_UNKNOWN` |
-| CatBoost on V5 features | Fold 0 only; six-trial Optuna and SMAC3 screens | 0.5869706 best Optuna `blend_0.60`; 0.5852159 best SMAC3 | Not measured | `PARTIAL_FOLD; POST_SELECTION_CV; CAUSALITY_AUDIT_UNKNOWN` |
-| XGBoost on V5 features | Fold 0 only; six-trial Optuna and SMAC3 screens | 0.5895990 best `blend_0.60` | Not measured | `PARTIAL_FOLD; POST_SELECTION_CV; CAUSALITY_AUDIT_UNKNOWN` |
+| Saved V5 LightGBM, 196 features | Five grouped-fold replay | 0.5810991 mean (0.5667206–0.6000968) | 0.5052849 on `test_reduced` | `CLOUD_PRIVATE`; `UNKNOWN_PROVENANCE; POST_SELECTION_CV; REDUCED_ONLY; CAUSALITY_AUDIT_UNKNOWN` |
+| CatBoost on V5 features | Fold 0 only; six-trial Optuna and SMAC3 screens | 0.5869706 best Optuna `blend_0.60`; 0.5852159 best SMAC3 | Not measured | `CLOUD_PRIVATE`; `PARTIAL_FOLD; POST_SELECTION_CV; CAUSALITY_AUDIT_UNKNOWN` |
+| XGBoost on V5 features | Fold 0 only; six-trial Optuna and SMAC3 screens | 0.5895990 best `blend_0.60` | Not measured | `CLOUD_PRIVATE`; `PARTIAL_FOLD; POST_SELECTION_CV; CAUSALITY_AUDIT_UNKNOWN` |
 
-The CatBoost screen also recorded a raw score of 0.5853518 and a separate memory blend of 0.5870524. Neither tree tuning study read `test_reduced`. Seeds and source code revisions were not preserved in the reviewed records. The low fold-0 scores deprioritized these specific configurations; the partial evaluation and approximate, unmatched v19 comparator do not establish a family-wide result. The V5 LightGBM transfer row likewise lacks a source-pinned inference path and its reduced diagnostic is not a sealed holdout. The source hashes are listed as `SRC-038` through `SRC-040`.
+The CatBoost screen also recorded a raw score of 0.5853518 and a separate memory blend of 0.5870524. Neither tree tuning study read `test_reduced`. Seeds and source code revisions were not preserved in the reviewed records. The low fold-0 scores deprioritized these specific configurations; the partial evaluation and approximate, unmatched v19 comparator do not establish a family-wide result. The V5 LightGBM fold vector and reduced score are recorded in source-ledger row `v5_transfer_audit_20260920` (`SRC-041`; `RUNSET-066`). Its fold mean and worst score reconcile, but the stored standard-deviation summary does not; the curated ledger reports the sample standard deviation recomputed from the displayed folds. The saved model, feature-generation code, and exact inference revision remain unavailable. CatBoost and XGBoost screens cite `SRC-039` and `SRC-040`. All three results remain private-data, protocol-limited research and are not benchmarks.
 
 ### Supplemental negative results
 
-Two code-adjacent grouped CV-A records tested BOCPD run-length features and contrastive current/reference window-gap features against the same fixed baseline. Each expert's five-fold mean was lower than its matched baseline, and every tested positive-weight blend also reduced that baseline score. These records are labeled `POST_SELECTION_CV`; their result files do not independently establish prefix-level causality. A dual-reference TNC head was below its Trial-13 control on both screened folds, and a Siamese CNN was near chance on one fold with lower-scoring tested blends. These are configuration-specific negative results, not evidence against their full method families. Their aggregate records and source hashes are in the CSV and evidence table below.
+Two code-adjacent grouped CV-A records tested BOCPD run-length features and contrastive current/reference window-gap features against the same fixed baseline. Each expert's five-fold mean was lower than its matched baseline, and every tested positive-weight blend also reduced that baseline score. These private-data records are labeled `CLOUD_PRIVATE; POST_SELECTION_CV`; their result files do not independently establish prefix-level causality. A dual-reference TNC head was below its Trial-13 control on both screened folds, and a Siamese CNN was near chance on one fold with lower-scoring tested blends. These are configuration-specific negative results, not evidence against their full method families. Their aggregate records and source hashes are in the CSV and evidence table below.
 
 ## One-time grouped holdout diagnostics
 
@@ -256,7 +256,6 @@ The source records are not distributed. Their digests identify the evidence used
 | `SRC-035` | Rosenblatt componentwise null-rank synthetic Stage 0 receipt | `38f6cf13f9813c71ef7d7db79abb3d0e5241b5dbf1ffa194f885bfcb52bd8c2e` |
 | `SRC-036` | Rosenblatt total-score null-rank synthetic Stage 0 receipt | `9642333c2d5b647be8a96a43d988eef8d36828880c1f21123319a567be034231` |
 | `SRC-037` | Trial 20 submission and package-parity note | `81b9357e5b767d0c080729b01647327fb0950e64a4bac34ad972c3cb2ec624e5` |
-| `SRC-038` | V5 saved-model transfer metrics | `be990b80faa40ea8296fbe11d19c746297e222f16407c3b93899a943fb65cc1a` |
 | `SRC-039` | CatBoost V5 fold-0 screen | `07984f78ecc2a8101f196849bcb9fa75383153e94a2c62ae2317bb26a0b7e270` |
 | `SRC-040` | CatBoost and XGBoost tuning audit | `68140195515b255a3129f06884819efa49f3cbc86e67c781380be08a7ff99976` |
 | `SRC-041` | Structured experiment score ledger (normalized 111-record inventory; source file withheld) | `503b3fd079d7e3c704e74ba93e7142ec6c46f47ce94216748db98c5be0b118a2` |

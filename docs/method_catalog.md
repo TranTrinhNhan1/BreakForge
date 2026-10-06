@@ -4,7 +4,7 @@ The project explored a broad set of evidence channels for heterogeneous univaria
 
 The catalog covers all 131 report-index identifiers (`MTH-*`) after grouping staged reports that describe the same underlying recipe. Under the catalog type rule, 139 records describe methods or variants: 117 detector/evidence methods, 13 representations/models, eight combinations/scoring heads, and one baseline. The other six records are five training/selection procedures and one validation audit. These are records, not distinct algorithms: staged reports are grouped and seeds, folds, and repeat runs are not separate methods. The audit entry is explicitly typed as such, and stage records with the same method are grouped under one catalog ID.
 
-A separate 111-record score inventory preserves run-level records from the source experiment ledger. The [run crosswalk](../reports/curated_results/run_variant_crosswalk.csv) connects every score record to a source configuration group and retains its recorded hypothesis, hyperparameters, and postprocessing. The [96-group appendix](../reports/curated_results/run_variant_groups.csv) groups by the exact pair of source model-family label and feature-block description; it is a run-organization rule, not a claim that each group is one distinct method. Six groups have a direct catalog match, four have a related-family link, and the other 86 are explicitly left without a verified catalog mapping. The source score inventory is private-data-derived, has unknown validation protocols, and every row remains ineligible as a benchmark.
+A separate 111-record score inventory preserves run-level records from the source experiment ledger. The [run crosswalk](../reports/curated_results/run_variant_crosswalk.csv) connects every score record to a source configuration group and retains its recorded hypothesis, hyperparameters, and postprocessing. The [96-group appendix](../reports/curated_results/run_variant_groups.csv) groups by the exact pair of source model-family label and feature-block description; it is a run-organization rule, not a claim that each group is one distinct method. Six groups have a direct catalog match, five have a related-family link, and 85 have no verified group-level catalog mapping. RUNSET-066 is a related group because its two score records have distinct hypotheses: the event-hazard member relates to CAT-065, while the saved V5 transfer member maps to SUP-009. The source score inventory is private-data-derived, has unknown validation protocols, and every row remains ineligible as a benchmark.
 
 The twenty additional report records are indexed by neutral public IDs and SHA-256 digests; the underlying source text and artifacts are not included. The index separates method screens from descriptive score audits, validation postmortems, and runtime-only studies. A digest supports provenance bookkeeping but does not make private evidence reproducible.
 
@@ -5283,7 +5283,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 </details>
 
 <details>
-<summary><code>SUP-009</code> · <code>SRC-038</code> · Saved V5 LightGBM replay on a 196-feature matrix</summary>
+<summary><code>SUP-009</code> · <code>RUNSET-066</code> · <code>SRC-041</code> · Saved V5 LightGBM replay on a 196-feature matrix</summary>
 
 **Record type:** representation or model.
 
@@ -5305,13 +5305,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Validation labels:** `UNKNOWN_PROVENANCE; POST_SELECTION_CV; CLOUD_PRIVATE; REDUCED_ONLY; CAUSALITY_AUDIT_UNKNOWN`.
 
-**Result and disposition:** Raw five-fold TS-AUC mean 0.5810991 (folds 0.5784017, 0.5818181, 0.5784581, 0.6000968, 0.5667206); test_reduced TS-AUC 0.5052849. Not promoted.
+**Result and disposition:** Raw five-fold TS-AUC mean 0.5810991 (folds 0.5784017, 0.5818181, 0.5784581, 0.6000968, 0.5667206); test_reduced TS-AUC 0.5052849. The stored source standard-deviation summary does not reconcile with the fold vector. Not promoted.
 
 **Limit / reason deprioritized:** The reduced diagnostic was substantially below the fold mean; the saved model, feature pipeline, selection path, and exact causal inference revision are not reproducible from the release record.
 
 **Open question:** Would a source-pinned, prefix-audited V5 model outperform simple controls on an untouched authorized dataset?
 
-**Source evidence:** `SRC-038`.
+**Source evidence:** `SRC-041`; source run group `RUNSET-066`.
 
 **Implementation status:** `HISTORICAL_SAVED_MODEL_REPLAY_NOT_SHIPPED`.
 
