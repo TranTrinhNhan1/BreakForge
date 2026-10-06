@@ -19,6 +19,7 @@ The identifiers `MTH-*`, `CAT-*`, `SUP-*`, `RPT-*`, and `RUNSET-*` were assigned
 - **Validation labels** preserve known caveats such as `POST_SELECTION_CV`, `NON_NESTED_META_CV`, `PARTIAL_FOLD`, and `INVALID_FUTURE_LENGTH`. `UNKNOWN_FROM_PUBLIC_INDEX` means the reviewed public summary does not justify a stronger claim.
 - **Missing detail** is labeled `Not preserved in the public summary` or `UNKNOWN_FROM_PUBLIC_INDEX`. This is not evidence that a method, control, or audit was absent; it means the release does not publish a verified detail for that field.
 - **Matched control** is report-specific only when the catalog names one. Otherwise the row says that a control was not preserved in its public summary; family-level examples and comparison principles are in [failed and inconclusive experiments](failed_experiments.md).
+- **Reference paper or method source** is recorded in the machine-readable `reference_paper_or_method_source` field when the reviewed report cites a specific source. `UNKNOWN_FROM_PUBLIC_INDEX` means no row-specific citation was preserved; the selected bibliography in [references](references.md) provides family-level context without implying that every catalog entry reproduces a cited method.
 - **Implementation status**, **validation stage**, and **final status** are structured fields in the CSV. `NOT_SHIPPED` means the historical prototype is not part of the public core; `UNKNOWN_FROM_PUBLIC_INDEX` records where the source summary does not support a stronger stage claim.
 
 ## Main research threads
