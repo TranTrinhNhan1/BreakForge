@@ -8,10 +8,13 @@ Python 3.10 or newer is required. From the repository root:
 
 ```bash
 python -m venv .venv
-python -m pip install -e '.[dev,plot]'
-python -m pytest -q
-python examples/synthetic_break_demo.py
+# macOS / Linux
+.venv/bin/python -m pip install -e '.[dev,plot]'
+.venv/bin/python -m pytest -q
+.venv/bin/python examples/synthetic_break_demo.py
 ```
+
+On Windows PowerShell, replace `.venv/bin/python` with `.venv\Scripts\python.exe`.
 
 The core package has no runtime dependencies outside the Python standard library. Matplotlib is optional and used only for plots.
 

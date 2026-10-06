@@ -36,12 +36,16 @@ The public reference uses conditional Gaussian innovations and sequential CUSUM 
 
 ## Quick start
 
+Create an isolated environment, then install and run the synthetic demo:
+
 ```bash
-python -m pip install -e .
-python examples/synthetic_break_demo.py
+python -m venv .venv
+# macOS / Linux
+.venv/bin/python -m pip install -e .
+.venv/bin/python examples/synthetic_break_demo.py
 ```
 
-The demo generates an AR series with a coefficient and noise-scale break. It needs no competition data or credentials. To save a figure, install with `python -m pip install -e '.[plot]'` and add `--plot`.
+On Windows PowerShell, use `.venv\Scripts\python.exe` in place of `.venv/bin/python`. For an optional plot, install `.[plot]` into the same environment and add `--plot` to the demo command. The demo generates an AR series with a coefficient and noise-scale break; it needs no competition data or credentials.
 
 ## Streaming API
 
@@ -103,11 +107,15 @@ research_archive/     indexed conclusions from selected research
 
 ## Reproducibility and documentation
 
+With the virtual environment from the quick start:
+
 ```bash
-python -m pip install -e '.[dev]'
-pytest -q
-python scripts/synthetic_benchmark.py
+.venv/bin/python -m pip install -e '.[dev]'
+.venv/bin/python -m pytest -q
+.venv/bin/python scripts/synthetic_benchmark.py
 ```
+
+On Windows PowerShell, replace `.venv/bin/python` with `.venv\Scripts\python.exe`.
 
 Start with [methodology](docs/methodology.md), [research journey](docs/research_journey.md), [references](docs/references.md), and [research workflow](docs/research_workflow.md).
 
