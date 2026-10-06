@@ -60,7 +60,7 @@ The checked-in table was regenerated from code revision `326c000` with the publi
 
 The 57-row curated comparison ledger is [`historical_research.csv`](../reports/curated_results/historical_research.csv). It records selected, high, invalid, partial-fold, code-only, and archived protocol-mixed comparisons from the source records summarized for release. It includes fold set and scores when available, reported mean, sample standard deviation computed from the displayed fold values, worst fold, secondary diagnostic, matched control where known, selection status, inference status, private-run outcome, and source evidence label. Missing settings, seeds, or code revisions are explicitly marked unknown instead of being reconstructed.
 
-A separate [111-record source score inventory](historical_score_inventory.md) preserves the broader experiment ledger. It includes 80 five-score vectors with internally consistent summaries, 8 vectors with summary mismatches, and 23 partial or ambiguous records. These source records are not added to the comparison tables: their evaluation protocols were not reconstructed, so every inventory row is marked ineligible as a benchmark.
+A separate [111-record source score inventory](historical_score_inventory.md) preserves the broader experiment ledger. It includes 80 five-score vectors with internally consistent summaries, 8 vectors with summary mismatches, and 23 partial or ambiguous records. All rows carry `CLOUD_PRIVATE;UNKNOWN_PROVENANCE`; partial rows also carry `PARTIAL_FOLD`. These source records are not added to the comparison tables: their evaluation protocols were not reconstructed, so every inventory row is marked ineligible as a benchmark.
 
 All competition-derived numeric outcomes in this section come from historical research on private data. Rows in the curated comparison ledger carry explicit validity labels; rows in the broader source inventory carry extraction and protocol flags. Neither file is a clean public benchmark.
 
@@ -219,5 +219,6 @@ The source records are not distributed. Their digests identify the evidence used
 | `SRC-038` | V5 saved-model transfer metrics | `be990b80faa40ea8296fbe11d19c746297e222f16407c3b93899a943fb65cc1a` |
 | `SRC-039` | CatBoost V5 fold-0 screen | `07984f78ecc2a8101f196849bcb9fa75383153e94a2c62ae2317bb26a0b7e270` |
 | `SRC-040` | CatBoost and XGBoost tuning audit | `68140195515b255a3129f06884819efa49f3cbc86e67c781380be08a7ff99976` |
+| `SRC-041` | Structured experiment score ledger (normalized 111-record inventory; source file withheld) | `503b3fd079d7e3c704e74ba93e7142ec6c46f47ce94216748db98c5be0b118a2` |
 
 See [validation](validation.md) for the leakage postmortems and the [method catalog](method_catalog.md) for experiment-level scope and disposition.

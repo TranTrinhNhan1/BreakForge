@@ -4,6 +4,8 @@
 
 The original ledger is not included. It contains local artifact paths and has inconsistent CSV field counts caused by unescaped commas. The public inventory keeps the experiment IDs, broad model families, source row order, score fields that can be recovered, and flags for records that need further review. Local paths, artifact pointers, fold hashes, and code commit IDs are omitted.
 
+Every inventory row cites `SRC-041` and carries a label from the result-validity taxonomy. Full and summary-mismatch records are labeled `CLOUD_PRIVATE;UNKNOWN_PROVENANCE`; partial or ambiguous records also carry `PARTIAL_FOLD`. These labels keep private-data dependence and unknown evaluation design visible even where source arithmetic is consistent.
+
 ## What was recovered
 
 - **80 five-score vectors** have recorded mean, population standard deviation, and worst score that agree with the five values to within `2e-5`.
@@ -21,3 +23,5 @@ The consistency checks are simple arithmetic checks, not validation of the evalu
 For partial records, `partial_score_values_unassigned` contains distinct numeric values found in the score area. It intentionally carries no fold labels. Do not compare those values with five-fold means or use them to rank methods.
 
 The source table does not retain enough information to reconstruct configurations, seeds, code revisions, data provenance, or the validation protocol for every row. The inventory therefore preserves the existence and score evidence of the experiments without presenting them as reproducible results. The curated ledger remains the place to compare historical outcomes with explicit evidence and validity labels.
+
+`SRC-041` is the SHA-256 digest of the withheld structured source ledger. It supports source identification only; the raw file is not distributed because it contains machine-local artifact references and malformed rows.
