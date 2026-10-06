@@ -63,7 +63,7 @@ The synthetic benchmark is reproducible with `python scripts/synthetic_benchmark
 
 ## Methods investigated
 
-The curated register maps 131 source reports to 134 evidence records: 129 detector, representation, scoring, and baseline records, four training or selection procedures, and one validation audit. Staged repeats are grouped; these counts describe records, not unique algorithms. The detailed [method and variant catalog](docs/method_catalog.md) preserves implementation, controls, validation scope, and open questions where source evidence supports them.
+The curated register maps 131 indexed source reports to 137 evidence records: 129 report-level entries cover all 131 reports, and eight supplemental records summarize additional audits and synthetic screens. Staged repeats are grouped; these counts describe records, not unique algorithms. The detailed [method and variant catalog](docs/method_catalog.md) preserves implementation, controls, validation scope, and open questions where source evidence supports them.
 
 Investigated variants include conditional AR/GARCH and empirical-PIT transforms, copula and expectile scores, CUSUM and restart/betting evidence, conformal martingales, RFF/MMD and density-ratio comparisons, Wasserstein distances, DMD/Koopman and switching-AR models, SINDy/ODE features, spectral and bispectral tests, wavelets, signatures and rough paths, recurrence graphs and persistent Laplacians, matrix profiles, TNC/TF-C and predictive-coding encoders, neural score models, CNN/GRU heads, pretrained forecasting/foundation models, and tree, ranking, stacking, and automated-search procedures. These are experiments in the archive, not all parts of the public reference detector.
 

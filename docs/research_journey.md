@@ -56,6 +56,8 @@ The final matched-capacity P2+Aux ablation showed a selected CV-A lift over the 
 
 Separate audits clarified several misleading patterns. A static history-ACF feature failed one preregistered synthetic group condition and was closed as a fixed recipe (`SYNTHETIC_STAGE0_HELD_SEED`). A robust-history-null correction failed its matched-control gate, and the associated under-detection claim was not supported. Metric-weight analysis showed why online-age subgroup AUC should not be treated as a direct measure of score contribution. A synthetic break-magnitude screen also needed correction: a raw maximum score rose with stream age under null, so its threshold-based “ceiling” interpretation was downgraded. These are specific diagnostics, not universal conclusions about their method families.
 
+Two history-only rank-calibration variants were also screened on synthetic Rosenblatt streams. Componentwise rank-then-mixture missed its frozen effect-size gate, while the post-mixture rank map did not beat the raw score on the tested heavy-tail mechanism. Prefix invariance passed, but overlapping calibration windows did not justify conformal or sequential-validity claims. Both recipes were closed without challenge-data evaluation.
+
 ## 14. Post-competition cleanup
 
 The public release extracts a small, deterministic, CPU-only reference implementation and its regression tests. Detailed source reports and raw artifacts are not included; selected lessons are summarized without publishing restricted data or scores presented without their validity limits. The resulting repository is intended to be a starting point for reproducible work, not a claim that the competition produced a universally superior detector.

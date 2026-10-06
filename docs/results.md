@@ -197,5 +197,7 @@ The source records are not distributed. Their digests identify the evidence used
 | `SRC-032` | Pair-weight and break-age metric audit | `e649132f76ed31315748910a9be776038d57e83b5fdfadac0986771ab8112c25` |
 | `SRC-033` | Synthetic break-magnitude screening study | `b90290b81d589c8291c0f3eb645abc242942176b03e8c92c093faad8e971d5f1` |
 | `SRC-034` | Synthetic null-growth correction to break-magnitude study | `8db38003b15bd8be22831d7fccc1a46f21691ace34e512df5fb73ceff24ebe41` |
+| `SRC-035` | Rosenblatt componentwise null-rank synthetic Stage 0 receipt | `38f6cf13f9813c71ef7d7db79abb3d0e5241b5dbf1ffa194f885bfcb52bd8c2e` |
+| `SRC-036` | Rosenblatt total-score null-rank synthetic Stage 0 receipt | `9642333c2d5b647be8a96a43d988eef8d36828880c1f21123319a567be034231` |
 
 See [validation](validation.md) for the leakage postmortems and the [method catalog](method_catalog.md) for experiment-level scope and disposition.

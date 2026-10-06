@@ -1,8 +1,8 @@
 # Research method catalog
 
-The project explored a broad set of evidence channels for heterogeneous univariate streams. The [machine-readable catalog](../reports/method_catalog.csv) has 134 records: 129 report-level `CAT-*` records cover all 131 indexed `MTH-*` reports (two catalog records combine pairs of staged reports), plus five supplemental `SUP-*` evidence records. It records a hypothesis, implementation, control, validation scope, or disposition when a release-safe summary supports it; missing fields are marked explicitly.
+The project explored a broad set of evidence channels for heterogeneous univariate streams. The [machine-readable catalog](../reports/method_catalog.csv) has 137 records: 129 report-level `CAT-*` records cover all 131 indexed `MTH-*` reports (two catalog records combine pairs of staged reports), plus eight supplemental `SUP-*` evidence records. It records a hypothesis, implementation, control, validation scope, or disposition when a release-safe summary supports it; missing fields are marked explicitly.
 
-The catalog covers all 131 report-index identifiers (`MTH-*`) after grouping staged reports that describe the same underlying recipe. Five supplemental records summarize evidence found outside those reports. These are catalog records, not a count of distinct algorithms: entries include detectors, feature representations, scoring heads, training or selection procedures, and one validation audit. Seeds, folds, and repeat runs are not counted as separate methods. The audit entry is explicitly typed as such, and stage records with the same method are grouped under one catalog ID.
+The catalog covers all 131 report-index identifiers (`MTH-*`) after grouping staged reports that describe the same underlying recipe. Eight supplemental records summarize evidence found outside those reports. These are catalog records, not a count of distinct algorithms: entries include detectors, feature representations, scoring heads, training or selection procedures, and one validation audit. Seeds, folds, and repeat runs are not counted as separate methods. The audit entry is explicitly typed as such, and stage records with the same method are grouped under one catalog ID.
 
 The identifiers `MTH-*` and `CAT-*` were assigned for this release. The report index keeps the source titles and SHA-256 digests; the original report text, raw predictions, model artifacts, and competition data are not included. The 131 report digests were checked against the source records used for this curation. A matching digest verifies the source mapping, but it does not make an experiment independently reproducible. Selected aggregate outcomes and their caveats are published separately in [results](results.md) and [`historical_research.csv`](../reports/curated_results/historical_research.csv).
 
@@ -15,6 +15,7 @@ The identifiers `MTH-*` and `CAT-*` were assigned for this release. The report i
 - **Validation labels** preserve known caveats such as `POST_SELECTION_CV`, `NON_NESTED_META_CV`, `PARTIAL_FOLD`, and `INVALID_FUTURE_LENGTH`. `UNKNOWN_FROM_PUBLIC_INDEX` means the reviewed public summary does not justify a stronger claim.
 - **Missing detail** is labeled `Not preserved in the public summary` or `UNKNOWN_FROM_PUBLIC_INDEX`. This is not evidence that a method, control, or audit was absent; it means the release does not publish a verified detail for that field.
 - **Matched control** is report-specific only when the catalog names one. Otherwise the row says that a control was not preserved in its public summary; family-level examples and comparison principles are in [failed and inconclusive experiments](failed_experiments.md).
+- **Implementation status**, **validation stage**, and **final status** are structured fields in the CSV. `NOT_SHIPPED` means the historical prototype is not part of the public core; `UNKNOWN_FROM_PUBLIC_INDEX` records where the source summary does not support a stronger stage claim.
 
 ## Main research threads
 
@@ -81,6 +82,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -112,6 +120,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -143,6 +158,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -174,6 +196,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -205,6 +234,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `FEASIBILITY_OR_PLANNED`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -236,6 +272,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -267,6 +310,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -298,6 +348,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -329,6 +386,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `FEASIBILITY_OR_PLANNED`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -360,6 +424,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -391,6 +462,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -422,6 +500,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -453,6 +538,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -484,6 +576,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -515,6 +614,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `FEASIBILITY_OR_PLANNED`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 ### Conformal and sequential inference
@@ -548,6 +654,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -579,6 +692,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -609,6 +729,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 **Limit / reason deprioritized:** Only two folds were screened after prior model development; results are post-selection and do not settle other restart constructions.
 
 **Open question:** Would a restart maximum or normalized candidate-time mixture help under a nested full-fold evaluation?
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -640,6 +767,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -671,6 +805,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -702,6 +843,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -733,6 +881,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -764,6 +919,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -795,6 +957,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -826,6 +995,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `FEASIBILITY_OR_PLANNED`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -857,6 +1033,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -888,6 +1071,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `FEASIBILITY_OR_PLANNED`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -919,6 +1109,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -950,6 +1147,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Can a transformation task be designed that adds stable evidence beyond low-order and conditional-residual controls?
 
+
+
+**Implementation status:** `SUPPLEMENTAL_SUMMARY_ONLY_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 ### Dynamical and Bayesian models
@@ -982,6 +1186,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 **Limit / reason deprioritized:** The screen showed no stable across-fold gain, and the feature-only heads remained near chance. The experiment did not implement exact pruned AR(p)-FOCuS.
 
 **Open question:** Would an exact AR(p)-FOCuS implementation or the fixed-grid approximation add value for non-location breaks under a full-fold, nested evaluation?
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1013,6 +1224,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `EXACT_STREAM_SCOPE_UNSPECIFIED`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1044,6 +1262,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `EXACT_STREAM_SCOPE_UNSPECIFIED`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1075,6 +1300,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1106,6 +1338,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -1137,6 +1376,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `EXACT_STREAM_SCOPE_UNSPECIFIED`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1168,6 +1414,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `EXACT_STREAM_SCOPE_UNSPECIFIED`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1199,6 +1452,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Can causal DMD residual features retain value under nested outer-fold training and matched low-order controls, with package-level prefix parity?
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1230,6 +1490,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1261,6 +1528,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -1292,6 +1566,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Would a more expressive history-fitted regime representation yield useful dependence-change evidence under nested folds and an independent matched control?
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1323,6 +1604,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -1354,6 +1642,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `FEASIBILITY_OR_PLANNED`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -1385,6 +1680,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -1416,6 +1718,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1447,6 +1756,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -1478,6 +1794,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -1509,6 +1832,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1540,6 +1870,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1571,6 +1908,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -1602,6 +1946,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `EXACT_STREAM_SCOPE_UNSPECIFIED`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1633,6 +1984,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1664,6 +2022,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1695,6 +2060,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1726,6 +2098,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Can run-length evidence add value with an independently validated online implementation and a genuinely nested training path?
 
+
+
+**Implementation status:** `SUPPLEMENTAL_SUMMARY_ONLY_NOT_SHIPPED`.
+
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 ### Kernel, discrepancy, and density comparison
@@ -1759,6 +2138,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `GROUPED_CV_A_SCREEN_OR_REPLAY`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1790,6 +2176,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -1821,6 +2214,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1852,6 +2252,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -1883,6 +2290,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1914,6 +2328,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `FEASIBILITY_OR_PLANNED`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -1945,6 +2366,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -1976,6 +2404,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2007,6 +2442,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2038,6 +2480,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -2069,6 +2518,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -2100,6 +2556,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Would blockwise MMD/SR evidence add value under nested grouped evaluation with an independent calibration and false-alarm study?
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2131,6 +2594,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2162,6 +2632,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2193,6 +2670,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2224,6 +2708,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 ### Learned representations and neural methods
@@ -2257,6 +2748,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `EXACT_STREAM_SCOPE_UNSPECIFIED`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -2288,6 +2786,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2319,6 +2824,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2350,6 +2862,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2381,6 +2900,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2412,6 +2938,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2443,6 +2976,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `FEASIBILITY_OR_PLANNED`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -2474,6 +3014,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Would a nested, prefix-audited contrastive representation add value under a matched training budget?
 
+
+
+**Implementation status:** `SUPPLEMENTAL_SUMMARY_ONLY_NOT_SHIPPED`.
+
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2505,6 +3052,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Does a strictly causal, nested Siamese model help on more than one held-out group?
 
+
+
+**Implementation status:** `SUPPLEMENTAL_SUMMARY_ONLY_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2536,6 +3090,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Would dual-view embeddings add value under nested representation fitting and full prefix parity?
 
+
+
+**Implementation status:** `SUPPLEMENTAL_SUMMARY_ONLY_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 ### Other causal evidence methods
@@ -2568,6 +3129,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 **Limit / reason deprioritized:** CV-A and feature development were repeatedly exposed. Bootstrap uncertainty is conditional on saved predictions. Integrated inference/package parity is open, and the no-age Arm C fell below its control on the reduced diagnostic.
 
 **Open question:** Would the CV-A lift persist with complete integrated-prefix parity and an independent nested or sealed evaluation?
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -2599,6 +3167,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `EXACT_STREAM_SCOPE_UNSPECIFIED`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -2630,6 +3205,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `EXACT_STREAM_SCOPE_UNSPECIFIED`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2661,6 +3243,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `FEASIBILITY_OR_PLANNED`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -2692,6 +3281,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -2723,6 +3319,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -2754,6 +3357,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2785,6 +3395,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2816,6 +3433,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2847,6 +3471,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `EXACT_STREAM_SCOPE_UNSPECIFIED`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2878,6 +3509,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `FEASIBILITY_OR_PLANNED`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -2909,6 +3547,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `EXACT_STREAM_SCOPE_UNSPECIFIED`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2940,6 +3585,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -2971,6 +3623,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `FEASIBILITY_OR_PLANNED`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -3002,6 +3661,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -3033,6 +3699,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 ### Path, geometry, and ordinal structure
@@ -3066,6 +3739,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Would a nested, predeclared evaluation against same-window moment and transition controls show incremental value from history-fitted state geometry?
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -3097,6 +3777,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -3128,6 +3815,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Would lead–lag features add value to a nested, predeclared detector when compared with same-window moment controls and an independently sealed evaluation?
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -3159,6 +3853,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -3190,6 +3891,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -3221,6 +3929,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `FEASIBILITY_OR_PLANNED`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -3252,6 +3967,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -3283,6 +4005,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -3314,6 +4043,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Could a simpler matched geometry summary justify a supervised test, and would its assumptions remain credible for dependent estimated innovations?
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -3345,6 +4081,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -3376,6 +4119,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -3407,6 +4157,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -3438,6 +4195,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 ### Spectral and multiscale evidence
@@ -3471,6 +4235,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -3502,6 +4273,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -3533,6 +4311,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -3564,6 +4349,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -3595,6 +4387,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -3626,6 +4425,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -3657,6 +4463,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `FEASIBILITY_OR_PLANNED`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -3688,6 +4501,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Would a predeclared time-frequency representation outperform matched moment and spectral controls under nested folds and exact package replay?
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -3719,6 +4539,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `EXACT_STREAM_SCOPE_UNSPECIFIED`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 ### Statistical and sequential baselines
@@ -3752,6 +4579,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -3783,6 +4617,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -3814,6 +4655,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_COMPETITION_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
+
+**Final status:** `HISTORICAL_REFERENCE`.
 </details>
 
 <details>
@@ -3845,6 +4693,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -3876,6 +4731,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 ### Supervised heads, ensembles, and selection
@@ -3909,6 +4771,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -3940,6 +4809,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `FEASIBILITY_OR_PLANNED`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -3971,6 +4847,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_AUDIT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `AUDIT_ONLY`.
 </details>
 
 <details>
@@ -4002,6 +4885,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -4033,6 +4923,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -4064,6 +4961,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
+
+**Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
 
 <details>
@@ -4095,6 +4999,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -4126,6 +5037,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Would a more complementary history-only representation or a preregistered worst-group objective improve transfer under independent grouped evaluation?
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -4157,6 +5075,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -4188,6 +5113,13 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Open question:** Not recorded in the public summary.
 
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
 
 <details>
@@ -4218,5 +5150,130 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 **Limit / reason deprioritized:** No additional limitation is preserved in the public summary; see the result and validation fields.
 
 **Open question:** Not recorded in the public summary.
+
+
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
+
+**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
+</details>
+
+
+<details>
+<summary><code>SUP-006</code> · <code>SRC-029</code> · Static history-ACF descriptor for a causal reference head</summary>
+
+**Record type:** detector or evidence method.
+
+**Reported family label:** Historical ACF conditioning.
+
+**Question or hypothesis:** A history-only lag-1 dependence descriptor may help a compact detector rank breaks across alternating, middle, and persistent history regimes.
+
+**Implementation:** One standardized historical ACF descriptor was added to the fixed 15-feature Clean V2 synthetic control; the descriptor was computed once from reference history.
+
+**Reference / online information:** The direct head was trained on three synthetic seeds and evaluated on the held-out seed. Online evidence used the observed prefix, with no online refitting or group routing.
+
+**Tested settings or stage:** Preregistered four-seed held-out synthetic Stage 0 with three history regimes and fixed change mechanisms.
+
+**Matched control:** The 15-feature Clean V2 control and a shuffled-ACF placebo on matched synthetic streams.
+
+**Causal evidence:** Prefix-mutation checks reported zero score changes before the mutation point.
+
+**Evaluation scope:** Synthetic-only four-seed Stage 0; no competition folds, reduced data, private evaluation, or deployment were accessed.
+
+**Validation labels:** `SYNTHETIC_ONLY; SYNTHETIC_STAGE0; FROZEN_GATE_FAILED`.
+
+**Result and disposition:** The mean candidate-control delta was +0.0051 and positive on three of four held seeds, but the predeclared condition for both ACF tails failed. The fixed recipe was closed.
+
+**Limit / reason deprioritized:** The result covers one descriptor, head, and synthetic design; it does not rule out history-conditioned detection generally.
+
+**Open question:** Would a separately preregistered history-regime representation help under independent DGPs and a matched low-order control?
+
+**Source evidence:** `SRC-029`.
+
+**Implementation status:** `HISTORICAL_SYNTHETIC_PROTOTYPE_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
+
+</details>
+
+<details>
+<summary><code>SUP-007</code> · <code>SRC-035</code> · History-only rank calibration before mixture</summary>
+
+**Record type:** detector or evidence method.
+
+**Reported family label:** Rosenblatt componentwise null-rank calibration.
+
+**Question or hypothesis:** Calibrating each causal window component against its history-only null distribution before mixing may reduce cross-window scale imbalance.
+
+**Implementation:** Each fixed trailing-window component on the causal Rosenblatt stream was upper-tail ranked against overlapping history-only windows of the same length, then combined into a fixed rank-mixture score.
+
+**Reference / online information:** The historical implementation updated the Rosenblatt state one observation at a time. Each online window ended at the current observation; calibration samples came from reference history only.
+
+**Tested settings or stage:** Synthetic Stage 0 with four fresh seeds, five change mechanisms, stationary AR(2) and GARCH null stress cases, and exact-online-age pair-weighted AUC.
+
+**Matched control:** Raw production tail-log-mixture was primary; tail maximum, joint log-mixture, scale maximum, and age-only scores were descriptive controls.
+
+**Causal evidence:** Prefix invariance, deterministic regeneration, finite-score, matched-prefix, and per-step reconstruction checks passed for the recorded synthetic implementation.
+
+**Evaluation scope:** Synthetic-only four-seed Stage 0. Overlapping calibration windows were not shown to be exchangeable with future windows.
+
+**Validation labels:** `SYNTHETIC_ONLY; SYNTHETIC_STAGE0; FROZEN_GATE_FAILED; NO_P_VALUE_OR_E_VALUE_GUARANTEE`.
+
+**Result and disposition:** The mean heavy-tail contrast was positive but below the preregistered +0.020 advancement threshold. The fixed recipe was closed without a competition-data evaluation.
+
+**Limit / reason deprioritized:** Serial dependence in history windows prevents treating these ranks as valid p-values or an e-process without additional assumptions and evidence.
+
+**Open question:** Can a history-calibrated componentwise score help under dependent-null calibration with a defensible coverage or sequential-validity argument?
+
+**Source evidence:** `SRC-035`.
+
+**Implementation status:** `HISTORICAL_SYNTHETIC_PROTOTYPE_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
+
+</details>
+
+<details>
+<summary><code>SUP-008</code> · <code>SRC-036</code> · History-only rank calibration after mixture</summary>
+
+**Record type:** detector or evidence method.
+
+**Reported family label:** Rosenblatt total-score null-rank calibration.
+
+**Question or hypothesis:** Applying an ID-specific history-only rank map after window evidence is integrated may change cross-stream rankings differently from calibrating each component first.
+
+**Implementation:** The raw tail log-mixture was computed first, then ranked against overlapping history-only mixture endpoints in the corresponding online-age band. Componentwise rank-then-mixture and fixed detector controls used the same streams.
+
+**Reference / online information:** History endpoints and age bands defined the calibration map; online scores used only the observed prefix. The recorded synthetic implementation passed prefix-mutation and deterministic-regeneration checks.
+
+**Tested settings or stage:** Four fresh synthetic seeds, five change mechanisms, and stationary AR(2)/GARCH null stress cases.
+
+**Matched control:** Raw tail log-mixture was primary; componentwise rank-then-mixture, joint and scale evidence, tail maximum, and age-only scores were also reported.
+
+**Causal evidence:** Prefix invariance passed for the tested synthetic streams. Calibration-window exchangeability and sequential validity were not established.
+
+**Evaluation scope:** Synthetic-only Stage 0 with exact-online-age scoring; historical endpoints overlap and are dependent.
+
+**Validation labels:** `SYNTHETIC_ONLY; SYNTHETIC_STAGE0; FROZEN_GATE_FAILED; NO_P_VALUE_OR_E_VALUE_GUARANTEE`.
+
+**Result and disposition:** The total-score rank map had a negative mean heavy-tail delta versus raw scores and was negative on all four seeds. The frozen advancement gate failed; no competition-data screen followed.
+
+**Limit / reason deprioritized:** The tested recipe did not improve the fixed synthetic control and does not provide a conformal or sequential-validity guarantee.
+
+**Open question:** Can another calibration map improve cross-stream comparability while retaining a justified null calibration under serial dependence?
+
+**Source evidence:** `SRC-036`.
+
+**Implementation status:** `HISTORICAL_SYNTHETIC_PROTOTYPE_NOT_SHIPPED`.
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 
 </details>
