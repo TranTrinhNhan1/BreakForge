@@ -39,7 +39,7 @@ python -m venv .venv
 .venv/bin/python examples/synthetic_break_demo.py
 ```
 
-The demo simulates AR coefficient and noise-scale breaks. On Windows PowerShell, replace `.venv/bin/python` with `.venv\Scripts\python.exe`. To save a plot, install `.[plot]` and add `--plot`.
+The demo simulates AR coefficient and noise-scale breaks. On Windows PowerShell, replace `.venv/bin/python` with `.venv\Scripts\python.exe`. Add `--plot` after installing `.[plot]` to save a figure.
 
 ## Streaming API
 
@@ -56,30 +56,25 @@ Inputs must be finite real values; `fit` requires at least three history observa
 
 ## Methods investigated
 
-Research covered conditional PIT/Rosenblatt normalization; statistical and sequential detectors; kernels and density ratios; spectral and path features; Bayesian and dynamical models; conformal methods; learned representations; and stacked heads. The report-backed catalog contains 145 evidence records (139 method or variant records and six procedures or audits); repeated runs are grouped. A separate crosswalk maps 111 historical score records to 96 recorded model/feature groups. These records preserve hypotheses, controls, and limits; they are not distinct-method counts or clean benchmarks. See the [method catalog](docs/method_catalog.md), [failed experiments](docs/failed_experiments.md), [run crosswalk](reports/curated_results/run_variant_crosswalk.csv), and [additional report index](reports/additional_report_index.csv).
+The catalog groups 139 method or variant records and six procedures or audits; repeated runs are not counted as new methods. It covers conditional PIT, sequential tests, kernels, density ratios, dynamics, spectral and path features, Bayesian and conformal methods, and learned models. See the [method catalog](docs/method_catalog.md), [failed experiments](docs/failed_experiments.md), [run crosswalk](reports/curated_results/run_variant_crosswalk.csv), and [additional report index](reports/additional_report_index.csv).
+
+| Family | Examples | Role | Outcome in this project |
+|---|---|---|---|
+| Conditional normalization | AR residuals; PIT/Rosenblatt | Scale values using history. | AR(1) reference retained; PIT assumptions documented. |
+| Statistical and sequential | Rolling moments; CUSUM; BOCPD | Detect changes and accumulate evidence. | CUSUM retained; score is uncalibrated. |
+| Kernel and distributional | MMD/RFF; RuLSIF; Wasserstein | Compare recent and historical windows. | Matched-control findings are configuration-specific. |
+| Dynamics and ordered structure | DMD/Koopman; spectra; signatures | Capture dependence and temporal geometry. | Selected gains often weakened against controls or diagnostics. |
+| Learned representations and heads | TNC/contrastive; boosted trees; stacking | Learn or combine evidence channels. | Research results carry selection and nested-OOF caveats. |
 
 ## Results
 
 ### Public synthetic benchmark
 
-Across six generated break mechanisms, the reference detector's AUC ranges from 0.4781 to 1.0000. The heavy-tail case is near chance (0.4781 AUC; 0.075 detection rate). These fixed-seed results describe selected synthetic generators, not general performance. Full metrics and settings are in [results](docs/results.md).
-
-| Generated mechanism | Raw CUSUM AUC | Conditional CUSUM AUC | BreakForge AUC |
-|---|---:|---:|---:|
-| Mean shift | 1.0000 | 1.0000 | 1.0000 |
-| Variance shift | 0.8406 | 0.9663 | 1.0000 |
-| AR coefficient shift | 0.2844 | 0.2938 | 0.9006 |
-| Persistence reversal | 0.6431 | 0.4806 | 1.0000 |
-| Frequency shift | 0.0175 | 0.0238 | 0.8288 |
-| Heavy-tail shift | 0.4244 | 0.4838 | 0.4781 |
-
-On unchanged streams, false-positive rates were 0.125 for raw CUSUM and 0.025 for both conditional detectors. Results are `SYNTHETIC_ONLY` (40 evaluation and 80 calibration streams per setting; seed `20261005`); see [protocol and full metrics](docs/results.md#clean-reproducible-synthetic-benchmark).
+In the fixed-seed synthetic benchmark, BreakForge AUC ranged from 0.4781 to 1.0000 across six generated breaks; the heavy-tail case was near chance. Its false-positive rate on unchanged streams was 0.025 under the stated calibration. These results are `SYNTHETIC_ONLY`, describe selected generators, and do not establish general performance. See [protocol and full metrics](docs/results.md#clean-reproducible-synthetic-benchmark).
 
 ### Official competition result
 
-The strongest verified private result is TS-AUC **0.6213427008** (`CLOUD_PRIVATE; VERIFIED_OFFICIAL`), submission #21 / run 120227. Final rank is unverified, package identity is incomplete, and this was a different system. It is not a BreakForge benchmark.
-
-Historical CV results remain labeled for future-length leakage, nested-OOF contamination, post-selection, or partial folds. They do not establish clean competition performance. See [results](docs/results.md) and the [validation guide](docs/validation.md).
+Competition scores, local CV, synthetic results, and invalidated historical values are not directly comparable. The strongest verified private result is TS-AUC **0.6213427008** (`CLOUD_PRIVATE; VERIFIED_OFFICIAL`), submission #21 / run 120227. Final rank and exact package identity are unverified; this was a different system, not a BreakForge benchmark. Historical CV results carry labels for future-length leakage, nested-OOF contamination, post-selection, or partial folds. See [results](docs/results.md) and the [validation guide](docs/validation.md).
 
 ## Validation lessons
 
@@ -112,7 +107,7 @@ research_archive/     indexed conclusions from selected research
 
 ## Reproducibility and documentation
 
-Run the tests and regenerate the synthetic benchmark with:
+Install development tools, run tests, and regenerate the benchmark with:
 
 ```bash
 .venv/bin/python -m pip install -e '.[dev]'
@@ -120,7 +115,7 @@ Run the tests and regenerate the synthetic benchmark with:
 .venv/bin/python scripts/synthetic_benchmark.py
 ```
 
-On Windows PowerShell, replace `.venv/bin/python` with `.venv\Scripts\python.exe`. For methodology, validation, history, and workflow, start at the [documentation index](docs/README.md).
+For methodology, validation, research history, and workflow, start at the [documentation index](docs/README.md).
 
 ## References
 
