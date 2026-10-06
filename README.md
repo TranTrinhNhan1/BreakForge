@@ -7,6 +7,10 @@
 
 BreakForge is a research framework for causal, real-time structural-break detection in heterogeneous univariate time series. The ADIA Lab / CrunchDAO challenge motivated the problem; this project makes the streaming method, validation lessons, and research history reusable beyond the competition.
 
+## Why BreakForge?
+
+The challenge supplied a strict real-time setting for streams with different scales and dynamics. BreakForge preserves a small reference detector alongside the broader method inventory and the validation lessons needed to interpret historical evidence; its public demonstration works without competition data.
+
 ## Problem and causal contract
 
 Given reference history and a stream `x_0, x_1, ...`, produce break evidence at each time `t`. A score may use the fitted reference and observations through `x_t`, never future values or final stream length. `fit(history)` freezes the reference, `update(x_t)` consumes one value, and `reset()` clears online state between independent series.
@@ -70,7 +74,19 @@ The catalog groups 139 method or variant records and six procedures or audits; r
 
 ### Public synthetic benchmark
 
-In the fixed-seed synthetic benchmark, BreakForge AUC ranged from 0.4781 to 1.0000 across six generated breaks; the heavy-tail case was near chance. Its false-positive rate on unchanged streams was 0.025 under the stated calibration. These results are `SYNTHETIC_ONLY`, describe selected generators, and do not establish general performance. See [protocol and full metrics](docs/results.md#clean-reproducible-synthetic-benchmark).
+The fixed-seed benchmark covers six chosen break generators plus unchanged controls. Each row is `SYNTHETIC_ONLY`; the results describe these generators and do not establish general performance. See [protocol, comparison baselines, and full metrics](docs/results.md#clean-reproducible-synthetic-benchmark).
+
+| Synthetic mechanism | BreakForge AUC | Detection / false-positive rate | Validity |
+|---|---:|---:|---|
+| Mean shift | 1.0000 | 1.000 | `SYNTHETIC_ONLY` |
+| Variance shift | 1.0000 | 0.950 | `SYNTHETIC_ONLY` |
+| AR coefficient shift | 0.9006 | 0.675 | `SYNTHETIC_ONLY` |
+| Persistence reversal | 1.0000 | 0.950 | `SYNTHETIC_ONLY` |
+| Frequency shift | 0.8288 | 0.550 | `SYNTHETIC_ONLY` |
+| Heavy-tail shift | 0.4781 | 0.075 | `SYNTHETIC_ONLY` |
+| No change | — | 0.025 false-positive rate | `SYNTHETIC_ONLY` |
+
+Thresholds were calibrated on 80 synthetic null streams per detector; evaluation used 40 streams per setting (seed `20261005`).
 
 ### Official competition result
 
