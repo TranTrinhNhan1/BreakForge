@@ -36,9 +36,11 @@ The public reference uses conditional Gaussian innovations and sequential CUSUM 
 
 ## Quick start
 
-Create an isolated environment, then install and run the synthetic demo:
+Clone the public repository, create an isolated environment, then install and run the synthetic demo:
 
 ```bash
+git clone https://github.com/TranTrinhNhan1/BreakForge.git
+cd BreakForge
 python -m venv .venv
 # macOS / Linux
 .venv/bin/python -m pip install -e .
@@ -84,6 +86,17 @@ Only the compact reference detector is in the public core. The [method catalog](
 ### Public synthetic benchmark
 
 Across six generated break mechanisms, the reference detector's AUC ranges from 0.4781 to 1.0000. The heavy-tail case is near chance (0.4781 AUC; 0.075 detection rate). These fixed-seed results describe selected synthetic generators, not general performance. Full metrics and settings are in [results](docs/results.md).
+
+| Generated mechanism | Raw CUSUM AUC | Conditional CUSUM AUC | BreakForge AUC |
+|---|---:|---:|---:|
+| Mean shift | 1.0000 | 1.0000 | 1.0000 |
+| Variance shift | 0.8406 | 0.9663 | 1.0000 |
+| AR coefficient shift | 0.2844 | 0.2938 | 0.9006 |
+| Persistence reversal | 0.6431 | 0.4806 | 1.0000 |
+| Frequency shift | 0.0175 | 0.0238 | 0.8288 |
+| Heavy-tail shift | 0.4244 | 0.4838 | 0.4781 |
+
+On unchanged streams, the false-positive rates were 0.125 for raw CUSUM and 0.025 for both conditional detectors. All values are `SYNTHETIC_ONLY`, from 40 evaluation streams and 80 calibration streams per setting (seed `20261005`); see [the complete benchmark protocol and results](docs/results.md#clean-reproducible-synthetic-benchmark).
 
 ### Official competition result
 
