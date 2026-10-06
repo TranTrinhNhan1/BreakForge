@@ -7,8 +7,9 @@ BreakForge presents a compact, causal streaming reference implementation and a c
 - A resettable, deterministic CPU detector with a fitted Gaussian AR(1) reference, conditional standardized innovations, optional Gaussian PIT values, and sequential CUSUM evidence.
 - A synthetic AR-break demonstration and seeded benchmark that require no competition data or Crunch runtime.
 - Exact-stream, suffix-invariance, reset, replay-parity, determinism, and fold-isolation validation utilities and tests.
-- A 140-record method/evidence catalog, an index of all 131 research reports and their digests, research journey, matched-control discussion, and curated failed/inconclusive experiments.
-- A separate 111-record historical score inventory with partial-score and arithmetic-mismatch flags; these source records are excluded from benchmark comparisons because their evaluation protocols were not reconstructed.
+- A 145-record method/evidence catalog with 139 method or variant records, six procedure or audit records, and 16 supplemental summaries; source-digest indexes cover 131 primary reports and 20 additional reviewed reports.
+- A separate 111-record historical score inventory with a crosswalk to 96 model-family/feature-block groups, plus partial-score and arithmetic-mismatch flags. These source records are excluded from benchmark comparisons because their evaluation protocols were not reconstructed.
+- Nineteen additional report-derived outcomes are listed separately from 57 curated historical comparisons and the reproducible synthetic benchmark.
 - Late P2+Aux matched-capacity findings, V5 transfer and tree-model screens, Trial 20 package-parity limits, the failed first package-import attempt, and corrections to the ACF, robust-null, and break-magnitude diagnostics.
 - Separate reporting for synthetic reproducible results, official private-run outcomes, and historical CV results with `INVALID_FUTURE_LENGTH`, `NON_NESTED_META_CV`, `POST_SELECTION_CV`, and `PARTIAL_FOLD` labels.
 - Primary-source references and an MIT-licensed, installable Python package.
