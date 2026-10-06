@@ -3873,7 +3873,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Reported family label:** Mrsc Subspace Projection.
 
-**Question or hypothesis:** Lee et al., “Multi-rank Subspace Change-point Detection for Monitoring Robotic Swarms,” arXiv:2506.18562v3 (revised 2026-08-16), propose MRS-C for emerging low-rank covariance structure. A rolling estimate of the leading signal subspace yields projection energy `Z_t = ||Uhat_t^T x_t||²`; a one-sided CUSUM accumulates `Z_t - Delta`.
+**Question or hypothesis:** Lee et al., “Multi-rank Subspace Change-point Detection with Application in Monitoring Robotic Swarms,” arXiv:2506.18562v3 (revised 2026-08-16), propose MRS-C for emerging low-rank covariance structure. A rolling estimate of the leading signal subspace yields projection energy `Z_t = ||Uhat_t^T x_t||²`; a one-sided CUSUM accumulates `Z_t - Delta`.
 
 **Implementation:** The tested feature forms lag vectors from the exact historical-reference Rosenblatt stream, estimates a covariance whitener on history only, and scores the current vector against a rank-2 subspace fit solely to the previous 32 lag-vectors. The basis refreshes every four observations. Historical prequential projection energies calibrate location/scale; outputs are a standardized projection energy, a fixed-drift positive-part CUSUM, and the previous-window top-subspace energy share. This is an empirical adaptation; overlapping lag vectors are dependent and no source guarantee transfers.
 
