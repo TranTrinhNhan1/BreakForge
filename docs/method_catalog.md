@@ -47,7 +47,7 @@ The catalog is a curated map, not a downloadable implementation of every experim
 
 ## Complete method and variant register
 
-This release contains **134 curated records**: **129 `CAT-*` records** cover **131 indexed `MTH-*` research reports**, and five `SUP-*` records summarize additional evidence. Two catalog entries each combine two staged reports. A record can describe a detector, feature representation, training or selection procedure, or a validation audit; these are not counts of independent algorithms. Report IDs and source evidence IDs preserve provenance. The original reports and private inputs are not distributed. Matching a source digest verifies which record informed the summary; it does not make the experiment independently reproducible.
+This release contains **137 curated records**: **129 `CAT-*` records** cover **131 indexed `MTH-*` research reports**, and eight `SUP-*` records summarize additional evidence. Two catalog entries each combine two staged reports. A record can describe a detector, feature representation, training or selection procedure, or a validation audit; these are not counts of independent algorithms. Report IDs and source evidence IDs preserve provenance. The original reports and private inputs are not distributed. Matching a source digest verifies which record informed the summary; it does not make the experiment independently reproducible.
 
 Each entry retains the experiment question, implementation or explicit unknown, matched control, evaluation scope, validation labels, outcome, limits, and open question where the reviewed source supports them. `UNKNOWN_FROM_PUBLIC_INDEX` and similar labels are retained when the source record does not justify a stronger statement.
 

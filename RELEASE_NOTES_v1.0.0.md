@@ -7,7 +7,7 @@ BreakForge presents a compact, causal streaming reference implementation and a c
 - A resettable, deterministic CPU detector with a fitted Gaussian AR(1) reference, conditional standardized innovations, optional Gaussian PIT values, and sequential CUSUM evidence.
 - A synthetic AR-break demonstration and seeded benchmark that require no competition data or Crunch runtime.
 - Exact-stream, suffix-invariance, reset, replay-parity, determinism, and fold-isolation validation utilities and tests.
-- A 134-record method/evidence catalog, an index of all 131 research reports and their digests, research journey, matched-control discussion, and curated failed/inconclusive experiments.
+- A 137-record method/evidence catalog, an index of all 131 research reports and their digests, research journey, matched-control discussion, and curated failed/inconclusive experiments.
 - Late P2+Aux matched-capacity findings, package-parity limitations, the failed first package-import attempt, and corrections to the ACF, robust-null, and break-magnitude diagnostics.
 - Separate reporting for synthetic reproducible results, official private-run outcomes, and historical CV results with `INVALID_FUTURE_LENGTH`, `NON_NESTED_META_CV`, `POST_SELECTION_CV`, and `PARTIAL_FOLD` labels.
 - Primary-source references and an MIT-licensed, installable Python package.
