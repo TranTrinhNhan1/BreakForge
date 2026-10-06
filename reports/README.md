@@ -10,8 +10,11 @@ See the [results and evidence status](../docs/results.md),
 [curated-results index](curated_results/README.md). `curated_results/`
 contains selected historical aggregate comparisons described in
 [`docs/results.md`](../docs/results.md).
-[`experiment_index.csv`](experiment_index.csv) is a title-and-provenance index
-for 131 research reports retained in the private working archive.
+[`experiment_index.csv`](experiment_index.csv) indexes 131 source reports by
+release-assigned ID, neutral title, and digest. The separate
+[`additional_report_index.csv`](additional_report_index.csv) classifies twenty
+more reviewed reports that fall outside that indexed set. Source report text,
+private artifacts, and local paths are not distributed.
 
 The `MTH-*` values are catalog keys assigned for this release, not original
 experiment IDs. A row represents a report, which may describe a variant,
@@ -25,5 +28,11 @@ does not infer causality, validation validity, effect size, matched control,
 or final disposition by scanning report text. The public status of selected
 results appears in [`docs/results.md`](../docs/results.md), and family-level
 interpretation appears in [`docs/method_catalog.md`](../docs/method_catalog.md)
-and [`docs/failed_experiments.md`](../docs/failed_experiments.md). No private
+and [`docs/failed_experiments.md`](../docs/failed_experiments.md). The 111-row
+score inventory is joined to its 96 source configuration groups in
+[`curated_results/run_variant_crosswalk.csv`](curated_results/run_variant_crosswalk.csv)
+and [`curated_results/run_variant_groups.csv`](curated_results/run_variant_groups.csv).
+Nineteen additional report-result rows are published in
+[`curated_results/additional_report_results.csv`](curated_results/additional_report_results.csv);
+each remains labeled historical or synthetic-only. No private
 competition data, predictions, model files, or logs are included.

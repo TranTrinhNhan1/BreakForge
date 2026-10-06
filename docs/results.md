@@ -120,6 +120,44 @@ The labels describe different evidence dimensions and can appear together. A cau
 | D3 + CPIT Trial 19 exact OOF blend | 0.634526 | Not measured | `POST_SELECTION_CV`; `NON_NESTED_META_CV` | OOF blend, not a package replay; F0/F4 informed screening. |
 | D3 direct blend with Trial 52 | 0.634292 | Not measured | `POST_SELECTION_CV`; package parity unverified | The selected difference does not establish an independent gain. |
 
+### Additional source-report outcomes
+
+Twenty additional source reports are classified in [`additional_report_index.csv`](../reports/additional_report_index.csv). The reports add late-stage method and selection evidence that was not in the original indexed set; other entries are descriptive audits, validation postmortems, or runtime-only studies. The exact score vectors and report digests are in [`additional_report_results.csv`](../reports/curated_results/additional_report_results.csv). These aggregates come from private competition data or separate source synthetic screens and are not independently reproducible from this repository.
+
+| Candidate / record | Comparison | Split and metric | Candidate | Control | Delta | Validity label |
+|---|---|---|---:|---:|---:|---|
+| Clean V2 + OSN-RFF + full-scan U direct head | Matched Clean V2 head | Five grouped CV-A folds; pair-weighted TS-AUC mean | 0.6060691 | 0.5992524 | +0.0068168 | `CLOUD_PRIVATE; POST_SELECTION_CV; VALID_EXACT_STREAM` |
+| Same direct head | Same matched control | One-shot reduced diagnostic; pair-weighted TS-AUC | 0.5323959 | 0.5205256 | +0.0118703 | `CLOUD_PRIVATE; POST_SELECTION_CV; REDUCED_ONLY` |
+
+The direct-head features passed the report’s prefix/parity checks, but the CV-A family had prior exposure and the reduced diagnostic is not a sealed holdout. The candidate was not promoted.
+
+| AR evidence variant | Comparison | Split | Candidate TS-AUC | Control TS-AUC | Delta / paired note | Validity label |
+|---|---|---|---:|---:|---|---|
+| Exact all-start AR maximum | Dyadic-start maximum | Synthetic Stage 0 macro score | 0.558611 | 0.545748 | +0.012863 | `SYNTHETIC_ONLY` |
+| Exact all-start Bayesian location mixture | Dyadic-start maximum | Synthetic Stage 0 macro score | 0.539405 | 0.545748 | −0.006343 | `SYNTHETIC_ONLY` |
+| Exact all-start AR maximum | Exact Trial 52 package | CV-A F4 / F1 standalone scores | 0.537137 / 0.532031 | 0.620983 / 0.639204 | Fixed 0.05 blend deltas: −0.000513 / −0.001101 | `CLOUD_PRIVATE; PARTIAL_FOLD; POST_SELECTION_CV; VALID_EXACT_STREAM` |
+| Exact all-start Bayesian location mixture | Exact Trial 52 package | CV-A F4 / F1 standalone scores | 0.536443 / 0.525121 | 0.620983 / 0.639204 | Fixed 0.05 blend deltas: −0.000911 / −0.003978 | `CLOUD_PRIVATE; PARTIAL_FOLD; POST_SELECTION_CV; VALID_EXACT_STREAM` |
+| Fixed-g mixture, uniform duration prior | Existing max-GLR evidence | Five grouped CV-A folds; pair-weighted TS-AUC mean | 0.5317707 | 0.5329225 | −0.0011518 | `CLOUD_PRIVATE; POST_SELECTION_CV; VALID_EXACT_STREAM` |
+| Fixed-g mixture, duration-weighted prior | Existing max-GLR evidence | Five grouped CV-A folds; pair-weighted TS-AUC mean | 0.5244552 | 0.5329225 | −0.0084672 | `CLOUD_PRIVATE; POST_SELECTION_CV; VALID_EXACT_STREAM` |
+| Fixed 50/50 max-GLR / mixture blend | Existing max-GLR evidence | Five grouped CV-A folds; pair-weighted TS-AUC mean | 0.5329186 | 0.5329225 | −0.0000039 | `CLOUD_PRIVATE; POST_SELECTION_CV; VALID_EXACT_STREAM` |
+
+The exact-start AR screen used only two transfer folds and did not proceed to another stage. The fixed-g mixture used all five folds but remained post-selection; neither family produced a promoted detector.
+
+| Synthetic expert-bank record | Comparison | Split / metric | Candidate | Control | Delta | Validity label |
+|---|---|---|---:|---:|---:|---|
+| Rich nine-expert conditional bank | Gaussian AR(0/1/2/4/8) bank | Four synthetic seeds; equal-seed mean pair-weighted TS-AUC | 0.6542221 | 0.6576308 | −0.0034087 | `SYNTHETIC_ONLY` |
+| Rich nine-expert conditional bank | Gaussian AR bank | Pooled synthetic pair-weighted TS-AUC | 0.6536139 | 0.6569469 | −0.0033330 | `SYNTHETIC_ONLY` |
+
+The four mechanism-level candidate-minus-control deltas were +0.0003858 (mean shift), −0.0032210 (scale shift), −0.0011991 (dependence shift), and −0.0067181 (tail shift), all `SYNTHETIC_ONLY`. The frozen advancement gate failed; this source screen is not part of the reproducible public synthetic benchmark.
+
+| Stage-two trial | Full five-fold CV-A mean TS-AUC | Trial-13 reference | Validity label |
+|---|---:|---:|---|
+| Trial 41, selected by a two-fold objective | 0.629066 | 0.631890 | `CLOUD_PRIVATE; POST_SELECTION_CV` |
+| Trial 31 | 0.628997 | 0.631890 | `CLOUD_PRIVATE; POST_SELECTION_CV` |
+| Trial 47 | 0.630663 | 0.631890 | `CLOUD_PRIVATE; POST_SELECTION_CV` |
+
+The two-fold objective for trial 41 was 0.6231522, labeled `CLOUD_PRIVATE; PARTIAL_FOLD; POST_SELECTION_CV`; its full five-fold replay did not confirm the selection. None of the stage-two candidates was promoted.
+
 The CSV also retains the complete archived protocol-mixed scoreboard slice rather than only its highest rows. Such rows are marked `UNKNOWN_PROVENANCE; POST_SELECTION_CV` unless a source audit justifies a stronger label. Two known future-length examples are shown separately below. Do not compare protocol-mixed values with the exact-stream rows above.
 
 ### Future-length-invalid historical values

@@ -64,7 +64,7 @@ Inputs must be finite real values; `fit` requires at least three history observa
 
 ## Methods investigated
 
-The catalog groups 140 evidence records into 135 method or variant records and five procedure or audit records. Staged reports are grouped when they describe the same recipe; run IDs, seeds, and folds are not counted as separate methods.
+The report-backed catalog contains 145 evidence records: 139 method or variant records and six procedure or audit records. Staged reports are grouped when they describe the same recipe; run IDs, seeds, and folds are not counted as separate methods. A separate crosswalk accounts for all 111 source-ledger score records in 96 model-family/feature-block groups; those groups preserve recorded hypotheses and configurations but are not distinct-method counts.
 
 | Family | Examples | Role | Outcome in this project |
 |---|---|---|---|
@@ -79,7 +79,7 @@ The catalog groups 140 evidence records into 135 method or variant records and f
 | Supervised heads, ensembles, and selection | Tree heads, rankers, stacked blends, automated search | Combine or rank detector evidence | Historical scores include partial-fold and post-selection screens; they do not establish a clean family-wide benchmark. |
 | Other causal evidence methods | Hazard, residual, and online-comparison features | Capture additional prefix-based change evidence | The catalog preserves method-specific controls and limitations without claiming a family-wide result. |
 
-Only the compact reference detector is in the public core. The [method catalog](docs/method_catalog.md) records questions, controls, validation scope, and limitations; [failed experiments](docs/failed_experiments.md) curates negative and inconclusive results. The separate 111-record score inventory is grouped by its 30 source model-family labels; those are run counts, not additional method counts.
+Only the compact reference detector is in the public core. The [method catalog](docs/method_catalog.md) records questions, controls, validation scope, and limitations; [failed experiments](docs/failed_experiments.md) curates negative and inconclusive results. The [run crosswalk](reports/curated_results/run_variant_crosswalk.csv) preserves source experiment IDs, hypotheses, and configurations; [additional report index](reports/additional_report_index.csv) classifies reports outside the main indexed set.
 
 ## Results
 
@@ -100,9 +100,9 @@ On unchanged streams, the false-positive rates were 0.125 for raw CUSUM and 0.02
 
 ### Official competition result
 
-The strongest verified private result recorded here is TS-AUC **0.6213427008** for submission #21 / run 120227. Final rank is not independently verified, package identity is incomplete, and the submitted system differs from the public reference. It is not a benchmark for BreakForge.
+The strongest verified private result recorded here is TS-AUC **0.6213427008** (`CLOUD_PRIVATE; VERIFIED_OFFICIAL`) for submission #21 / run 120227. Final rank is not independently verified, package identity is incomplete, and the submitted system differs from the public reference. It is not a benchmark for BreakForge.
 
-Historical competition CV results remain separate and labeled, including future-length leakage, nested-OOF contamination, post-selection, and partial-fold cases. The [results record](docs/results.md) separates its 57 curated comparisons from a broader 111-record source inventory; neither replaces the synthetic benchmark or supports claims about clean competition performance.
+Historical competition CV results remain separate and labeled, including future-length leakage, nested-OOF contamination, post-selection, and partial-fold cases. The [results record](docs/results.md) separates 57 curated comparisons, 19 supplemental report-derived outcomes, and a broader 111-record source inventory; none replaces the synthetic benchmark or supports claims about clean competition performance.
 
 ## Validation lessons
 

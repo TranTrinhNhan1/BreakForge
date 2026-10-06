@@ -1,12 +1,14 @@
 # Research method catalog
 
-The project explored a broad set of evidence channels for heterogeneous univariate streams. The [machine-readable catalog](../reports/method_catalog.csv) has 140 records: 129 report-level `CAT-*` records cover all 131 indexed `MTH-*` reports (two catalog records combine pairs of staged reports), plus eleven supplemental `SUP-*` evidence records. It records a hypothesis, implementation, control, validation scope, or disposition when a release-safe summary supports it; missing fields are marked explicitly.
+The project explored a broad set of evidence channels for heterogeneous univariate streams. The [machine-readable catalog](../reports/method_catalog.csv) has 145 records: 129 report-level `CAT-*` records cover all 131 indexed `MTH-*` reports (two catalog records combine pairs of staged reports), plus sixteen supplemental `SUP-*` records for evidence outside that index. The [additional report index](../reports/additional_report_index.csv) classifies twenty further source reports; five previously unrepresented method or selection variants from that set are added below. Runtime audits and descriptive diagnostics are indexed without counting them as detector methods.
 
-The catalog covers all 131 report-index identifiers (`MTH-*`) after grouping staged reports that describe the same underlying recipe. Eleven supplemental records summarize evidence found outside those reports. Under the catalog type rule, 135 records describe methods or variants: 114 detector/evidence methods, 13 representations/models, seven combinations/scoring heads, and one baseline. The other five records are four training/selection procedures and one validation audit. These are records, not distinct algorithms: staged reports are grouped and seeds, folds, and repeat runs are not separate methods. The audit entry is explicitly typed as such, and stage records with the same method are grouped under one catalog ID.
+The catalog covers all 131 report-index identifiers (`MTH-*`) after grouping staged reports that describe the same underlying recipe. Under the catalog type rule, 139 records describe methods or variants: 117 detector/evidence methods, 13 representations/models, eight combinations/scoring heads, and one baseline. The other six records are five training/selection procedures and one validation audit. These are records, not distinct algorithms: staged reports are grouped and seeds, folds, and repeat runs are not separate methods. The audit entry is explicitly typed as such, and stage records with the same method are grouped under one catalog ID.
 
-A separate 111-record score inventory preserves run-level records from the source experiment ledger. Its 30 source model-family labels are summarized in [`source_model_family_inventory.csv`](../reports/curated_results/source_model_family_inventory.csv). That appendix groups records by the recorded implementation family; it does not count methods. The source score ledger has no complete, verified one-to-one link from each run ID to a `CAT-*` or `MTH-*` record, so the two inventories remain separate rather than implying unsupported mappings. The score inventory is private-data-derived, has unknown validation protocols, and is ineligible as a benchmark.
+A separate 111-record score inventory preserves run-level records from the source experiment ledger. The [run crosswalk](../reports/curated_results/run_variant_crosswalk.csv) connects every score record to a source configuration group and retains its recorded hypothesis, hyperparameters, and postprocessing. The [96-group appendix](../reports/curated_results/run_variant_groups.csv) groups by the exact pair of source model-family label and feature-block description; it is a run-organization rule, not a claim that each group is one distinct method. Six groups have a direct catalog match, four have a related-family link, and the other 86 are explicitly left without a verified catalog mapping. The source score inventory is private-data-derived, has unknown validation protocols, and every row remains ineligible as a benchmark.
 
-The identifiers `MTH-*` and `CAT-*` were assigned for this release. The report index keeps the source titles and SHA-256 digests; the original report text, raw predictions, model artifacts, and competition data are not included. The 131 report digests were checked against the source records used for this curation. A matching digest verifies the source mapping, but it does not make an experiment independently reproducible. Selected aggregate outcomes and their caveats are published separately in [results](results.md) and [`historical_research.csv`](../reports/curated_results/historical_research.csv).
+The twenty additional report records are indexed by neutral public IDs and SHA-256 digests; the underlying source text and artifacts are not included. The index separates method screens from descriptive score audits, validation postmortems, and runtime-only studies. A digest supports provenance bookkeeping but does not make private evidence reproducible.
+
+The identifiers `MTH-*`, `CAT-*`, `SUP-*`, `RPT-*`, and `RUNSET-*` were assigned for this release. The report indexes keep neutral titles and SHA-256 digests; the original report text, raw predictions, model artifacts, and competition data are not included. The indexed report digests were checked against the source records used for curation. A matching digest verifies source mapping, not independent reproducibility. Selected aggregate outcomes and their caveats are published separately in [results](results.md), [`historical_research.csv`](../reports/curated_results/historical_research.csv), and [`additional_report_results.csv`](../reports/curated_results/additional_report_results.csv).
 
 ## How to read the catalog
 
@@ -5394,5 +5396,204 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 **Validation stage:** `FOLD_0_SCREEN_WITH_SMALL_TUNING_STUDIES`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
+
+</details>
+
+## Additional source-report variants and selection records
+
+Five later source reports add the following method or selection-stage records. Their hashes and public dispositions are listed in the [additional report index](../reports/additional_report_index.csv); each numeric value below inherits the row’s stated validation labels.
+
+<details>
+<summary><code>SUP-012</code> · <code>RPT-004</code> · Clean Baseline V2 direct head with OSN-RFF and full-scan U evidence</summary>
+
+**Record type:** combination or scoring head
+
+**Reported family label:** Clean V2 + OSN-RFF / full-scan U direct head
+
+**Question or hypothesis:** Can four fixed causal X-only channels—an OSN-RFF log-mixture and three history-full-scan U statistics—improve the same-step Clean V2 direct head under a matched training and fold protocol?
+
+**Implementation:** Adds four fixed channels to the existing 15-feature direct LightGBM head. The feature builder is label-blind; the head is trained only on the corresponding grouped-fold training IDs.
+
+**Reference / online information:** Online features use the observed prefix and were checked against the cached Clean V2 stream. Full feature/cache comparisons reported exact equality; this does not establish independent package parity or a clean outer-fold estimate.
+
+**Tested settings or stage:** Five grouped CV-A folds with the same trainer, parameters, fold map, and 120 boosting rounds; one frozen-prediction test_reduced diagnostic.
+
+**Matched control:** The 15-feature Clean Baseline V2 head with the same trainer, parameters, labels, fold maps, and boosting rounds.
+
+**Causal evidence:** Causal X-only construction and feature/cache parity were reported; the fold estimate remains post-selection.
+
+**Evaluation scope:** Private competition-derived CV-A after prior exposure plus a one-shot reduced diagnostic.
+
+**Validation labels:** `VALID_EXACT_STREAM; POST_SELECTION_CV; CLOUD_PRIVATE; REDUCED_ONLY`
+
+**Result and disposition:** Candidate CV-A mean TS-AUC 0.6060691 versus 0.5992524 for the matched control (reported paired mean delta +0.0068168). One-shot reduced scores were 0.5323959 versus 0.5205256. Neither result is independent confirmation; not promoted.
+
+**Limit / reason deprioritized:** CV-A was exposed to earlier design choices, and the reduced diagnostic is not a sealed holdout. The candidate was not a deployment model.
+
+**Open question:** Would this frozen four-channel addition improve a predeclared, nested comparison on a new authorized dataset?
+
+**Source evidence:** `RPT-004` (digest and neutral report title in the [additional report index](../reports/additional_report_index.csv))
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`
+
+**Validation stage:** `FIVE_FOLD_GROUPED_CV_A_PLUS_ONE_SHOT_REDUCED_DIAGNOSTIC`
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`
+
+</details>
+
+<details>
+<summary><code>SUP-013</code> · <code>RPT-014</code> · Exact all-start AR mean-change maximum and normalized Bayesian location mixture</summary>
+
+**Record type:** detector or evidence method
+
+**Reported family label:** AR-Focus exact all-start screen
+
+**Question or hypothesis:** Can brute-force causal AR-transient mean-change evidence over every available start time complement a history-fitted conditional detector?
+
+**Implementation:** Fits BIC-selected AR coefficients and innovation scale from reference history, standardizes online innovations, then computes an exact all-start mean-shift maximum or a normalized Gaussian-effect/uniform-start log-sum-exp mixture. The code did not implement the paper’s exact-pruning algorithm or claim its guarantees.
+
+**Reference / online information:** The candidate-start set contains only suffix starts available at the current time. A sampled future-suffix mutation check reported zero prefix-score changes. This is not the full AR-to-ECDF normal-score Rosenblatt pipeline used by the reference package.
+
+**Tested settings or stage:** Synthetic Stage 0 on four change mechanisms; partial two-fold grouped CV-A transfer screen with a fixed 0.05 blend and no tuning.
+
+**Matched control:** Dyadic-start maximum and mixture in synthetic Stage 0; exact Trial 52 package and its dyadic evidence in the two-fold transfer screen.
+
+**Causal evidence:** Prefix mutation passed on the reported sample; the computation enumerates only current candidate starts.
+
+**Evaluation scope:** Synthetic feasibility followed by two private competition CV-A screening folds; no later folds, reduced labels, cloud run, or deployment change.
+
+**Validation labels:** `SYNTHETIC_ONLY; VALID_EXACT_STREAM; CLOUD_PRIVATE; PARTIAL_FOLD; POST_SELECTION_CV`
+
+**Result and disposition:** Synthetic macro pair-weighted TS-AUC was 0.558611 for the exact maximum and 0.539405 for the Bayesian mixture, versus 0.545748 for the dyadic maximum. On both screened CV-A folds, each fixed 0.05 blend reduced the exact-package score; the family was stopped.
+
+**Limit / reason deprioritized:** The exact maximum’s synthetic signal did not transfer. The screen covered two folds and was post-selection; the method also omits the reference package’s full Rosenblatt transform.
+
+**Open question:** Would a preregistered AR-transient detector add value under a nested, fully causal comparison with an appropriate matched control?
+
+**Source evidence:** `RPT-014` (digest and neutral report title in the [additional report index](../reports/additional_report_index.csv))
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`
+
+**Validation stage:** `SYNTHETIC_STAGE0_PLUS_TWO_FOLD_GROUPED_CV_A_SCREEN`
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`
+
+</details>
+
+<details>
+<summary><code>SUP-014</code> · <code>RPT-015</code> · Fixed-g Gaussian evidence mixture over causal AR-transient durations</summary>
+
+**Record type:** detector or evidence method
+
+**Reported family label:** AR-Focus fixed-g candidate-location mixture
+
+**Question or hypothesis:** Can integrating a plug-in Gaussian shift likelihood over candidate suffix durations be more stable than selecting the maximum AR-transient statistic?
+
+**Implementation:** For each currently available suffix duration, computes a standardized AR-transient statistic under history-only BIC-selected AR(0–12) coefficients and innovation scale, then integrates fixed g values {0.25, 1, 4} over unique geometric-grid durations.
+
+**Reference / online information:** Repeated candidate locations are removed when the requested duration exceeds the current stream age. Equal mass per unique duration and mass proportional to represented duration were compared. These plug-in scores are not calibrated Bayesian guarantees.
+
+**Tested settings or stage:** Five grouped CV-A folds; fixed-g mixture with uniform-grid and duration-weighted priors, plus one fixed 50/50 per-step blend with max-GLR.
+
+**Matched control:** The existing causal max-GLR evidence on the same folds.
+
+**Causal evidence:** Feature construction used only the history and current prefix; scalar formula and prefix-invariance checks passed.
+
+**Evaluation scope:** Full grouped CV-A on private competition data, with previous CV-A screens on the same feature family; no reduced or private-label evaluation.
+
+**Validation labels:** `VALID_EXACT_STREAM; POST_SELECTION_CV; CLOUD_PRIVATE`
+
+**Result and disposition:** The uniform-grid mixture mean was 0.5317707 versus 0.5329225 for max-GLR; the duration-weighted mixture mean was 0.5244552. The fixed blend mean was 0.5329186, effectively tied with max-GLR and not an improvement.
+
+**Limit / reason deprioritized:** The variants did not improve the control, and prior CV-A exposure prevents treating the reported folds as independent confirmation.
+
+**Open question:** Would another duration prior help in a preregistered nested study with a sealed evaluation group?
+
+**Source evidence:** `RPT-015` (digest and neutral report title in the [additional report index](../reports/additional_report_index.csv))
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`
+
+**Validation stage:** `FIVE_FOLD_GROUPED_CV_A_POST_SELECTION`
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`
+
+</details>
+
+<details>
+<summary><code>SUP-015</code> · <code>RPT-019</code> · Nine-expert Student-t and EWMA-variance bank for cumulative predictive NLL shift</summary>
+
+**Record type:** detector or evidence method
+
+**Reported family label:** MPS rich conditional-expert bank
+
+**Question or hypothesis:** Can heavy-tail and time-varying-variance experts add useful causal evidence to a compact Gaussian AR expert bank?
+
+**Implementation:** Adds Student-t(4) AR(0/1) experts and Gaussian AR(0) EWMA-variance experts with fixed decays 0.90/0.98 to a Gaussian AR(0/1/2/4/8) bank. AR coefficients use the first 72% of history innovations; EWMA state updates after the current residual.
+
+**Reference / online information:** All experts are history-fitted; online score state consumes the current residual in sequence. Prefix mutation and streaming/batch Rosenblatt parity checks passed in the source experiment.
+
+**Tested settings or stage:** Frozen synthetic Stage 0 with four fresh seed rotations and mean, scale, dependence, and tail changes.
+
+**Matched control:** The unchanged causal Gaussian AR(0/1/2/4/8) cumulative expert-NLL-shift bank.
+
+**Causal evidence:** Future-suffix mutation passed on the reported synthetic sample; batch and streaming Rosenblatt outputs were bitwise equal on the parity sample.
+
+**Evaluation scope:** Synthetic-only feasibility screen; challenge labels, grouped CV, reduced data, private/cloud results, and deployment were not accessed.
+
+**Validation labels:** `SYNTHETIC_ONLY`
+
+**Result and disposition:** The equal-seed mean was 0.6542221 for the rich bank versus 0.6576308 for the Gaussian control (delta -0.0034087); all four seed rotations were negative. The frozen advancement gate failed and the exact bank was closed.
+
+**Limit / reason deprioritized:** This negative result applies to the tested nine-expert bank and synthetic design; it does not reject every expert-set or conditional-density method. The source experiment is not part of the code-reproducible public benchmark.
+
+**Open question:** Would a different preregistered expert bank help under independent synthetic generators and matched compute?
+
+**Source evidence:** `RPT-019` (digest and neutral report title in the [additional report index](../reports/additional_report_index.csv))
+
+**Implementation status:** `HISTORICAL_SYNTHETIC_PROTOTYPE_NOT_SHIPPED`
+
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`
+
+</details>
+
+<details>
+<summary><code>SUP-016</code> · <code>RPT-020</code> · Two-fold Optuna selection with full-fold replay of candidate causal heads</summary>
+
+**Record type:** selection or training procedure
+
+**Reported family label:** P3 causal-head stage-two optimizer screen
+
+**Question or hypothesis:** Can a second-stage hyperparameter search improve the fixed causal P3 head beyond the previous trial-13 reference?
+
+**Implementation:** The stage-two search used a two-fold objective to select candidate heads. Trials 41, 31, and 47 were then replayed across all five grouped CV-A folds and compared with trial 13.
+
+**Reference / online information:** This is a supervised-head selection procedure, not a new streaming detector. Feature and score-state causality inherit the P3 head record and are not independently re-established by this optimizer report.
+
+**Tested settings or stage:** Two-fold search objective followed by five-fold CV-A replay for the selected and comparison trials.
+
+**Matched control:** The previous trial-13 causal reference head on the same five grouped CV-A folds.
+
+**Causal evidence:** The report concerns model selection; it does not provide an independent new causal audit.
+
+**Evaluation scope:** Private competition CV-A; the search objective was partial-fold and the follow-up folds were already part of the exposed research process.
+
+**Validation labels:** `CLOUD_PRIVATE; PARTIAL_FOLD; POST_SELECTION_CV`
+
+**Result and disposition:** The two-fold selected trial 41 had a five-fold mean of 0.629066 versus 0.631890 for trial 13. The other replayed candidates, trials 31 and 47, also remained below trial 13; none was promoted.
+
+**Limit / reason deprioritized:** The two-fold objective was optimistic for this head and its selected ranking was reversed by full-fold replay. The folds are not an untouched estimate.
+
+**Open question:** Would nested hyperparameter selection with a sealed group support a different result?
+
+**Source evidence:** `RPT-020` (digest and neutral report title in the [additional report index](../reports/additional_report_index.csv))
+
+**Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`
+
+**Validation stage:** `TWO_FOLD_SEARCH_PLUS_FIVE_FOLD_GROUPED_CV_A_REPLAY`
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`
 
 </details>
