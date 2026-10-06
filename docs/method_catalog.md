@@ -2,7 +2,7 @@
 
 The project explored a broad set of evidence channels for heterogeneous univariate streams. The [machine-readable catalog](../reports/method_catalog.csv) has 137 records: 129 report-level `CAT-*` records cover all 131 indexed `MTH-*` reports (two catalog records combine pairs of staged reports), plus eight supplemental `SUP-*` evidence records. It records a hypothesis, implementation, control, validation scope, or disposition when a release-safe summary supports it; missing fields are marked explicitly.
 
-The catalog covers all 131 report-index identifiers (`MTH-*`) after grouping staged reports that describe the same underlying recipe. Eight supplemental records summarize evidence found outside those reports. These are catalog records, not a count of distinct algorithms: entries include detectors, feature representations, scoring heads, training or selection procedures, and one validation audit. Seeds, folds, and repeat runs are not counted as separate methods. The audit entry is explicitly typed as such, and stage records with the same method are grouped under one catalog ID.
+The catalog covers all 131 report-index identifiers (`MTH-*`) after grouping staged reports that describe the same underlying recipe. Eight supplemental records summarize evidence found outside those reports. Under the catalog type rule, 132 records describe methods or variants: 114 detector/evidence methods, 10 representations/models, seven combinations/scoring heads, and one baseline. The other five records are four training/selection procedures and one validation audit. These are records, not distinct algorithms: staged reports are grouped and seeds, folds, and repeat runs are not separate methods. The audit entry is explicitly typed as such, and stage records with the same method are grouped under one catalog ID.
 
 The identifiers `MTH-*` and `CAT-*` were assigned for this release. The report index keeps the source titles and SHA-256 digests; the original report text, raw predictions, model artifacts, and competition data are not included. The 131 report digests were checked against the source records used for this curation. A matching digest verifies the source mapping, but it does not make an experiment independently reproducible. Selected aggregate outcomes and their caveats are published separately in [results](results.md) and [`historical_research.csv`](../reports/curated_results/historical_research.csv).
 
@@ -47,7 +47,7 @@ The catalog is a curated map, not a downloadable implementation of every experim
 
 ## Complete method and variant register
 
-This release contains **137 curated records**: **129 `CAT-*` records** cover **131 indexed `MTH-*` research reports**, and eight `SUP-*` records summarize additional evidence. Two catalog entries each combine two staged reports. A record can describe a detector, feature representation, training or selection procedure, or a validation audit; these are not counts of independent algorithms. Report IDs and source evidence IDs preserve provenance. The original reports and private inputs are not distributed. Matching a source digest verifies which record informed the summary; it does not make the experiment independently reproducible.
+This release contains **137 curated records**: **129 `CAT-*` records** cover **131 indexed `MTH-*` research reports**, and eight `SUP-*` records summarize additional evidence. Under the record-type rule, **132 records describe methods or variants** (114 detector/evidence methods, 10 representations/models, seven combinations/scoring heads, and one baseline); the remaining five are four training/selection procedures and one validation audit. Two catalog entries each combine two staged reports, so these totals are not counts of independent algorithms. Report IDs and source evidence IDs preserve provenance. The original reports and private inputs are not distributed. Matching a source digest verifies which record informed the summary; it does not make the experiment independently reproducible.
 
 Each entry retains the experiment question, implementation or explicit unknown, matched control, evaluation scope, validation labels, outcome, limits, and open question where the reviewed source supports them. `UNKNOWN_FROM_PUBLIC_INDEX` and similar labels are retained when the source record does not justify a stronger statement.
 
@@ -110,9 +110,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Grouped CV-A: eta was selected using F4/F2, then frozen and evaluated on F1/F3/F0. The feature update consumes one observation at a time; no reduced evaluation, CV-B, provider run, or deployment package.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** VALID_EXACT_STREAM; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** Status: Stage 1 plus frozen Stage 2 transfer complete; exploratory only, not promoted. Scope: New causal evidence features over the existing history-whitened stream; no deployment-package change.
 
@@ -124,7 +124,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -262,9 +262,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** A future-length leakage was discovered and removed; the repaired transform was checked with exact-prefix and future-suffix mutation tests.
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** An early path used final online length and was later repaired to use history/prefix information. The selected head/blend was tuned on F4/F0, frozen for all five CV-A folds, and checked once on a reduced diagnostic; CV-B remained sealed.
 
-**Validation labels:** INVALID_FUTURE_LENGTH; VALID_EXACT_STREAM (repaired path); POST_SELECTION_CV
+**Validation labels:** INVALID_FUTURE_LENGTH; VALID_EXACT_STREAM (repaired path); POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The initial PIT path used final online length and is labeled INVALID_FUTURE_LENGTH. A history/prefix-only repair passed causality checks but remained an unpromoted complement to the locked Trial-52 stream.
 
@@ -276,7 +276,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
@@ -338,9 +338,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Synthetic Stage 0 on 384 streams; prefix/suffix invariance was reported. No CV-A/B, reduced, private-data, provider, or deployment evaluation.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** SYNTHETIC_ONLY; VALID_EXACT_STREAM
 
 **Result and disposition:** The fixed historical-EWMA-reference recipe was closed after Stage 0; no challenge-fold validation was run.
 
@@ -352,7 +352,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
 
 **Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
@@ -490,9 +490,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Settings were selected on F4/F0, then frozen for five-fold CV-A evaluation. No reduced-data result is reported.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** Retained only as a Fold-4 diagnostic; not deployed or submitted.
 
@@ -504,7 +504,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -795,9 +795,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Grouped leave-one-fold-out evaluation over all five CV-A folds; portfolio signs and weights for each outer fold were learned on the other four. CV-B remained sealed; no reduced diagnostic or provider run.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** Causal Evidence Portfolio Optimizer — Stage 1 Decision: Not promising as a standalone candidate; do not promote or spend more budget tuning these six channels.
 
@@ -809,7 +809,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
@@ -833,9 +833,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** causal_design_or_exact_stream_reported; audit_scope_varies
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Synthetic feasibility followed by CV-A F4/F1 selection and frozen checks on F0/F2/F3. Feature-level bitwise replay and prefix checks were reported; integrated main.infer parity was not tested.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** VALID_EXACT_STREAM; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The synthetic tail gain did not transfer to challenge CV-A; OOF errors remained correlated and exact deployed-package parity was not established.
 
@@ -847,7 +847,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
@@ -871,9 +871,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Staged full five-fold CV-A evaluation with a negative mean result, followed by one reduced-transfer diagnostic. CV-B was not accessed; feature construction was label-blind.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** VALID_EXACT_STREAM; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The ONS betting feature was evaluated with a frozen small blend; the selected increment did not justify promotion.
 
@@ -885,7 +885,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -947,9 +947,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Staged CV-A evaluation on F4/F2, then F1/F3, then F0, with complete fold-excluded OOF predictions in the final stage. The candidate was not promoted.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** Status: Tested; this head/configuration is not promoted.
 
@@ -961,7 +961,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -1023,9 +1023,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** causal_design_or_exact_stream_reported; audit_scope_varies
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** CV-A F4/F0 screen only; no reduced-data result is reported and the candidate was not promoted to full-fold evaluation.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** PARTIAL_FOLD; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The whitened predictive-rank martingale had little or no complementarity in the full selected CV screen; not promoted.
 
@@ -1037,7 +1037,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -1099,9 +1099,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Synthetic calibration screens followed by a grouped CV-A F4/F2 screen. Feature construction was label-blind; no full-fold or provider evaluation is reported.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** PARTIAL_FOLD; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** WATCH-Inspired Weighted-Conformal Context Evidence — Stage 1 Status: tested on Stage-1 folds; this binned context adaptation is not promoted.
 
@@ -1113,7 +1113,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -1290,9 +1290,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** causal_design_or_exact_stream_reported; audit_scope_varies
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Five-fold grouped CV-A and one frozen reduced-transfer diagnostic; exact streaming-transform replay and prefix/suffix checks were reported on 131 sampled IDs. No provider run or deployment package.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** VALID_EXACT_STREAM; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** Status: completed exploratory CV-A and one frozen reduced transfer diagnostic; not promoted.
 
@@ -1304,7 +1304,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -1480,9 +1480,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Four-stage evaluation: F2/F4 feasibility, F1/F3 screen, frozen p=4 five-fold cross-fit, and one frozen reduced diagnostic. The recorded feature path excludes future and terminal-length information.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** VALID_EXACT_STREAM; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The four-bin residual-rank transition head was weak, its selected CV-A gain was negligible, and reduced transfer was negative; not promoted.
 
@@ -1494,7 +1494,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -1594,9 +1594,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Scalar and joint-head stages covered four development folds. The source summary does not establish a complete five-fold evaluation; no CV-B or reduced evaluation is reported.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** PARTIAL_FOLD; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** Status: Scalar Stage 1/2 and fold-excluded joint-head Stage 1/2 are complete; no MBO(q) candidate is promoted.
 
@@ -1608,7 +1608,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
 
 **Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
@@ -1708,9 +1708,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Reported across all five CV-A folds; the public source summary does not preserve a CV-B, reduced, or provider evaluation.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The tested P6 candidate-change-time configuration remained exploratory and was not promoted.
 
@@ -1722,7 +1722,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -1784,7 +1784,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** The source report describes grouped CV-A TS-AUC variants, but the public summary does not establish the exact fold set or whether a reduced diagnostic was included.
 
 **Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
 
@@ -1822,7 +1822,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** prefix_or_future_mutation_audit_reported
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** The staged source describes an initial F2/F4 CV-A screen and one frozen reduced diagnostic, but the public summary does not establish whether a complete five-fold CV-A evaluation followed.
 
 **Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
 
@@ -1860,9 +1860,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Full exact-stream CV-A evaluation followed by one reduced diagnostic after settings were frozen.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** VALID_EXACT_STREAM; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The history-frozen soft-AR gate remained a staged exploratory result; no promotion claim is made.
 
@@ -1874,7 +1874,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -2012,9 +2012,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Two-fold screens preceded a full CV-A result recorded in the final stage; no reduced-data result is reported. The result was not replayed in the submission package.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The temporal-neighborhood encoder showed only a small CV-A result; exact package parity was incomplete, so it was not promoted.
 
@@ -2026,7 +2026,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -2050,9 +2050,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** One CV-A screen on F4/F0; no reduced-data result is reported and the candidate was not promoted.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** PARTIAL_FOLD; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The whitened historical-reference encoder was unstable across folds and did not justify promotion.
 
@@ -2064,7 +2064,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -2280,9 +2280,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Synthetic Stage 0 plus a CV-A F4/F1 screen; settings were selected on the screened folds. No full-fold confirmation is reported.
 
-**Validation labels:** POST_SELECTION_CV
+**Validation labels:** PARTIAL_FOLD; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The adjusted-range full-scan variant was closed after its null-calibration checks failed; not promoted.
 
@@ -2294,7 +2294,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -2394,9 +2394,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Stage 1 screened F4/F2, followed by frozen transfer-fold checks and a stitched five-fold descriptive blend. The report notes that the downstream Trial-11 baseline has a separate nested-OOF contamination issue.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** VALID_EXACT_STREAM; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** Status: Stage-1 screen plus frozen transfer folds complete; not promoted.
 
@@ -2408,7 +2408,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -2432,9 +2432,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** CV-A F4/F0 screen only; the candidate was not promoted to full CV-A or deployment evaluation.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** PARTIAL_FOLD; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The screened history-seeded kernel-CUSUM variants were weak and were not promoted.
 
@@ -2446,7 +2446,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -2584,9 +2584,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** causal_design_or_exact_stream_reported; audit_scope_varies
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** A candidate was selected using frozen OOF labels from F4/F0, then evaluated on all five frozen CV-A folds. No reduced-data result is reported.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The causal direct-density-ratio feature did not add useful complementary evidence to the tested reference and was not promoted.
 
@@ -2598,7 +2598,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -2622,9 +2622,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** F4/F0 screen followed by a frozen five-fold CV-A evaluation. No reduced-data result is reported.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The full grouped-CV variant was not promoted; its replay did not establish an independent result or justify reduced evaluation.
 
@@ -2636,7 +2636,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -2660,9 +2660,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Feature groups and blend were evaluated across five CV-A folds; one frozen reduced diagnostic regressed and the candidate was not promoted.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The finite-basis rolling Stein-score recipe was not promoted after a negative selected CV-A screen; no e-process guarantee is claimed.
 
@@ -2674,7 +2674,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -2698,9 +2698,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** prefix_or_future_mutation_audit_reported
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Staged CV-A evaluation covered all five folds; one frozen reduced diagnostic was negative and the candidate was not promoted.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** Decision: Do not promote this feature-head experiment.
 
@@ -2712,7 +2712,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
@@ -2928,9 +2928,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Full grouped CV-A stepwise replay plus one frozen reduced diagnostic; the candidate was not promoted.
 
-**Validation labels:** INVALID_FUTURE_LENGTH_OR_NONCAUSAL_INPUTS_REVIEW_SOURCE
+**Validation labels:** POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** Status: full grouped CV-A stepwise replay and one frozen reduced diagnostic complete; not promoted.
 
@@ -2942,7 +2942,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -3309,9 +3309,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Synthetic Stage 0 plus a grouped CV-A F4/F1 screen. No reduced or provider evaluation and no full-fold transfer result are reported.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** PARTIAL_FOLD; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** Decision Do not promote the tested variants.
 
@@ -3323,7 +3323,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
 
 **Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
@@ -3423,9 +3423,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Full CV-A screen followed by a one-time reduced-data diagnostic that informed selection; CV-B was not run. The reduced diagnostic is not a sealed holdout.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The age-conditioned follow-up did not improve overall transfer after fold-4/fold-0 tuning; no variant was promoted.
 
@@ -3437,7 +3437,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -3767,9 +3767,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Synthetic Stage 0, grouped CV-A screening on F4/F1, frozen checks on F0/F2/F3, and one reduced diagnostic. Exact-prefix and future-suffix checks were reported on nine sampled IDs.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** VALID_EXACT_STREAM; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The synthetic gain did not transfer to a meaningful CV-A improvement; the tested configuration was not advanced.
 
@@ -3781,7 +3781,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -3843,9 +3843,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** causal_design_or_exact_stream_reported; audit_scope_varies
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Frozen synthetic Stage 0 gate only; no competition folds, CV-B, reduced data, provider evaluation, or deployment package.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** SYNTHETIC_ONLY; VALID_EXACT_STREAM
 
 **Result and disposition:** The synthetic feasibility gate passed, but the frozen matrix-profile feature did not transfer to the screened challenge folds; not promoted.
 
@@ -3857,7 +3857,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -3995,9 +3995,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** causal_design_or_exact_stream_reported; audit_scope_varies
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Synthetic Stage 0 followed by a frozen CV-A F4/F1 feasibility screen. No CV-B, reduced, provider, or deployment evaluation.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** PARTIAL_FOLD; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** rolling-moment family.
 
@@ -4009,7 +4009,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
 
 **Final status:** `HISTORICAL_RESULT_RECORDED_STATUS_UNSPECIFIED`.
 </details>
@@ -4071,9 +4071,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** F4/F0 selection followed by a frozen five-fold CV-A evaluation. No reduced-data result is reported.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The tested ordinal-pattern feature failed its selected full-CV screen and was not promoted.
 
@@ -4085,7 +4085,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -4109,9 +4109,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Two-fold CV-A screen on F2/F4. The report says feature generation did not use labels, CV-B, or test_reduced; the stage was not promoted.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** PARTIAL_FOLD; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** Status: Stage-1 complete; tested representation not promoted.
 
@@ -4123,7 +4123,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -4185,9 +4185,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Synthetic Stage 0 followed by a frozen CV-A F4/F1 screen; no CV-B, reduced, provider, or deployment evaluation.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** PARTIAL_FOLD; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The tested visibility-graph backward-degree feature/head and 20% blend were not promoted.
 
@@ -4199,7 +4199,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -4415,9 +4415,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Synthetic Stage 0 followed by a CV-A F4/F1 screen. The source says CV-A/B, reduced, provider, and deployment stages were not completed beyond this screen.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** PARTIAL_FOLD; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The synthetic spectral-delay-state gate did not justify the next validation stage; the tested recipe was closed before challenge-fold evaluation.
 
@@ -4429,7 +4429,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -4721,9 +4721,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Synthetic Stage 0 gates passed, then a frozen CV-A F4/F1 screen was run. No CV-B, reduced, provider, or deployment evaluation.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** PARTIAL_FOLD; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The frozen predictive-mixture CUSUM passed synthetic gates but remained an exploratory F4/F1 screen; it was not promoted.
 
@@ -4735,7 +4735,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -4761,9 +4761,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Frozen synthetic Stage 0 only; no CV-A/B, reduced, competition-private, provider, GPU, or deployment evaluation. Direct and prefix/suffix replays matched in the recorded checks.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** SYNTHETIC_ONLY; VALID_EXACT_STREAM
 
 **Result and disposition:** The exact incidence-by-timing product and training scheme were closed; no promotion.
 
@@ -4775,7 +4775,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -4837,9 +4837,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Audit of saved pairwise OOF outputs over all five CV-A folds; this was an OOF-result audit, not a new inference evaluation. The report states that test_reduced labels were not used.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** Pairwise OOF results did not justify a joint multi-expert ensemble; the selected blend remains vulnerable to selection noise.
 
@@ -4851,7 +4851,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_AUDIT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `AUDIT_ONLY`.
 </details>
@@ -4875,9 +4875,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Five-fold outer evaluation of feature-only blend weights; each outer-fold head excluded that fold and the scalar weight used 1,200 disjoint IDs. CV-B, reduced labels, provider evaluation, and package integration were not used.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The exact two-head blend/weight-optimizer recipe was stopped and not promoted.
 
@@ -4889,7 +4889,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -4913,9 +4913,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** Nested causal feature-only pairwise correction evaluated across all five outer folds; the recorded outer/inner exclusions are described per fold. The family had prior CV-A selection exposure.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** Retained as an exploratory complementary feature family, not a promotion candidate; the tested pairwise correction did not improve the selected reference.
 
@@ -4927,7 +4927,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -4989,9 +4989,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** CV-A F4/F1 screen plus one frozen reduced diagnostic. X-only feature construction and stream parity were checked on five IDs; CV-B, provider evaluation, and package integration were not used.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** VALID_EXACT_STREAM; PARTIAL_FOLD; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The direct sampled-pairwise head failed its continuation gate on both screened CV-A folds; it produced no new best or submission candidate.
 
@@ -5003,7 +5003,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -5065,9 +5065,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** F4 screen only; expression selection used inner leave-one-fold-out checks over F1/F2/F3. There was no F0, full CV-A, CV-B, reduced, provider, or package evaluation.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** PARTIAL_FOLD; POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** Status: Stage 1 complete on F4; the tested 51-expression grammar is not promoted and does not advance to F0.
 
@@ -5079,7 +5079,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `PARTIAL_GROUPED_CV_A`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
@@ -5141,9 +5141,9 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Causal evidence:** UNKNOWN_FROM_PUBLIC_INDEX
 
-**Evaluation scope:** UNKNOWN_FROM_PUBLIC_INDEX
+**Evaluation scope:** F4/F0 search followed by a frozen five-fold CV-A evaluation. No reduced-data result is reported.
 
-**Validation labels:** UNKNOWN_FROM_PUBLIC_INDEX
+**Validation labels:** POST_SELECTION_CV; CLOUD_PRIVATE
 
 **Result and disposition:** The same-step LambdaRank head did not pass its focused screen and was not deployed.
 
@@ -5155,7 +5155,7 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 
 **Implementation status:** `HISTORICAL_EXPERIMENT_IMPLEMENTATION_NOT_SHIPPED`.
 
-**Validation stage:** `UNKNOWN_FROM_PUBLIC_INDEX`.
+**Validation stage:** `GROUPED_CV_A_FULL_OR_REPLAY`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 </details>
