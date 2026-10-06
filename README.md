@@ -62,7 +62,22 @@ Inputs must be finite real values; `fit` requires at least three history observa
 
 ## Methods investigated
 
-Research families include conditional normalization and PITs, sequential tests, rolling and spectral statistics, kernels and density ratios, optimal transport, DMD/Koopman and Bayesian dynamics, path signatures, conformal methods, learned representations, foundation models, and ensembles. Only the compact reference detector is in the public core. The [method catalog](docs/method_catalog.md) records meaningful variants, controls, evidence, and limitations; [failed experiments](docs/failed_experiments.md) curates negative and inconclusive results.
+The catalog groups 140 evidence records into 135 method or variant records and five procedure or audit records. Staged reports are grouped when they describe the same recipe; run IDs, seeds, and folds are not counted as separate methods.
+
+| Family | Examples | Role | Outcome in this project |
+|---|---|---|---|
+| Conditional normalization and score transforms | AR residuals, ECDF/PIT, Gaussian scores, copula variants | Normalize each series against its reference history | The public core uses a small Gaussian AR(1) PIT model; its interpretation depends on conditional-model adequacy. |
+| Statistical and sequential baselines | Rolling moments, quantiles, autocorrelation, CUSUM | Provide simple change evidence and controls | CUSUM remains in the reference detector; extra rolling summaries did not establish stable gains. |
+| Conformal and sequential inference | Betting processes, restart mixtures, conformal martingales | Accumulate evidence and express uncertainty over change time | More complex branches did not establish calibrated error control for dependent streams. |
+| Kernel, discrepancy, and density comparison | RFF/MMD, density ratios, Wasserstein comparisons | Detect distributional changes beyond a fixed parametric score | Tested configurations were mixed and were not promoted as the public reference. |
+| Dynamical and Bayesian models | AR likelihoods, context trees, DMD/Koopman, run-length models | Detect changes in transitions or latent dynamics | Selected results did not consistently transfer to reduced diagnostics; conclusions are configuration-specific. |
+| Spectral and multiscale evidence | Fourier, wavelet, bispectral features | Detect changes in periodicity and scale structure | No tested configuration earned promotion; performance depended on the break mechanism. |
+| Path, geometry, and ordinal structure | Signatures, recurrence geometry, ordinal patterns | Represent order and path interactions | Signature controls were small or changed sign across folds; other variants remain configuration-specific. |
+| Learned representations and neural methods | Contrastive encoders, TNC, CNN/TCN pilots, foundation models | Learn features intended to transfer across streams | Pilots did not establish a clean, independent transfer benchmark. |
+| Supervised heads, ensembles, and selection | Tree heads, rankers, stacked blends, automated search | Combine or rank detector evidence | Historical scores include partial-fold and post-selection screens; they do not establish a clean family-wide benchmark. |
+| Other causal evidence methods | Hazard, residual, and online-comparison features | Capture additional prefix-based change evidence | The catalog preserves method-specific controls and limitations without claiming a family-wide result. |
+
+Only the compact reference detector is in the public core. The [method catalog](docs/method_catalog.md) records questions, controls, validation scope, and limitations; [failed experiments](docs/failed_experiments.md) curates negative and inconclusive results. The separate 111-record score inventory is grouped by its 30 source model-family labels; those are run counts, not additional method counts.
 
 ## Results
 

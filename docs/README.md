@@ -4,6 +4,7 @@
 - [Validation](validation.md): exact-stream causality, grouped folds, nested stacking, holdouts, and validity labels.
 - [Results](results.md): reproducible synthetic metrics, official run history, and labeled historical comparisons.
 - [Historical score inventory](historical_score_inventory.md): normalized inventory of 111 source records, including partial scores and summary inconsistencies; not a benchmark.
+- [Grouped run-family appendix](../reports/curated_results/source_model_family_inventory.csv): counts the 111 source score records across 30 recorded model-family labels; it does not count distinct methods.
 - [Method catalog](method_catalog.md): report-backed method and variant inventory, controls, validation scope, and disposition; includes the complete CSV catalog.
 - [Failed experiments](failed_experiments.md): negative and inconclusive findings without family-wide overclaims.
 - [Research journey](research_journey.md): how the research evolved and what its validation audits changed.

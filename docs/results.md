@@ -62,6 +62,8 @@ The 57-row curated comparison ledger is [`historical_research.csv`](../reports/c
 
 A separate [111-record source score inventory](historical_score_inventory.md) preserves the broader experiment ledger. It includes 80 five-score vectors with internally consistent summaries, 8 vectors with summary mismatches, and 23 partial or ambiguous records. All rows carry `CLOUD_PRIVATE;UNKNOWN_PROVENANCE`; partial rows also carry `PARTIAL_FOLD`. These source records are not added to the comparison tables: their evaluation protocols were not reconstructed, so every inventory row is marked ineligible as a benchmark.
 
+The score inventory is grouped across 30 recorded model-family labels in [`source_model_family_inventory.csv`](../reports/curated_results/source_model_family_inventory.csv). Those groups describe runs in the source ledger; they are not a count of methods and do not provide a verified one-to-one mapping to the `CAT-*` catalog.
+
 All competition-derived numeric outcomes in this section come from historical research on private data. Rows in the curated comparison ledger carry explicit validity labels; rows in the broader source inventory carry extraction and protocol flags. Neither file is a clean public benchmark.
 
 ### Comparability groups

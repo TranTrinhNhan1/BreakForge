@@ -25,3 +25,5 @@ For partial records, `partial_score_values_unassigned` contains distinct numeric
 The source table does not retain enough information to reconstruct configurations, seeds, code revisions, data provenance, or the validation protocol for every row. The inventory therefore preserves the existence and score evidence of the experiments without presenting them as reproducible results. The curated ledger remains the place to compare historical outcomes with explicit evidence and validity labels.
 
 `SRC-041` is the SHA-256 digest of the withheld structured source ledger. It supports source identification only; the raw file is not distributed because it contains machine-local artifact references and malformed rows.
+
+The [grouped model-family appendix](../reports/curated_results/source_model_family_inventory.csv) aggregates the 111 records into 30 labels and retains the arithmetic-status counts. These are implementation-family run counts, not counts of methods. The source ledger has no verified row-by-row link to the curated `CAT-*` method catalog, so it is not used to inflate the method count or to claim that a run is a distinct method.
