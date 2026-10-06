@@ -58,9 +58,11 @@ The checked-in table was regenerated from code revision `326c000` with the publi
 
 ## Historical competition-derived research
 
-The complete curated ledger is [`historical_research.csv`](../reports/curated_results/historical_research.csv). It records 57 selected, high, invalid, partial-fold, code-only, and archived protocol-mixed comparisons from the source records summarized for release. It includes fold set and scores when available, reported mean, sample standard deviation computed from the displayed fold values, worst fold, secondary diagnostic, matched control where known, selection status, inference status, private-run outcome, and source evidence label. Missing settings, seeds, or code revisions are explicitly marked unknown instead of being reconstructed.
+The 57-row curated comparison ledger is [`historical_research.csv`](../reports/curated_results/historical_research.csv). It records selected, high, invalid, partial-fold, code-only, and archived protocol-mixed comparisons from the source records summarized for release. It includes fold set and scores when available, reported mean, sample standard deviation computed from the displayed fold values, worst fold, secondary diagnostic, matched control where known, selection status, inference status, private-run outcome, and source evidence label. Missing settings, seeds, or code revisions are explicitly marked unknown instead of being reconstructed.
 
-All numeric outcomes in this section are historical research on private competition-derived data. Each row in the machine-readable ledger carries explicit validity labels; these values are not clean public benchmarks.
+A separate [111-record source score inventory](historical_score_inventory.md) preserves the broader experiment ledger. It includes 80 five-score vectors with internally consistent summaries, 8 vectors with summary mismatches, and 23 partial or ambiguous records. These source records are not added to the comparison tables: their evaluation protocols were not reconstructed, so every inventory row is marked ineligible as a benchmark.
+
+All competition-derived numeric outcomes in this section come from historical research on private data. Rows in the curated comparison ledger carry explicit validity labels; rows in the broader source inventory carry extraction and protocol flags. Neither file is a clean public benchmark.
 
 ### Comparability groups
 

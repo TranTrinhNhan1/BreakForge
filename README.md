@@ -74,7 +74,7 @@ Across six generated break mechanisms, the reference detector's AUC ranges from 
 
 The strongest verified private result recorded here is TS-AUC **0.6213427008** for submission #21 / run 120227. Final rank is not independently verified, package identity is incomplete, and the submitted system differs from the public reference. It is not a benchmark for BreakForge.
 
-Historical competition CV results remain separate and labeled, including future-length leakage, nested-OOF contamination, post-selection, and partial-fold cases. Synthetic, private, and historical scores answer different questions; see the [results ledger](docs/results.md).
+Historical competition CV results remain separate and labeled, including future-length leakage, nested-OOF contamination, post-selection, and partial-fold cases. The [results record](docs/results.md) separates its 57 curated comparisons from a broader 111-record source inventory; neither replaces the synthetic benchmark or supports claims about clean competition performance.
 
 ## Validation lessons
 
