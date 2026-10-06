@@ -58,7 +58,7 @@ The checked-in table was regenerated from code revision `326c000` with the publi
 
 ## Historical competition-derived research
 
-The complete curated ledger is [`historical_research.csv`](../reports/curated_results/historical_research.csv). It records 54 selected, high, invalid, partial-fold, code-only, and archived protocol-mixed comparisons from the source records summarized for release. It includes fold set and scores when available, reported mean, sample standard deviation computed from the displayed fold values, worst fold, secondary diagnostic, matched control where known, selection status, inference status, private-run outcome, and source evidence label. Missing settings, seeds, or code revisions are explicitly marked unknown instead of being reconstructed.
+The complete curated ledger is [`historical_research.csv`](../reports/curated_results/historical_research.csv). It records 57 selected, high, invalid, partial-fold, code-only, and archived protocol-mixed comparisons from the source records summarized for release. It includes fold set and scores when available, reported mean, sample standard deviation computed from the displayed fold values, worst fold, secondary diagnostic, matched control where known, selection status, inference status, private-run outcome, and source evidence label. Missing settings, seeds, or code revisions are explicitly marked unknown instead of being reconstructed.
 
 All numeric outcomes in this section are historical research on private competition-derived data. Each row in the machine-readable ledger carries explicit validity labels; these values are not clean public benchmarks.
 
@@ -71,11 +71,11 @@ The `result_group` field keeps the historical records in their original evidence
 | `causal_reference` | 1 | Locked, exact-stream grouped CV-A reference | Private-data research baseline; not comparable with the official provider score or synthetic benchmark. |
 | `historical_cva` | 13 | Historical grouped CV-A experiment records | Compare only when fold set, metric, configuration stage, and selection status match. |
 | `selected_cva_head` | 6 | Supervised heads selected or confirmed using CV-A | Treat as post-selection diagnostics; not a clean benchmark. |
-| `archived_protocol_mixed` | 30 | Legacy scoreboard rows with mixed or unaudited stream/protocol details | Do not rank against exact-stream or reproducible results. |
+| `archived_protocol_mixed` | 31 | Private-data results with mixed or incompletely audited stream/protocol details, including the V5 saved-model replay | Do not rank against exact-stream or reproducible results. |
 | `code_only_historical_cva` | 2 | Code-adjacent full-CV-A result records | Read the row-level selection and causality labels; not independently reproducible here. |
-| `code_only_partial_cva` | 2 | Code-adjacent partial-fold screens | Do not interpret as full-fold estimates. |
+| `code_only_partial_cva` | 4 | Code-adjacent partial-fold screens | Do not interpret as full-fold estimates. |
 
-The synthetic benchmark is published as a separate clean group above. Official provider runs are a separate private-evaluation group in `official_runs.csv`. Neither is pooled with these 54 competition-derived research records.
+The synthetic benchmark is published as a separate clean group above. Official provider runs are a separate private-evaluation group in `official_runs.csv`. Neither is pooled with these 57 competition-derived research records.
 
 These are not clean public benchmarks: their source data are private competition data, the raw data and predictions are omitted, and selected research comparisons share folds. The canonical labels used in the result ledgers are:
 
@@ -126,6 +126,22 @@ These values are preserved because they shaped the research record, but the audi
 |---|---:|---:|---|---|
 | P2 historical-null robust-z anchor | 0.6505362 | 0.6409083 | `INVALID_FUTURE_LENGTH` | The null segment length was selected using the complete online-sequence length. |
 | P11 nested-weight audit, gamma 5 / eta 0.015 | 0.6504968 | 0.6530942 | `INVALID_FUTURE_LENGTH`; `POST_SELECTION_CV` | An upstream null-profile segment used the final online length; this was one of several tuned settings. |
+
+### Trial 20 package-parity note
+
+The existing `Trial 20 original` ledger row retains `UNKNOWN_PROVENANCE; POST_SELECTION_CV; CLOUD_PRIVATE`. A separate submission note reports the same displayed five-fold values, a `test_reduced` score of 0.5960944 versus the 0.5968674 baseline, and zero score delta between the target package and reference evaluator on that reduced diagnostic. The note does not record a source artifact digest or code revision for the package, and it records no completed private-cloud run. The parity check therefore does not upgrade the fold result to an independently reproducible or clean benchmark. Its evidence digest is `SRC-037`.
+
+### Gradient-boosted tree screens on the V5 feature matrix
+
+These private-data screens are preserved as historical evidence. The v19 LightGBM fold-0 score of approximately 0.6345 is cited in the source notes as context; it is not a matched-capacity control because feature and model configurations differ.
+
+| Candidate | Evaluation | TS-AUC | Transfer result | Status |
+|---|---|---:|---:|---|
+| Saved V5 LightGBM, 196 features | Five grouped-fold replay | 0.5810991 mean (0.5667206–0.6000968) | 0.5052849 on `test_reduced` | `UNKNOWN_PROVENANCE; POST_SELECTION_CV; REDUCED_ONLY; CAUSALITY_AUDIT_UNKNOWN` |
+| CatBoost on V5 features | Fold 0 only; six-trial Optuna and SMAC3 screens | 0.5869706 best Optuna `blend_0.60`; 0.5852159 best SMAC3 | Not measured | `PARTIAL_FOLD; POST_SELECTION_CV; CAUSALITY_AUDIT_UNKNOWN` |
+| XGBoost on V5 features | Fold 0 only; six-trial Optuna and SMAC3 screens | 0.5895990 best `blend_0.60` | Not measured | `PARTIAL_FOLD; POST_SELECTION_CV; CAUSALITY_AUDIT_UNKNOWN` |
+
+The CatBoost screen also recorded a raw score of 0.5853518 and a separate memory blend of 0.5870524. Neither tree tuning study read `test_reduced`. Seeds and source code revisions were not preserved in the reviewed records. The low fold-0 scores deprioritized these specific configurations; the partial evaluation and approximate, unmatched v19 comparator do not establish a family-wide result. The V5 LightGBM transfer row likewise lacks a source-pinned inference path and its reduced diagnostic is not a sealed holdout. The source hashes are listed as `SRC-038` through `SRC-040`.
 
 ### Supplemental negative results
 
@@ -197,5 +213,9 @@ The source records are not distributed. Their digests identify the evidence used
 | `SRC-034` | Synthetic null-growth correction to break-magnitude study | `8db38003b15bd8be22831d7fccc1a46f21691ace34e512df5fb73ceff24ebe41` |
 | `SRC-035` | Rosenblatt componentwise null-rank synthetic Stage 0 receipt | `38f6cf13f9813c71ef7d7db79abb3d0e5241b5dbf1ffa194f885bfcb52bd8c2e` |
 | `SRC-036` | Rosenblatt total-score null-rank synthetic Stage 0 receipt | `9642333c2d5b647be8a96a43d988eef8d36828880c1f21123319a567be034231` |
+| `SRC-037` | Trial 20 submission and package-parity note | `81b9357e5b767d0c080729b01647327fb0950e64a4bac34ad972c3cb2ec624e5` |
+| `SRC-038` | V5 saved-model transfer metrics | `be990b80faa40ea8296fbe11d19c746297e222f16407c3b93899a943fb65cc1a` |
+| `SRC-039` | CatBoost V5 fold-0 screen | `07984f78ecc2a8101f196849bcb9fa75383153e94a2c62ae2317bb26a0b7e270` |
+| `SRC-040` | CatBoost and XGBoost tuning audit | `68140195515b255a3129f06884819efa49f3cbc86e67c781380be08a7ff99976` |
 
 See [validation](validation.md) for the leakage postmortems and the [method catalog](method_catalog.md) for experiment-level scope and disposition.

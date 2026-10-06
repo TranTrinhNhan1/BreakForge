@@ -1,8 +1,8 @@
 # Research method catalog
 
-The project explored a broad set of evidence channels for heterogeneous univariate streams. The [machine-readable catalog](../reports/method_catalog.csv) has 137 records: 129 report-level `CAT-*` records cover all 131 indexed `MTH-*` reports (two catalog records combine pairs of staged reports), plus eight supplemental `SUP-*` evidence records. It records a hypothesis, implementation, control, validation scope, or disposition when a release-safe summary supports it; missing fields are marked explicitly.
+The project explored a broad set of evidence channels for heterogeneous univariate streams. The [machine-readable catalog](../reports/method_catalog.csv) has 140 records: 129 report-level `CAT-*` records cover all 131 indexed `MTH-*` reports (two catalog records combine pairs of staged reports), plus eleven supplemental `SUP-*` evidence records. It records a hypothesis, implementation, control, validation scope, or disposition when a release-safe summary supports it; missing fields are marked explicitly.
 
-The catalog covers all 131 report-index identifiers (`MTH-*`) after grouping staged reports that describe the same underlying recipe. Eight supplemental records summarize evidence found outside those reports. Under the catalog type rule, 132 records describe methods or variants: 114 detector/evidence methods, 10 representations/models, seven combinations/scoring heads, and one baseline. The other five records are four training/selection procedures and one validation audit. These are records, not distinct algorithms: staged reports are grouped and seeds, folds, and repeat runs are not separate methods. The audit entry is explicitly typed as such, and stage records with the same method are grouped under one catalog ID.
+The catalog covers all 131 report-index identifiers (`MTH-*`) after grouping staged reports that describe the same underlying recipe. Eleven supplemental records summarize evidence found outside those reports. Under the catalog type rule, 135 records describe methods or variants: 114 detector/evidence methods, 13 representations/models, seven combinations/scoring heads, and one baseline. The other five records are four training/selection procedures and one validation audit. These are records, not distinct algorithms: staged reports are grouped and seeds, folds, and repeat runs are not separate methods. The audit entry is explicitly typed as such, and stage records with the same method are grouped under one catalog ID.
 
 The identifiers `MTH-*` and `CAT-*` were assigned for this release. The report index keeps the source titles and SHA-256 digests; the original report text, raw predictions, model artifacts, and competition data are not included. The 131 report digests were checked against the source records used for this curation. A matching digest verifies the source mapping, but it does not make an experiment independently reproducible. Selected aggregate outcomes and their caveats are published separately in [results](results.md) and [`historical_research.csv`](../reports/curated_results/historical_research.csv).
 
@@ -47,7 +47,7 @@ The catalog is a curated map, not a downloadable implementation of every experim
 
 ## Complete method and variant register
 
-This release contains **137 curated records**: **129 `CAT-*` records** cover **131 indexed `MTH-*` research reports**, and eight `SUP-*` records summarize additional evidence. Under the record-type rule, **132 records describe methods or variants** (114 detector/evidence methods, 10 representations/models, seven combinations/scoring heads, and one baseline); the remaining five are four training/selection procedures and one validation audit. Two catalog entries each combine two staged reports, so these totals are not counts of independent algorithms. Report IDs and source evidence IDs preserve provenance. The original reports and private inputs are not distributed. Matching a source digest verifies which record informed the summary; it does not make the experiment independently reproducible.
+This release contains **140 curated records**: **129 `CAT-*` records** cover **131 indexed `MTH-*` research reports**, and eleven `SUP-*` records summarize additional evidence. Under the record-type rule, **135 records describe methods or variants** (114 detector/evidence methods, 13 representations/models, seven combinations/scoring heads, and one baseline); the remaining five are four training/selection procedures and one validation audit. Two catalog entries each combine two staged reports, so these totals are not counts of independent algorithms. Report IDs and source evidence IDs preserve provenance. The original reports and private inputs are not distributed. Matching a source digest verifies which record informed the summary; it does not make the experiment independently reproducible.
 
 Each entry retains the experiment question, implementation or explicit unknown, matched control, evaluation scope, validation labels, outcome, limits, and open question where the reviewed source supports them. `UNKNOWN_FROM_PUBLIC_INDEX` and similar labels are retained when the source record does not justify a stronger statement.
 
@@ -5273,6 +5273,123 @@ Each entry retains the experiment question, implementation or explicit unknown, 
 **Implementation status:** `HISTORICAL_SYNTHETIC_PROTOTYPE_NOT_SHIPPED`.
 
 **Validation stage:** `SYNTHETIC_ONLY_SCREEN`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
+
+</details>
+
+<details>
+<summary><code>SUP-009</code> · <code>SRC-038</code> · Saved V5 LightGBM replay on a 196-feature matrix</summary>
+
+**Record type:** representation or model.
+
+**Reported family label:** V5 saved LightGBM transfer screen.
+
+**Question or hypothesis:** Do saved V5 LightGBM models retain their grouped-fold ranking and transfer to a reduced private diagnostic?
+
+**Implementation:** Replayed saved LightGBM V5 models using raw scores from a 196-feature matrix. The published source record does not preserve the model configuration or training source revision.
+
+**Reference / online information:** The source labels the feature matrix as causal, but the public record does not include feature-generation code or an exact package revision. Per-step prefix invariance and package parity are therefore not independently established.
+
+**Tested settings or stage:** Five grouped folds on private competition-derived data and one test_reduced diagnostic; raw scores; 196 features.
+
+**Matched control:** No same-feature or model-matched control is preserved for this transfer audit.
+
+**Causal evidence:** Causality is not independently established from the saved-model aggregate record.
+
+**Evaluation scope:** Five-fold grouped replay plus a reduced-data diagnostic; shared research folds and private inputs.
+
+**Validation labels:** `UNKNOWN_PROVENANCE; POST_SELECTION_CV; CLOUD_PRIVATE; REDUCED_ONLY; CAUSALITY_AUDIT_UNKNOWN`.
+
+**Result and disposition:** Raw five-fold TS-AUC mean 0.5810991 (folds 0.5784017, 0.5818181, 0.5784581, 0.6000968, 0.5667206); test_reduced TS-AUC 0.5052849. Not promoted.
+
+**Limit / reason deprioritized:** The reduced diagnostic was substantially below the fold mean; the saved model, feature pipeline, selection path, and exact causal inference revision are not reproducible from the release record.
+
+**Open question:** Would a source-pinned, prefix-audited V5 model outperform simple controls on an untouched authorized dataset?
+
+**Source evidence:** `SRC-038`.
+
+**Implementation status:** `HISTORICAL_SAVED_MODEL_REPLAY_NOT_SHIPPED`.
+
+**Validation stage:** `FIVE_FOLD_GROUPED_REPLAY_PLUS_REDUCED_DIAGNOSTIC`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
+
+</details>
+
+<details>
+<summary><code>SUP-010</code> · <code>SRC-039;SRC-040</code> · CatBoost fold-0 screen and six-trial tuning</summary>
+
+**Record type:** representation or model.
+
+**Reported family label:** CatBoost on V5 causal feature matrix.
+
+**Question or hypothesis:** Can CatBoost provide a useful tree-model inductive bias on the 196-feature V5 matrix compared with the retained LightGBM direction?
+
+**Implementation:** A fold-0 CatBoost screen used 60 iterations, depth 7, learning rate 0.05, and pair weighting. Separate Optuna and SMAC3 screens ran six trials each on the same 196-feature cache.
+
+**Reference / online information:** The results are held-fold scores only. The reviewed records do not establish per-step inference semantics or full package parity.
+
+**Tested settings or stage:** Frozen ID fold 0; raw score 0.5853518, one memory blend 0.5870524, Optuna best blend_0.60 0.5869706, and SMAC3 best 0.5852159. test_reduced was not evaluated.
+
+**Matched control:** The report cites a retained v19 LightGBM fold-0 reference of approximately 0.6345. This is contextual only: feature and model capacity were not matched.
+
+**Causal evidence:** No independent prefix-invariance or package-parity audit is preserved for this tree model.
+
+**Evaluation scope:** Single-fold private-data screen and small tuning studies; no complete five-fold or reduced-data evaluation.
+
+**Validation labels:** `CLOUD_PRIVATE; PARTIAL_FOLD; POST_SELECTION_CV; CAUSALITY_AUDIT_UNKNOWN`.
+
+**Result and disposition:** All reported CatBoost fold-0 variants were well below the approximately 0.6345 contextual v19 reference. The tested configuration was not promoted.
+
+**Limit / reason deprioritized:** One held fold and six-trial tuner searches do not establish transfer or family-wide weakness; the comparator was not a matched-capacity control.
+
+**Open question:** Would CatBoost add value in a preregistered, source-pinned comparison with identical features, nested selection, and full causal replay?
+
+**Source evidence:** `SRC-039;SRC-040`.
+
+**Implementation status:** `HISTORICAL_RESEARCH_EXPERIMENT_NOT_SHIPPED`.
+
+**Validation stage:** `FOLD_0_SCREEN_WITH_SMALL_TUNING_STUDIES`.
+
+**Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
+
+</details>
+
+<details>
+<summary><code>SUP-011</code> · <code>SRC-040</code> · XGBoost fold-0 screen and six-trial tuning</summary>
+
+**Record type:** representation or model.
+
+**Reported family label:** XGBoost on V5 causal feature matrix.
+
+**Question or hypothesis:** Can XGBoost improve the V5 feature-matrix ranking through a different boosted-tree implementation and regularization?
+
+**Implementation:** A 45-round, depth-7 XGBoost model with min_child_weight 100 and pair weighting was screened on the 196-feature matrix; Optuna and SMAC3 each ran six trials.
+
+**Reference / online information:** The results are held-fold scores only. The reviewed record does not establish per-step inference semantics or full package parity.
+
+**Tested settings or stage:** Frozen ID fold 0; best reported blend_0.60 TS-AUC was 0.5895990 for both tuner screens. test_reduced was not evaluated.
+
+**Matched control:** The audit cites a retained v19 LightGBM fold-0 reference of approximately 0.6345. This is contextual only: feature and model capacity were not matched.
+
+**Causal evidence:** No independent prefix-invariance or package-parity audit is preserved for this tree model.
+
+**Evaluation scope:** Single-fold private-data screen and small tuning studies; no complete five-fold or reduced-data evaluation.
+
+**Validation labels:** `CLOUD_PRIVATE; PARTIAL_FOLD; POST_SELECTION_CV; CAUSALITY_AUDIT_UNKNOWN`.
+
+**Result and disposition:** The tested XGBoost configuration scored 0.5895990 on fold 0 and was not promoted.
+
+**Limit / reason deprioritized:** One held fold and six-trial tuner searches do not establish transfer or family-wide weakness; the comparator was not a matched-capacity control.
+
+**Open question:** Would a preregistered XGBoost study with identical feature inputs, nested selection, and exact causal package replay add value?
+
+**Source evidence:** `SRC-040`.
+
+**Implementation status:** `HISTORICAL_RESEARCH_EXPERIMENT_NOT_SHIPPED`.
+
+**Validation stage:** `FOLD_0_SCREEN_WITH_SMALL_TUNING_STUDIES`.
 
 **Final status:** `NOT_PROMOTED_IN_AVAILABLE_RECORD`.
 
