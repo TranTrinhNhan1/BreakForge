@@ -5,19 +5,11 @@
 [![CI](https://github.com/TranTrinhNhan1/BreakForge/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/TranTrinhNhan1/BreakForge/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/github/license/TranTrinhNhan1/BreakForge)](LICENSE)
 
-BreakForge is a research framework for causal, real-time structural-break detection in heterogeneous univariate time series. The ADIA Lab / CrunchDAO challenge supplied the original problem; the repository presents reusable methods, a reference detector, and the lessons learned from validation and failed experiments.
+BreakForge is a research framework for causal, real-time structural-break detection in heterogeneous univariate time series. The ADIA Lab / CrunchDAO challenge motivated the problem; this project makes the streaming method, validation lessons, and research history reusable beyond the competition.
 
-## Why BreakForge?
+## Problem and causal contract
 
-Online scores must reflect only information available when each observation arrives. BreakForge makes this constraint explicit and pairs a small streaming API with a broad, evidence-labeled research record.
-
-## Problem definition
-
-Given a reference history and stream `x_0, x_1, ...`, produce break evidence at each time `t`. The score may depend on the fitted reference and observations through `x_t`, never on future values or final stream length.
-
-## Causal contract
-
-`fit(history)` estimates and freezes the reference model. Each `update(x_t)` consumes one new observation and returns evidence through that time. `reset()` clears online state and restarts from the fitted history endpoint.
+Given reference history and a stream `x_0, x_1, ...`, produce break evidence at each time `t`. A score may use the fitted reference and observations through `x_t`, never future values or final stream length. `fit(history)` freezes the reference, `update(x_t)` consumes one value, and `reset()` clears online state between independent series.
 
 ## Architecture
 
@@ -32,11 +24,11 @@ flowchart LR
     S --> E["Uncalibrated break evidence"]
 ```
 
-The public reference uses conditional Gaussian innovations and sequential CUSUM evidence. Its score is not a calibrated probability or alarm guarantee. PIT interpretation depends on the adequacy of the fitted conditional model.
+The public reference uses conditional Gaussian innovations and sequential CUSUM evidence. Its score is not a calibrated probability or alarm guarantee. PIT interpretation depends on the fitted conditional model being adequate.
 
 ## Quick start
 
-Clone the public repository, create an isolated environment, then install and run the synthetic demo:
+The synthetic AR-break demo needs no competition data or credentials:
 
 ```bash
 git clone https://github.com/TranTrinhNhan1/BreakForge.git
@@ -47,7 +39,7 @@ python -m venv .venv
 .venv/bin/python examples/synthetic_break_demo.py
 ```
 
-On Windows PowerShell, use `.venv\Scripts\python.exe` in place of `.venv/bin/python`. For an optional plot, install `.[plot]` into the same environment and add `--plot` to the demo command. The demo generates an AR series with a coefficient and noise-scale break; it needs no competition data or credentials.
+The demo simulates AR coefficient and noise-scale breaks. On Windows PowerShell, replace `.venv/bin/python` with `.venv\Scripts\python.exe`. To save a plot, install `.[plot]` and add `--plot`.
 
 ## Streaming API
 
@@ -60,26 +52,11 @@ for x_t in stream:
 detector.reset()
 ```
 
-Inputs must be finite real values; `fit` requires at least three history observations. `update` returns a non-decreasing, uncalibrated score. Reset between independent series.
+Inputs must be finite real values; `fit` requires at least three history observations. `update` returns a non-decreasing, uncalibrated score. Reset the detector between independent series.
 
 ## Methods investigated
 
-The report-backed catalog contains 145 evidence records: 139 method or variant records and six procedure or audit records. Staged reports are grouped when they describe the same recipe; run IDs, seeds, and folds are not counted as separate methods. A separate crosswalk accounts for all 111 source-ledger score records in 96 model-family/feature-block groups; those groups preserve recorded hypotheses and configurations but are not distinct-method counts.
-
-| Family | Examples | Role | Outcome in this project |
-|---|---|---|---|
-| Conditional normalization and score transforms | AR residuals, ECDF/PIT, Gaussian scores, copula variants | Normalize each series against its reference history | The public core uses a small Gaussian AR(1) PIT model; its interpretation depends on conditional-model adequacy. |
-| Statistical and sequential baselines | Rolling moments, quantiles, autocorrelation, CUSUM | Provide simple change evidence and controls | CUSUM remains in the reference detector; extra rolling summaries did not establish stable gains. |
-| Conformal and sequential inference | Betting processes, restart mixtures, conformal martingales | Accumulate evidence and express uncertainty over change time | More complex branches did not establish calibrated error control for dependent streams. |
-| Kernel, discrepancy, and density comparison | RFF/MMD, density ratios, Wasserstein comparisons | Detect distributional changes beyond a fixed parametric score | Tested configurations were mixed and were not promoted as the public reference. |
-| Dynamical and Bayesian models | AR likelihoods, context trees, DMD/Koopman, run-length models | Detect changes in transitions or latent dynamics | Selected results did not consistently transfer to reduced diagnostics; conclusions are configuration-specific. |
-| Spectral and multiscale evidence | Fourier, wavelet, bispectral features | Detect changes in periodicity and scale structure | No tested configuration earned promotion; performance depended on the break mechanism. |
-| Path, geometry, and ordinal structure | Signatures, recurrence geometry, ordinal patterns | Represent order and path interactions | Signature controls were small or changed sign across folds; other variants remain configuration-specific. |
-| Learned representations and neural methods | Contrastive encoders, TNC, CNN/TCN pilots, foundation models | Learn features intended to transfer across streams | Pilots did not establish a clean, independent transfer benchmark. |
-| Supervised heads, ensembles, and selection | Tree heads, rankers, stacked blends, automated search | Combine or rank detector evidence | Historical scores include partial-fold and post-selection screens; they do not establish a clean family-wide benchmark. |
-| Other causal evidence methods | Hazard, residual, and online-comparison features | Capture additional prefix-based change evidence | The catalog preserves method-specific controls and limitations without claiming a family-wide result. |
-
-Only the compact reference detector is in the public core. The [method catalog](docs/method_catalog.md) records questions, controls, validation scope, and limitations; [failed experiments](docs/failed_experiments.md) curates negative and inconclusive results. The [run crosswalk](reports/curated_results/run_variant_crosswalk.csv) preserves source experiment IDs, hypotheses, and configurations; [additional report index](reports/additional_report_index.csv) classifies reports outside the main indexed set.
+Research covered conditional PIT/Rosenblatt normalization; statistical and sequential detectors; kernels and density ratios; spectral and path features; Bayesian and dynamical models; conformal methods; learned representations; and stacked heads. The report-backed catalog contains 145 evidence records (139 method or variant records and six procedures or audits); repeated runs are grouped. A separate crosswalk maps 111 historical score records to 96 recorded model/feature groups. These records preserve hypotheses, controls, and limits; they are not distinct-method counts or clean benchmarks. See the [method catalog](docs/method_catalog.md), [failed experiments](docs/failed_experiments.md), [run crosswalk](reports/curated_results/run_variant_crosswalk.csv), and [additional report index](reports/additional_report_index.csv).
 
 ## Results
 
@@ -96,13 +73,13 @@ Across six generated break mechanisms, the reference detector's AUC ranges from 
 | Frequency shift | 0.0175 | 0.0238 | 0.8288 |
 | Heavy-tail shift | 0.4244 | 0.4838 | 0.4781 |
 
-On unchanged streams, the false-positive rates were 0.125 for raw CUSUM and 0.025 for both conditional detectors. All values are `SYNTHETIC_ONLY`, from 40 evaluation streams and 80 calibration streams per setting (seed `20261005`); see [the complete benchmark protocol and results](docs/results.md#clean-reproducible-synthetic-benchmark).
+On unchanged streams, false-positive rates were 0.125 for raw CUSUM and 0.025 for both conditional detectors. Results are `SYNTHETIC_ONLY` (40 evaluation and 80 calibration streams per setting; seed `20261005`); see [protocol and full metrics](docs/results.md#clean-reproducible-synthetic-benchmark).
 
 ### Official competition result
 
-The strongest verified private result recorded here is TS-AUC **0.6213427008** (`CLOUD_PRIVATE; VERIFIED_OFFICIAL`) for submission #21 / run 120227. Final rank is not independently verified, package identity is incomplete, and the submitted system differs from the public reference. It is not a benchmark for BreakForge.
+The strongest verified private result is TS-AUC **0.6213427008** (`CLOUD_PRIVATE; VERIFIED_OFFICIAL`), submission #21 / run 120227. Final rank is unverified, package identity is incomplete, and this was a different system. It is not a BreakForge benchmark.
 
-Historical competition CV results remain separate and labeled, including future-length leakage, nested-OOF contamination, post-selection, and partial-fold cases. The [results record](docs/results.md) separates 57 curated comparisons, 19 supplemental report-derived outcomes, and a broader 111-record source inventory; none replaces the synthetic benchmark or supports claims about clean competition performance.
+Historical CV results remain labeled for future-length leakage, nested-OOF contamination, post-selection, or partial folds. They do not establish clean competition performance. See [results](docs/results.md) and the [validation guide](docs/validation.md).
 
 ## Validation lessons
 
@@ -110,7 +87,7 @@ Historical competition CV results remain separate and labeled, including future-
 - Every upstream fit in stacked evaluation must exclude the outer held-out group.
 - Repeatedly selected folds do not provide an untouched estimate.
 
-See the [validation guide](docs/validation.md) for exact-stream protocols and causal tests.
+See the [validation guide](docs/validation.md) for exact-stream protocols, grouped folds, and causality tests.
 
 ## What did not work
 
@@ -118,7 +95,7 @@ Some high historical scores depended on future information or contaminated stack
 
 ## Competition origin and data
 
-The Structural Break: Real-Time challenge motivated this work and its streaming constraints. Competition data, labels, predictions, and submission bundles are not included; users must provide data they are authorized to use. See [competition background](docs/competition.md).
+The Structural Break: Real-Time challenge motivated this work and its streaming constraints. Competition data, labels, predictions, and submission bundles are excluded. Users must supply data they are authorized to use; see [competition background](docs/competition.md).
 
 ## Repository structure
 
@@ -135,7 +112,7 @@ research_archive/     indexed conclusions from selected research
 
 ## Reproducibility and documentation
 
-With the virtual environment from the quick start:
+Run the tests and regenerate the synthetic benchmark with:
 
 ```bash
 .venv/bin/python -m pip install -e '.[dev]'
@@ -143,9 +120,11 @@ With the virtual environment from the quick start:
 .venv/bin/python scripts/synthetic_benchmark.py
 ```
 
-On Windows PowerShell, replace `.venv/bin/python` with `.venv\Scripts\python.exe`.
+On Windows PowerShell, replace `.venv/bin/python` with `.venv\Scripts\python.exe`. For methodology, validation, history, and workflow, start at the [documentation index](docs/README.md).
 
-Start with [methodology](docs/methodology.md), [research journey](docs/research_journey.md), [references](docs/references.md), and [research workflow](docs/research_workflow.md).
+## References
+
+See the curated [references and further reading](docs/references.md).
 
 ## Citation
 
